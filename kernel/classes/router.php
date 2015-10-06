@@ -7,11 +7,20 @@
 
 namespace kernel\classes;
 
-
+/**
+ * Class Router
+ * @package kernel\classes
+ *
+ * Роутер. Находит контроллер и вызывает его определённый метод,
+ * определённый по uri
+ */
 class Router {
 
     private $route;
 
+    /**
+     * Осуществить роутинг
+     */
     public function route() {
         if ($this->route == '/') {
             $userController = 'application\\controllers\\Controller_Main';
@@ -45,6 +54,9 @@ class Router {
         }
     }
 
+    /**
+     * Контроллер или действие контроллера не найдено
+     */
     public function error404() {
         $userController = 'application\\controllers\\Controller_Error404';
         $systemController = 'kernel\\controllers\\Controller_Error404';
@@ -55,10 +67,21 @@ class Router {
         }
     }
 
+    /**
+     * Установить uri
+     *
+     * @param string $route uri
+     */
     public function setRoute($route) {
         $this->route = $route;
     }
 
+
+    /**
+     * Получить uri
+     *
+     * @return string
+     */
     public function getRoute() {
         return $this->route;
     }

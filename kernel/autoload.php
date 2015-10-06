@@ -4,6 +4,12 @@
  * User: metr
  * Date: 04.10.15
  */
+
+/**
+ * Автоматическое подключение запрашиваемых классов.
+ *
+ * @param string $class Полное имя класса
+ */
 function autoload($class) {
     $classNameParts = explode(DIRECTORY_SEPARATOR, $class);
     $count = count($classNameParts);

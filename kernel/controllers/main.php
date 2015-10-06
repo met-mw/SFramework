@@ -11,6 +11,12 @@ namespace kernel\controllers;
 use kernel\interfaces\Interface_Controller;
 use kernel\views\View_Main;
 
+/**
+ * Class Controller_Main
+ * @package kernel\controllers
+ *
+ * Контроллер по умолчанию для главной страницы
+ */
 class Controller_Main implements Interface_Controller {
 
     public function actionIndex() {

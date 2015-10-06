@@ -10,6 +10,12 @@ namespace kernel\views;
 
 use kernel\interfaces\Interface_View;
 
+/**
+ * Class View_Main
+ * @package kernel\views
+ *
+ * Представление по умолчанию для главной страницы
+ */
 class View_Main implements Interface_View {
 
     public $message;

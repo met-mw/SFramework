@@ -10,6 +10,12 @@ namespace kernel\views;
 
 use kernel\interfaces\Interface_View;
 
+/**
+ * Class View_Error404
+ * @package kernel\views
+ *
+ * Представление по умолчанию для ненайденной страницы
+ */
 class View_Error404 implements Interface_View {
 
     public $message;

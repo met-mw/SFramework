@@ -11,6 +11,12 @@ namespace kernel\orm;
 use kernel\orm\interfaces\Interface_Driver;
 use kernel\orm\traits\Trait_Setting;
 
+/**
+ * Class Driver
+ * @package kernel\orm
+ *
+ * Базовый класс драйвера доступа к данным
+ */
 class Driver implements Interface_Driver {
 
     use Trait_Setting;

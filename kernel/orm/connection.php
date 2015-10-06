@@ -10,6 +10,12 @@ namespace kernel\orm;
 
 use kernel\orm\interfaces\Interface_Driver;
 
+/**
+ * Class Connection
+ * @package kernel\orm
+ *
+ * Соединение. Посредник между проектом и драйвером для доступа к данным
+ */
 class Connection {
 
     static protected $instance = null;

@@ -31,7 +31,7 @@ abstract class Entity implements Interface_Entity {
     protected $driver;
 
     public function __construct($primaryKey = null) {
-        $this->driver = Registry::db();
+        $this->driver = Registry::driver();
 
         if (!is_null($primaryKey)) {
             $this->load($primaryKey);

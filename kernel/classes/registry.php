@@ -10,15 +10,36 @@ namespace kernel\classes;
 
 use kernel\orm\interfaces\Interface_Driver;
 
+/**
+ * Class Registry
+ * @package kernel\classes
+ *
+ * Реестр. Заменитель глобальных переменных. Сюда помещаются данные,
+ * которые могут понадобиться в любой части проекта.
+ */
 class Registry {
 
     static private $container = [];
     static private $lock = [];
 
+    /**
+     * Получить данные из реестра
+     *
+     * @param string $name Имя записи
+     *
+     * @return mixed
+     */
     static public function get($name) {
         return self::$container[$name];
     }
 
+    /**
+     * Добавить данные в реестр
+     *
+     * @param string $name Имя записи
+     * @param mixed $value Данные
+     * @param bool $lock Заблокировать от перезаписи
+     */
     static public function set($name, $value, $lock = false) {
         if (!isset(self::$lock[$name])) {
             self::$container[$name] = $value;
@@ -29,13 +50,17 @@ class Registry {
     }
 
     /**
+     * Получить драйвер доступа к данным
+     *
      * @return Interface_Driver
      */
-    static public function db() {
+    static public function driver() {
         return isset(self::$container['db']) ? self::$container['db'] : null;
     }
 
     /**
+     * Получить роутер
+     *
      * @return Router
      */
     static public function router() {

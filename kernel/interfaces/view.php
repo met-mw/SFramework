@@ -10,6 +10,9 @@ namespace kernel\interfaces;
 
 interface Interface_View {
 
+    /**
+     * Рендеринг представления. Обязательный метод для всех представлений.
+     */
     public function render();
 
 } 

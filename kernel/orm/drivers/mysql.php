@@ -14,6 +14,12 @@ use mysqli;
 use mysqli_result;
 use mysqli_stmt;
 
+/**
+ * Class Mysql
+ * @package kernel\orm\drivers
+ *
+ * Драйвер для работы с MySQL и MariaDB
+ */
 class Mysql extends Driver implements Interface_Driver {
 
     const DRIVER_CLASS = __CLASS__;
