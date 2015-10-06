@@ -8,7 +8,7 @@
 namespace kernel\views;
 
 
-use kernel\interfaces\Interface_View;
+use kernel\classes\View;
 
 /**
  * Class View_Main
@@ -16,11 +16,11 @@ use kernel\interfaces\Interface_View;
  *
  * Представление по умолчанию для главной страницы
  */
-class View_Main implements Interface_View {
+class View_Main extends View {
 
     public $message;
 
-    public function render() {
+    public function currentRender() {
         ?>
         <html>
             <head>

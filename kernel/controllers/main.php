@@ -8,7 +8,7 @@
 namespace kernel\controllers;
 
 
-use kernel\interfaces\Interface_Controller;
+use kernel\classes\Controller;
 use kernel\views\View_Main;
 
 /**
@@ -17,7 +17,7 @@ use kernel\views\View_Main;
  *
  * Контроллер по умолчанию для главной страницы
  */
-class Controller_Main implements Interface_Controller {
+class Controller_Main extends Controller {
 
     public function actionIndex() {
         $view = new View_Main();

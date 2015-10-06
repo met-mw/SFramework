@@ -15,4 +15,6 @@ interface Interface_Controller {
      */
     public function actionIndex();
 
+    public function param($name);
+
 } 

@@ -8,7 +8,7 @@
 namespace kernel\views;
 
 
-use kernel\interfaces\Interface_View;
+use kernel\classes\View;
 
 /**
  * Class View_Error404
@@ -16,11 +16,11 @@ use kernel\interfaces\Interface_View;
  *
  * Представление по умолчанию для ненайденной страницы
  */
-class View_Error404 implements Interface_View {
+class View_Error404 extends View {
 
     public $message;
 
-    public function render() {
+    public function currentRender() {
         ?>
         <html>
             <head>

@@ -22,7 +22,21 @@ class Router {
      * Осуществить роутинг
      */
     public function route() {
-        if ($this->route == '/') {
+        list($route, $parametersString) = explode('?', $this->route);
+        $parameters = [];
+        if (!is_null($parametersString)) {
+            foreach (explode('&', $parametersString) as $parameter) {
+                list($name, $value) = explode('=', $parameter);
+                if (strpos($name, '[]')) {
+                    $parameters[str_replace('[]', '', $name)][] = $value;
+                } else {
+                    $parameters[$name] = $value;
+                }
+
+            }
+        }
+
+        if ($route == '/') {
             $userController = 'application\\controllers\\Controller_Main';
             $systemController = 'kernel\\controllers\\Controller_Main';
             if (class_exists($userController)) {
@@ -35,21 +49,27 @@ class Router {
             return;
         }
 
-        $exploded = explode('/', $this->route);
+        $exploded = explode('/', $route);
         array_shift($exploded);
         $controller = 'application\\controllers\\Controller_' . ucfirst(array_shift($exploded));
         if (class_exists($controller)) {
-            $action = 'actionIndex';
-            if (method_exists($controller, 'action' . ucfirst(reset($exploded)))) {
+            if (count($exploded) == 0 || reset($exploded) == '') {
+                $action = 'actionIndex';
+            } elseif (method_exists($controller, 'action' . ucfirst(reset($exploded)))) {
                 $action = 'action' . ucfirst(array_shift($exploded));
+            } else {
+                $this->error404();
+                return;
             }
 
             if (method_exists($controller, $action)) {
-                call_user_func_array([$controller, $action], $exploded);
+                $controllerObject = new $controller($parameters);
+                $controllerObject->$action();
             } else {
                 $this->error404();
             }
         } else {
+
             $this->error404();
         }
     }

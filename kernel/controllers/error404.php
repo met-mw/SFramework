@@ -8,7 +8,7 @@
 namespace kernel\controllers;
 
 
-use kernel\interfaces\Interface_Controller;
+use kernel\classes\Controller;
 use kernel\views\View_Error404;
 
 /**
@@ -17,7 +17,7 @@ use kernel\views\View_Error404;
  *
  * Контроллер по умолчанию для не найденной страницы
  */
-class Controller_Error404 implements Interface_Controller {
+class Controller_Error404 extends Controller {
 
     public function actionIndex() {
         $view = new View_Error404();
