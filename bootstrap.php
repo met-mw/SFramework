@@ -12,7 +12,7 @@ use kernel\orm\drivers\Mysql;
 
 include_once('kernel' . DIRECTORY_SEPARATOR . 'autoload.php');
 
-//$dbSettings = include('config\db.php');
+//$dbSettings = include('application\config\db.php');
 //Connection::instance()->connect(Mysql::DRIVER_CLASS, $dbSettings);
 
 Registry::set('db', Connection::instance()->getDriver(), true);
