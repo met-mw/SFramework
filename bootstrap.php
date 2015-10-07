@@ -25,3 +25,5 @@ Registry::frame()->setFrame('default');
 $router = Registry::router();
 $router->setRoute($_SERVER['REQUEST_URI']);
 $router->route();
+
+include_once('application' . DIRECTORY_SEPARATOR . 'bootstrap.php');
