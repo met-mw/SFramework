@@ -8,6 +8,7 @@
 namespace kernel\orm;
 
 
+use Exception;
 use kernel\classes\Registry;
 use kernel\orm\interfaces\Interface_Driver;
 use kernel\orm\interfaces\Interface_Entity;
@@ -18,6 +19,8 @@ abstract class Entity implements Interface_Entity {
     const FIELD_TYPE_INTEGER = 'i';
     const FIELD_TYPE_DOUBLE = 'd';
     const FIELD_TYPE_BLOB = 'b';
+
+    protected $isDeleted = false;
 
     protected $allowedFields = [];
     protected $fieldTypes = [];
@@ -68,6 +71,10 @@ abstract class Entity implements Interface_Entity {
     }
 
     public function commit() {
+        if ($this->isDeleted) {
+            throw new Exception('Данные модели уже удалены.');
+        }
+
         $driver = $this->driver;
 
         if (is_null($this->getPrimaryKey())) {
@@ -112,6 +119,10 @@ abstract class Entity implements Interface_Entity {
     public function delete() {
         $query = "delete from {$this->tableName} where {$this->primaryKeyName}={$this->getPrimaryKey()}";
         $this->driver->query($query);
+        foreach ($this->allowedFields as $field) {
+            $this->fieldValues[$field] = null;
+        }
+        $this->isDeleted = true;
     }
 
 }

@@ -16,4 +16,6 @@ interface Interface_Param {
 
     static public function request($name);
 
+    static public function file($name);
+
 } 

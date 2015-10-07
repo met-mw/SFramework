@@ -10,6 +10,10 @@ namespace kernel\classes;
 
 use kernel\interfaces\Interface_Param;
 
+/**
+ * Class Param
+ * @package kernel\classes
+ */
 class Param implements Interface_Param {
 
     static public function get($name) {
@@ -22,5 +26,9 @@ class Param implements Interface_Param {
 
     static public function request($name) {
         return new Customization(isset($_REQUEST[$name]) ? $_REQUEST[$name] : null);
+    }
+
+    static public function file($name) {
+        return new Customization(isset($_FILES[$name]) ? $_FILES[$name] : null);
     }
 }
