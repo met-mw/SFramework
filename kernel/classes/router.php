@@ -40,9 +40,13 @@ class Router {
             $userController = 'application\\controllers\\Controller_Main';
             $systemController = 'kernel\\controllers\\Controller_Main';
             if (class_exists($userController)) {
-                call_user_func([$userController, 'actionIndex']);
+                /** @var Controller $controller */
+                $controller = new $userController();
+                $controller->actionIndex();
             } elseif (class_exists($systemController)) {
-                call_user_func([$systemController, 'actionIndex']);
+                /** @var Controller $controller */
+                $controller = new $systemController();
+                $controller->actionIndex();
             } else {
                 $this->error404();
             }

@@ -22,14 +22,7 @@ class View_Error404 extends View {
 
     public function currentRender() {
         ?>
-        <html>
-            <head>
-                <title>404</title>
-            </head>
-            <body>
-                <h1><?= $this->message ?></h1>
-            </body>
-        </html>
+        <h1><?= $this->message ?></h1>
         <?
     }
 }

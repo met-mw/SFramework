@@ -67,4 +67,13 @@ class Registry {
         return isset(self::$container['router']) ? self::$container['router'] : null;
     }
 
+    /**
+     * Получить фрейм
+     *
+     * @return Frame
+     */
+    static public function frame() {
+        return isset(self::$container['frame']) ? self::$container['frame'] : null;
+    }
+
 } 

@@ -12,19 +12,22 @@ use kernel\interfaces\Interface_Controller;
 
 abstract class Controller implements Interface_Controller {
 
-    /**
-     * @var Customization[]
-     */
+    /** @var Customization[] */
     private $params = [];
+    /** @var Frame */
+    private $frame = null;
 
     public function __construct(array $params = []) {
-        foreach ($params as $name => $value) {
-            $this->params[$name] = new Customization($value);
-        }
+        $this->params = $params;
+        $this->frame = Registry::frame();
     }
 
     public function param($name) {
-        return $this->params[$name];
+        return new Customization($this->params[$name]);
+    }
+
+    public function frame() {
+        return $this->frame;
     }
 
 }

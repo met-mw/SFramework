@@ -20,6 +20,11 @@ class Connection {
 
     static protected $instance = null;
 
+    /** @var Interface_Driver */
+    private $driver = null;
+
+    protected  function __construct() {}
+
     static public function instance() {
         if (is_null(self::$instance)) {
             self::$instance = new self();
@@ -27,11 +32,6 @@ class Connection {
 
         return self::$instance;
     }
-
-    /** @var Interface_Driver */
-    private $driver = null;
-
-    protected  function __construct() {}
 
     /**
      * @param string $driver

@@ -4,6 +4,7 @@
  * User: metr
  * Date: 03.10.15
  */
+use kernel\classes\Frame;
 use kernel\classes\Registry;
 use kernel\classes\Router;
 use kernel\orm\Connection;
@@ -17,6 +18,9 @@ include_once('kernel' . DIRECTORY_SEPARATOR . 'autoload.php');
 
 Registry::set('db', Connection::instance()->getDriver(), true);
 Registry::set('router', new Router(), true);
+Registry::set('frame', Frame::instance(), true);
+
+Registry::frame()->setFrame('default');
 
 $router = Registry::router();
 $router->setRoute($_SERVER['REQUEST_URI']);

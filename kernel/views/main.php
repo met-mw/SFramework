@@ -22,15 +22,8 @@ class View_Main extends View {
 
     public function currentRender() {
         ?>
-        <html>
-            <head>
-                <title>Главная страница</title>
-            </head>
-            <body>
-                <h1>Главная страница</h1>
-                <p><?= $this->message ?></p>
-            </body>
-        </html>
+        <h1>Главная страница</h1>
+        <p><?= $this->message ?></p>
         <?
     }
 }

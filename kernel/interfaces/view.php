@@ -15,4 +15,4 @@ interface Interface_View {
      */
     public function render();
 
-} 
+}
