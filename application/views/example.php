@@ -8,13 +8,16 @@
 namespace application\views;
 
 
+use application\models\Model_Example;
 use kernel\classes\View;
 
 class View_Example extends View {
 
     public $header;
     public $message;
-    public $example = [];
+    public $example;
+    /** @var Model_Example */
+    public $firstExample;
 
     public function currentRender() {
         ?>
@@ -25,6 +28,7 @@ class View_Example extends View {
             <li>ID: <?= $row['id'] ?>; TEXT: <?= $row['text'] ?></li>
         <? endforeach; ?>
         </ul>
+        <h2><?= $this->firstExample->text ?></h2>
         <?
     }
 
