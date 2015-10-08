@@ -21,7 +21,7 @@ class Controller_Main extends Controller {
 
     public function actionIndex() {
         $view = new View_Main();
-        $view->message = 'Добро пожаловать в met-framework. Если Вы видите этот текст, значит всё хорошо.';
+        $view->message = 'Добро пожаловать в SFramework. Если Вы видите этот текст, значит всё хорошо.';
         $view->render();
     }
 

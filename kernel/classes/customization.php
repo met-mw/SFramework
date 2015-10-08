@@ -8,6 +8,7 @@
 namespace kernel\classes;
 
 
+use Exception;
 use kernel\classes\customization\File;
 use kernel\interfaces\Interface_Customization;
 
@@ -28,7 +29,11 @@ class Customization implements Interface_Customization {
     }
 
     public function asEmail() {
-        // TODO: Implement asEmail() method.
+        if (filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
+            return $this->value;
+        }
+
+        throw new Exception("Параметр не является адресом email");
     }
 
     public function asBool() {
@@ -36,25 +41,37 @@ class Customization implements Interface_Customization {
     }
 
     public function asArray() {
-        return (array)$this->value;
+        if (is_array($this->value)) {
+            return (array)$this->value;
+        }
+
+        throw new Exception("Параметр не является массивом");
     }
 
     public function asFile() {
-        return new File($this->value);
+        if (is_array($this->value)) {
+            return new File($this->value);
+        }
+
+        throw new Exception("Параметр не является массивом информации о файле");
     }
 
     public function asFilesArray() {
-        $files = [];
-        for ($i = 0; $i < count($this->value['name']); $i++) {
-            $files[] = new File([
-                'name' => $this->value['name'][$i],
-                'type' => $this->value['type'][$i],
-                'tmp_name' => $this->value['tmp_name'][$i],
-                'error' => $this->value['error'][$i],
-                'size' => $this->value['size'][$i]
-            ]);
+        if (is_array($this->value)) {
+            $files = [];
+            for ($i = 0; $i < count($this->value['name']); $i++) {
+                $files[] = new File([
+                    'name' => $this->value['name'][$i],
+                    'type' => $this->value['type'][$i],
+                    'tmp_name' => $this->value['tmp_name'][$i],
+                    'error' => $this->value['error'][$i],
+                    'size' => $this->value['size'][$i]
+                ]);
+            }
+
+            return $files;
         }
 
-        return $files;
+        throw new Exception("Параметр не является массивом информации о файле");
     }
 }

@@ -52,4 +52,12 @@ class Driver implements Interface_Driver {
     public function execute() {
         // TODO: Implement execute() method.
     }
+
+    public function getResult() {
+        // TODO: Implement getResult() method.
+    }
+
+    public function fetchAll() {
+        // TODO: Implement fetchAll() method.
+    }
 }

@@ -26,6 +26,11 @@ abstract class Entity implements Interface_Entity {
     protected $fieldTypes = [];
     protected $fieldValues = [];
 
+    protected $oneToOne = [];
+    protected $oneToMany = [];
+    protected $manyToOne = [];
+    protected $manyToMany = [];
+
     /** @var string */
     protected $tableName;
     /** @var string */
@@ -34,7 +39,7 @@ abstract class Entity implements Interface_Entity {
     protected $driver;
 
     public function __construct($primaryKey = null) {
-        $this->driver = Registry::driver();
+        $this->driver = Registry::dataSourceDriver();
 
         if (!is_null($primaryKey)) {
             $this->load($primaryKey);

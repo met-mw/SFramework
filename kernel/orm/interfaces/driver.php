@@ -18,6 +18,8 @@ interface Interface_Driver {
 
     public function fetchFields();
 
+    public function fetchAll();
+
     public function lastInsertId();
 
     public function prepare($query);
@@ -25,5 +27,8 @@ interface Interface_Driver {
     public function bindParameter($types, array $attributes);
 
     public function execute();
+
+    public function getResult();
+
 
 } 

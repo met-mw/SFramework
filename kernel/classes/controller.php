@@ -9,6 +9,7 @@ namespace kernel\classes;
 
 
 use kernel\interfaces\Interface_Controller;
+use kernel\orm\interfaces\Interface_Driver;
 
 abstract class Controller implements Interface_Controller {
 
@@ -16,10 +17,13 @@ abstract class Controller implements Interface_Controller {
     private $params = [];
     /** @var Frame */
     private $frame = null;
+    /** @var Interface_Driver */
+    private $driver = null;
 
     public function __construct(array $params = []) {
         $this->params = $params;
         $this->frame = Registry::frame();
+        $this->driver = Registry::dataSourceDriver();
     }
 
     public function param($name) {
@@ -28,6 +32,10 @@ abstract class Controller implements Interface_Controller {
 
     public function frame() {
         return $this->frame;
+    }
+
+    public function driver() {
+        return $this->driver;
     }
 
 }

@@ -54,8 +54,8 @@ class Registry {
      *
      * @return Interface_Driver
      */
-    static public function driver() {
-        return isset(self::$container['db']) ? self::$container['db'] : null;
+    static public function dataSourceDriver() {
+        return isset(self::$container['dataSourceDriver']) ? self::$container['dataSourceDriver'] : null;
     }
 
     /**

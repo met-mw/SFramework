@@ -9,7 +9,6 @@ namespace kernel\orm\drivers;
 
 
 use kernel\orm\Driver;
-use kernel\orm\interfaces\Interface_Driver;
 use mysqli;
 use mysqli_result;
 use mysqli_stmt;
@@ -20,13 +19,13 @@ use mysqli_stmt;
  *
  * Драйвер для работы с MySQL и MariaDB
  */
-class Mysql extends Driver implements Interface_Driver {
+class Mysql extends Driver {
 
     const DRIVER_CLASS = __CLASS__;
 
     /** @var mysqli */
     private $mysqli = null;
-    /** @var mysqli_result */
+    /** @var mysqli_result|boolean */
     private $result = null;
     /** @var mysqli_stmt */
     private $stmt = null;
@@ -62,6 +61,10 @@ class Mysql extends Driver implements Interface_Driver {
         return $this->result->fetch_fields();
     }
 
+    public function fetchAll() {
+        return $this->result->fetch_all();
+    }
+
     public function lastInsertId() {
         return $this->mysqli->insert_id;
     }
@@ -85,6 +88,10 @@ class Mysql extends Driver implements Interface_Driver {
 
     public function execute() {
         $this->stmt->execute();
+    }
+
+    public function getResult() {
+        $this->result;
     }
 
 }
