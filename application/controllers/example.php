@@ -26,13 +26,15 @@ class Controller_Example extends Controller {
         $view->message = 'Это страница-пример. Если видишь её, значит всё работает как надо. Теперь добавь свои контроллеры и представления в папку application. Также можешь переделать этот контроллер. Развлекайся!';
 
         // Получим все записи из таблицы и передадим их в представление
-        $driver->query('select * from example');
-        while ($result = $driver->fetchAssoc()) {
-            $view->example[] = $result;
-        }
+//        $driver->query('select * from example');
+//        while ($result = $driver->fetchAssoc()) {
+//            $view->example[] = $result;
+//        }
+        $view->example = [];
         // Получим одну запись из таблицы в объектном виде (ActiveRecord)
         // и передадим полученный объект представлению
-        $view->firstExample = new Model_Example(1);
+//        $view->firstExample = new Model_Example(1);
+        $view->firstExample = new Model_Example();
 
         // Назначаем представление фрейму на метку 'content'
         $frame->bindView('content', $view);

@@ -76,6 +76,10 @@ class Frame {
         $this->binds['js'][] = $jsPath;
     }
 
+    public function addMeta(array $metaParams) {
+        $this->binds['meta'][] = $metaParams;
+    }
+
     public function bindView($label, Interface_View $view) {
         if (in_array($label, $this->systemLabels)) {
             throw new Exception("Метка \"{$label}\" является системной, её нельзя использовать. Системные метки: " . implode(',', $this->systemLabels));
@@ -124,25 +128,31 @@ class Frame {
             foreach ($this->binds[$label] as $cssPath) {
                 $css[] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$cssPath}\">";
             }
-            $this->frameContent = str_replace($targetLabel, implode("\n", $css), $this->frameContent);
+            $content = implode("\n", $css);
         } elseif ($label == 'js') {
             $js = [];
             foreach ($this->binds[$label] as $jsPath) {
                 $js[] = "<script type=\"text/javascript\" async=\"\" src=\"{$jsPath}\"></script>";
             }
-            $this->frameContent = str_replace($targetLabel, implode("\n", $js), $this->frameContent);
-        } elseif ($label == 'title') {
-            $this->frameContent = str_replace($targetLabel, $this->binds[$label], $this->frameContent);
-        } elseif (in_array('kernel\interfaces\Interface_View', class_implements($this->binds[$label]))) {
+            $content = implode("\n", $js);
+        } elseif ($label == 'meta') {
+            $meta = [];
+            foreach ($this->binds[$label] as $metaData) {
+                foreach ($metaData as $key => $value) {
+                    $meta[] = "{$key}=\"{$value}\"";
+                }
+            }
+            $content = '<meta ' . implode(' ', $meta) . ' />';
+        } elseif ($this->binds[$label] instanceof Interface_View) {
             ob_start();
             $this->binds[$label]->render();
             $content = ob_get_contents();
             ob_end_clean();
-            $this->frameContent = str_replace($targetLabel, $content, $this->frameContent);
         } else {
-            $this->frameContent = str_replace($targetLabel, $this->binds[$label], $this->frameContent);
+            $content = $this->binds[$label];
         }
 
+        $this->frameContent = str_replace($targetLabel, $content, $this->frameContent);
     }
 
 } 
