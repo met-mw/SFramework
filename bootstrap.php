@@ -9,7 +9,11 @@ use kernel\classes\Router;
 
 
 include_once('kernel' . DIRECTORY_SEPARATOR . 'autoload.php');
-include_once('application' . DIRECTORY_SEPARATOR . 'bootstrap.php');
+$applicationBootstrap = 'application' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+if (file_exists($applicationBootstrap)) {
+    include_once($applicationBootstrap);
+}
+
 
 Registry::set('router', new Router(), true);
 $router = Registry::router();
