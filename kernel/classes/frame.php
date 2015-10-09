@@ -132,7 +132,7 @@ class Frame {
         } elseif ($label == 'js') {
             $js = [];
             foreach ($this->binds[$label] as $jsPath) {
-                $js[] = "<script type=\"text/javascript\" async=\"\" src=\"{$jsPath}\"></script>";
+                $js[] = "<script type=\"text/javascript\" src=\"{$jsPath}\"></script>";
             }
             $content = implode("\n", $js);
         } elseif ($label == 'meta') {
