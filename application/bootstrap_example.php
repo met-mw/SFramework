@@ -19,6 +19,7 @@ use kernel\orm\drivers\Mysql;
 
 Registry::set('frame', Frame::instance(), true);
 Registry::frame()->setFrame('example');
+Registry::frame()->addFavicon();
 Registry::frame()->addMeta([
     'name' => 'viewport',
     'content' => 'width=device-width, initial-scale=1.0'

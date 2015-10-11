@@ -18,7 +18,7 @@ class Controller_Example extends Controller {
         $frame = $this->frame();
         $driver = $this->driver();
 
-        $frame->title('Пример'); // Устанавливаем заголовок страницы
+//        $frame->title('Пример'); // Устанавливаем заголовок страницы
 
         // Подготавливаем представление
         $view = new View_Example();
@@ -35,11 +35,14 @@ class Controller_Example extends Controller {
         // и передадим полученный объект представлению
 //        $view->firstExample = new Model_Example(1);
         $view->firstExample = new Model_Example();
+        // Если используется фрейм, то render() представления не вызывается
+        // вместо него используется рендер самого фрейма $this->frame()->render()
+        $view->render();
 
         // Назначаем представление фрейму на метку 'content'
-        $frame->bindView('content', $view);
+//        $frame->bindView('content', $view);
 
-        $frame->render(); // Отрисовываем страницу
+//        $frame->render(); // Отрисовываем страницу
     }
 
 }

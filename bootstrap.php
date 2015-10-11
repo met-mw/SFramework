@@ -13,6 +13,8 @@ $applicationBootstrap = 'application' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 if (file_exists($applicationBootstrap)) {
     include_once($applicationBootstrap);
 }
+// Чтобы применить демонстрационые настройки раскомментируй следующую строку
+//include_once('application' . DIRECTORY_SEPARATOR . 'bootstrap_example.php');
 
 
 Registry::set('router', new Router(), true);

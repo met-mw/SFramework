@@ -21,7 +21,7 @@ class Frame {
 
     static protected $instance = null;
 
-    private $systemLabels = ['title', 'css', 'js', 'meta'];
+    private $systemLabels = ['title', 'css', 'js', 'meta', 'favicon'];
 
     private $root = '';
     protected $currentFrame = '';
@@ -76,6 +76,14 @@ class Frame {
         $this->binds['js'][] = $jsPath;
     }
 
+    public function addFavicon(array $faviconData = ['href' => '/favicon.ico', 'type' => 'image/x-icon']) {
+        if (!isset($faviconData['href']) || !($faviconData['type'])) {
+            throw new Exception('Неверные парметры иконки сайта.');
+        }
+
+        $this->binds['favicon'] = $faviconData;
+    }
+
     public function addMeta(array $metaParams) {
         $this->binds['meta'][] = $metaParams;
     }
@@ -123,7 +131,9 @@ class Frame {
     protected function applyBind($label) {
         $targetLabel = '{' . $label . '}';
 
-        if ($label == 'css') {
+        if ($label == 'favicon') {
+            $content = "<link rel=\"shortcut icon\" href=\"{$this->binds[$label]['href']}\" type=\"{$this->binds[$label]['type']}\">";
+        } elseif ($label == 'css') {
             $css = [];
             foreach ($this->binds[$label] as $cssPath) {
                 $css[] = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$cssPath}\">";
