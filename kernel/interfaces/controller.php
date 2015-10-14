@@ -10,11 +10,6 @@ namespace kernel\interfaces;
 
 interface Interface_Controller {
 
-    /**
-     * Действие контроллера по умолчанию, должно обязательно присутствовать во всех контроллерах
-     */
-    public function actionIndex();
-
     public function param($name);
 
 } 
