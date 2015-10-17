@@ -70,10 +70,12 @@ class Registry {
     /**
      * Получить фрейм
      *
+     * @param $frameName
+     *
      * @return Frame
      */
-    static public function frame() {
-        return isset(self::$container['frame']) ? self::$container['frame'] : null;
+    static public function frame($frameName) {
+        return isset(self::$container[$frameName]) ? self::$container[$frameName] : null;
     }
 
 } 

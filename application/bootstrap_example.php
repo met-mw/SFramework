@@ -25,10 +25,10 @@ if (file_exists($configFileName)) {
 }
 
 // Настраиваем фрейм
-Registry::set('frame', Frame::instance(), true);
-Registry::frame()->setFrame('example');
-Registry::frame()->addFavicon();
-Registry::frame()->addMeta([
+Registry::set('example', new Frame(), true);
+Registry::frame('example')->setFrame('example');
+Registry::frame('example')->setFavicon();
+Registry::frame('example')->addMeta([
     'name' => 'viewport',
     'content' => 'width=device-width, initial-scale=1.0'
 ]);

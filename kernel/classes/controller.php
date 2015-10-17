@@ -15,23 +15,16 @@ abstract class Controller implements Interface_Controller {
 
     /** @var Customization[] */
     private $params = [];
-    /** @var Frame */
-    private $frame = null;
     /** @var Interface_Driver */
-    private $driver = null;
+    protected $driver = null;
 
     public function __construct(array $params = []) {
         $this->params = $params;
-        $this->frame = Registry::frame();
         $this->driver = Registry::dataSourceDriver();
     }
 
     public function param($name) {
         return new Customization($this->params[$name]);
-    }
-
-    public function frame() {
-        return $this->frame;
     }
 
     public function driver() {

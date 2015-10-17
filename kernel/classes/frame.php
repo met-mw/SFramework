@@ -19,8 +19,6 @@ use kernel\interfaces\Interface_View;
  */
 class Frame {
 
-    static protected $instance = null;
-
     private $systemLabels = ['title', 'css', 'js', 'meta', 'favicon'];
 
     private $root = '';
@@ -30,16 +28,10 @@ class Frame {
     /** @var Interface_View[]|mixed */
     protected $binds = [];
 
-    private function __construct() {
-        $this->root = 'application' . DIRECTORY_SEPARATOR . 'frames'. DIRECTORY_SEPARATOR;
-    }
-
-    static public function instance() {
-        if (is_null(self::$instance)) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
+    public function __construct($framesRoot = null) {
+        $this->root = is_null($framesRoot)
+            ? 'application' . DIRECTORY_SEPARATOR . 'frames'. DIRECTORY_SEPARATOR
+            : $framesRoot;
     }
 
     public function setFrame($framePath) {
@@ -49,6 +41,8 @@ class Frame {
         } else {
             throw new Exception("Фрейм \"{$framePath}\" не существует.");
         }
+
+        return $this;
     }
 
     public function getFrame() {
@@ -76,7 +70,7 @@ class Frame {
         $this->binds['js'][] = $jsPath;
     }
 
-    public function addFavicon(array $faviconData = ['href' => '/favicon.ico', 'type' => 'image/x-icon']) {
+    public function setFavicon(array $faviconData = ['href' => '/favicon.ico', 'type' => 'image/x-icon']) {
         if (!isset($faviconData['href']) || !($faviconData['type'])) {
             throw new Exception('Неверные парметры иконки сайта.');
         }
@@ -102,7 +96,7 @@ class Frame {
         $this->binds[$label] = $data;
     }
 
-    public function title($title) {
+    public function setTitle($title) {
         $this->binds['title'] = $title;
     }
 
