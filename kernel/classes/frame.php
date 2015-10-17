@@ -119,11 +119,11 @@ class Frame {
     }
 
     protected function clearLabel($label) {
-        $this->frameContent = str_replace('{' . $label . '}', '', $this->frameContent);
+        $this->frameContent = str_replace("<!--label[{$label}]-->", '', $this->frameContent);
     }
 
     protected function applyBind($label) {
-        $targetLabel = '{' . $label . '}';
+        $targetLabel = "<!--label[{$label}]-->";
 
         if ($label == 'favicon') {
             $content = "<link rel=\"shortcut icon\" href=\"{$this->binds[$label]['href']}\" type=\"{$this->binds[$label]['type']}\">";
