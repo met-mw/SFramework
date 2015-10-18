@@ -130,4 +130,14 @@ abstract class Entity implements Interface_Entity {
         $this->isDeleted = true;
     }
 
+    public function asJSON() {
+        $jsonParts = [];
+        foreach ($this->allowedFields as $field) {
+            $jsonParts[] = "\"{$field}\": \"{$this->fieldValues[$field]}\"";
+        }
+        $json = '{' . implode(', ', $jsonParts) . '}';
+
+        return $json;
+    }
+
 }
