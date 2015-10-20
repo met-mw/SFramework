@@ -21,8 +21,6 @@ use mysqli_stmt;
  */
 class Mysql extends Driver {
 
-    const DRIVER_CLASS = __CLASS__;
-
     /** @var mysqli */
     private $mysqli = null;
     /** @var mysqli_result|boolean */

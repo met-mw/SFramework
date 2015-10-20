@@ -9,7 +9,6 @@ namespace kernel\orm;
 
 
 use Exception;
-use kernel\classes\Registry;
 use kernel\orm\interfaces\Interface_Driver;
 use kernel\orm\interfaces\Interface_Entity;
 
@@ -35,11 +34,12 @@ abstract class Entity implements Interface_Entity {
     protected $tableName;
     /** @var string */
     protected $primaryKeyName = 'id';
-    /** @var Interface_Driver  */
-    protected $driver;
 
-    public function __construct($primaryKey = null) {
-        $this->driver = Registry::dataSourceDriver();
+    /** @var Interface_Driver  */
+    private $driver;
+
+    public function __construct(Interface_Driver $driver, $primaryKey = null) {
+        $this->driver = $driver;
 
         if (!is_null($primaryKey)) {
             $this->load($primaryKey);
@@ -138,6 +138,14 @@ abstract class Entity implements Interface_Entity {
         $json = '{' . implode(', ', $jsonParts) . '}';
 
         return $json;
+    }
+
+    public function asXML() {
+        // TODO: Implement asXML() method.
+    }
+
+    final static public function cls() {
+        return get_called_class();
     }
 
 }

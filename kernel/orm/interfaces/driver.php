@@ -10,6 +10,10 @@ namespace kernel\orm\interfaces;
 
 interface Interface_Driver {
 
+    static public function factory($className, $primaryKey = null);
+
+    static public function cls();
+
     public function query($query);
 
     public function fetchAssoc();

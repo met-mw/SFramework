@@ -6,15 +6,15 @@
 
 use kernel\classes\Frame;
 use kernel\classes\Registry;
-use kernel\orm\Connection;
-use kernel\orm\drivers\Mysql;
+// Раскоментируй две следующие строки, если хочешь использовать БД
+//use kernel\orm\classes\Orm_Registry;
+//use kernel\orm\drivers\Mysql;
 
 
 // Заполни конфиг db.php по примеру из db_example.php,
-// раскомменируй три следующие строки, чтобы начать работу с базой данных MySQL/MariaDB
+// раскомменируй две следующие строки, чтобы начать работу с базой данных MySQL/MariaDB
 //$dbSettings = include('config' . DIRECTORY_SEPARATOR . 'db.php');
-//Connection::instance()->connect(Mysql::DRIVER_CLASS, $dbSettings);
-//Registry::set('dataSourceDriver', Connection::instance()->getDriver(), true);
+//Orm_Registry::add(new Mysql($dbSettings));
 
 // Настраиваем роутер
 $configFileName = 'application' .

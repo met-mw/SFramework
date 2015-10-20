@@ -8,6 +8,8 @@
 namespace kernel\orm;
 
 
+use Exception;
+use kernel\orm\classes\Orm_Registry;
 use kernel\orm\interfaces\Interface_Driver;
 use kernel\orm\traits\Trait_Setting;
 
@@ -17,47 +19,20 @@ use kernel\orm\traits\Trait_Setting;
  *
  * Базовый класс драйвера доступа к данным
  */
-class Driver implements Interface_Driver {
+abstract class Driver implements Interface_Driver {
 
     use Trait_Setting;
 
-    public function query($query) {
-        // TODO: Implement query() method.
+    static public function factory($className, $primaryKey = null) {
+        if (!class_exists($className)) {
+            throw new Exception("Модель {$className} не существует");
+        }
+
+        return new $className(Orm_Registry::get(self::cls()), $primaryKey);
     }
 
-    public function fetchAssoc() {
-        // TODO: Implement fetchAssoc() method.
+    static public function cls() {
+        return get_called_class();
     }
 
-    public function fetchRow() {
-        // TODO: Implement fetchRow() method.
-    }
-
-    public function fetchFields() {
-        // TODO: Implement fetchFields() method.
-    }
-
-    public function lastInsertId() {
-        // TODO: Implement lastInsertId() method.
-    }
-
-    public function prepare($query) {
-        // TODO: Implement prepare() method.
-    }
-
-    public function bindParameter($types, array $attributes) {
-        // TODO: Implement bindParameter() method.
-    }
-
-    public function execute() {
-        // TODO: Implement execute() method.
-    }
-
-    public function getResult() {
-        // TODO: Implement getResult() method.
-    }
-
-    public function fetchAll() {
-        // TODO: Implement fetchAll() method.
-    }
 }

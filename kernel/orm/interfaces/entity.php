@@ -10,10 +10,10 @@ namespace kernel\orm\interfaces;
 
 interface Interface_Entity {
 
+    static public function cls();
+
     /**
      * @param int $primaryKey Первичный ключ
-     *
-     * @return static[]
      */
     public function load($primaryKey);
 
@@ -22,5 +22,9 @@ interface Interface_Entity {
     public function commit();
 
     public function delete();
+
+    public function asJSON();
+
+    public function asXML();
 
 } 
