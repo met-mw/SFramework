@@ -4,16 +4,16 @@
  * User: metr
  * Date: 03.10.15
  */
-use kernel\classes\Registry;
-use kernel\classes\Router;
 
+use SFramework\Classes\Registry;
+use SFramework\Classes\Router;
 
-include_once('kernel' . DIRECTORY_SEPARATOR . 'autoload.php');
+require_once('vendor' . DIRECTORY_SEPARATOR . 'autoload.php');
 Registry::set('router', new Router(), true);
 
-$applicationBootstrap = 'application' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+$applicationBootstrap = SFW_APP_ROOT . 'bootstrap.php';
 if (file_exists($applicationBootstrap)) {
-    include_once($applicationBootstrap);
+    require_once($applicationBootstrap);
 }
 // Чтобы применить демонстрационые настройки раскомментируй следующую строку
 //include_once('application' . DIRECTORY_SEPARATOR . 'bootstrap_example.php');

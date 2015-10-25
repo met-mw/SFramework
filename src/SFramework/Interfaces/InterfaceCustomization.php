@@ -5,10 +5,10 @@
  * Date: 07.10.15
  */
 
-namespace kernel\interfaces;
+namespace SFramework\Interfaces;
 
 
-interface Interface_Customization {
+interface InterfaceCustomization {
 
     public function asInteger();
 

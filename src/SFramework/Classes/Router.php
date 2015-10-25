@@ -5,12 +5,13 @@
  * Date: 06.10.15
  */
 
-namespace kernel\classes;
+namespace SFramework\Classes;
+
+
 use Exception;
 
 /**
  * Class Router
- * @package kernel\classes
  *
  * Роутер. Находит контроллер и вызывает его определённый метод,
  * определённый по uri

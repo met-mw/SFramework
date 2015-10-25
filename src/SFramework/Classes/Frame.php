@@ -5,15 +5,13 @@
  * Date: 07.10.15
  */
 
-namespace kernel\classes;
-
-
+namespace SFramework\Classes;
 use Exception;
-use kernel\interfaces\Interface_View;
+use SFramework\Interfaces\InterfaceView;
+
 
 /**
  * Class Frame
- * @package kernel\classes
  *
  * Основной макет страницы
  */
@@ -25,7 +23,7 @@ class Frame {
     protected $currentFrame = '';
     protected $frameContent = '';
 
-    /** @var Interface_View[]|mixed */
+    /** @var InterfaceView[]|mixed */
     protected $binds = [];
 
     public function __construct($framesRoot = null) {
@@ -82,7 +80,7 @@ class Frame {
         $this->binds['meta'][] = $metaParams;
     }
 
-    public function bindView($label, Interface_View $view) {
+    public function bindView($label, InterfaceView $view) {
         if (in_array($label, $this->systemLabels)) {
             throw new Exception("Метка \"{$label}\" является системной, её нельзя использовать. Системные метки: " . implode(',', $this->systemLabels));
         }
@@ -147,7 +145,7 @@ class Frame {
                 }
             }
             $content = '<meta ' . implode(' ', $meta) . ' />';
-        } elseif ($this->binds[$label] instanceof Interface_View) {
+        } elseif ($this->binds[$label] instanceof InterfaceView) {
             ob_start();
             $this->binds[$label]->render();
             $content = ob_get_contents();

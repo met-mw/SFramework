@@ -5,14 +5,12 @@
  * Date: 04.10.15
  */
 
-namespace kernel\classes;
+namespace SFramework\Classes;
 
 
-use kernel\orm\interfaces\Interface_Driver;
 
 /**
  * Class Registry
- * @package kernel\classes
  *
  * Реестр. Заменитель глобальных переменных. Сюда помещаются данные,
  * которые могут понадобиться в любой части проекта.
@@ -47,15 +45,6 @@ class Registry {
                 self::$lock[] = $name;
             }
         }
-    }
-
-    /**
-     * Получить драйвер доступа к данным
-     *
-     * @return Interface_Driver
-     */
-    static public function dataSourceDriver() {
-        return isset(self::$container['dataSourceDriver']) ? self::$container['dataSourceDriver'] : null;
     }
 
     /**

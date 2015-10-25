@@ -5,10 +5,10 @@
  * Date: 06.10.15
  */
 
-namespace kernel\interfaces;
+namespace SFramework\Interfaces;
 
 
-interface Interface_Controller {
+interface InterfaceController {
 
     public function param($name);
 

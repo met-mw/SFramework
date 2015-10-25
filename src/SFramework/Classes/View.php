@@ -5,14 +5,14 @@
  * Date: 07.10.15
  */
 
-namespace kernel\classes;
+namespace SFramework\Classes;
 
 
 use Exception;
-use kernel\interfaces\Interface_View;
 use ReflectionProperty;
+use SFramework\Interfaces\InterfaceView;
 
-abstract class View implements Interface_View {
+abstract class View implements InterfaceView {
 
     final public function render() {
         $objectFields = get_object_vars($this);

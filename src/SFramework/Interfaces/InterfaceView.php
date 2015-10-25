@@ -5,10 +5,10 @@
  * Date: 06.10.15
  */
 
-namespace kernel\interfaces;
+namespace SFramework\Interfaces;
 
 
-interface Interface_View {
+interface InterfaceView {
 
     /**
      * Рендеринг представления. Обязательный метод для всех представлений.

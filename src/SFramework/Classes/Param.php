@@ -5,16 +5,15 @@
  * Date: 07.10.15
  */
 
-namespace kernel\classes;
+namespace SFramework\Classes;
 
 
-use kernel\interfaces\Interface_Param;
+use SFramework\Interfaces\InterfaceParam;
 
 /**
  * Class Param
- * @package kernel\classes
  */
-class Param implements Interface_Param {
+class Param implements InterfaceParam {
 
     static public function get($name) {
         return new Customization(isset($_GET[$name]) ? $_GET[$name] : null);

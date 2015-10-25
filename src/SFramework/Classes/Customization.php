@@ -5,14 +5,14 @@
  * Date: 07.10.15
  */
 
-namespace kernel\classes;
+namespace SFramework\Classes;
 
 
 use Exception;
-use kernel\classes\customization\File;
-use kernel\interfaces\Interface_Customization;
+use SFramework\Classes\Customization\File;
+use SFramework\Interfaces\InterfaceCustomization;
 
-class Customization implements Interface_Customization {
+class Customization implements InterfaceCustomization {
 
     private $value = null;
 

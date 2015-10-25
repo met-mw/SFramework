@@ -1,0 +1,27 @@
+{
+    "name": "Met_MW/Sframework",
+    "authors": [
+        {
+            "name": "met-mw",
+            "email": "met-mw@rambler.ru"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/met-mw/SORM.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "Met_MW/SORM": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SFramework\\": "src/SFramework"
+        }
+    }
+}

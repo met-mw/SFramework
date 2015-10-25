@@ -5,7 +5,7 @@
  * Date: 08.10.15
  */
 
-namespace kernel\classes\customization;
+namespace SFramework\Classes\Customization;
 
 
 class File {
