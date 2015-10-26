@@ -15,9 +15,9 @@ if ($argc == 2) {
         if (mkdir($appRoot)) {
             echo 'success.' . PHP_EOL;
 
-            $routeRoot = "{$appRoot}Config" . DIRECTORY_SEPARATOR;
-            echo "Create directory: \"{$routeRoot}\" - ";
-            if (mkdir($routeRoot)) {
+            $configRoot = "{$appRoot}Config" . DIRECTORY_SEPARATOR;
+            echo "Create directory: \"{$configRoot}\" - ";
+            if (mkdir($configRoot)) {
                 echo 'success.' . PHP_EOL;
 
                 // Создаём файл конфигурации роутера
@@ -31,22 +31,66 @@ return [
     \'defaultAction\' => \'Index\',
     \'defaultActionPrefix\' => \'action\'
 ];';
-            echo 'Create file: "' . $routeRoot . 'route.php" - ';
-            echo (file_put_contents("{$routeRoot}route.php", $configRoute) !== false ? 'success.' : 'filed.') . PHP_EOL;
+            echo 'Create file: "' . $configRoot . 'route.php" - ';
+            echo (file_put_contents("{$configRoot}route.php", $configRoute) !== false ? 'success.' : 'filed.') . PHP_EOL;
             } else {
                 echo 'filed.' . PHP_EOL;
             }
 
-            echo 'Create directory: "' . $root . 'app\Controllers" - ';
-            echo (mkdir($appRoot . 'Controllers') ? 'success.' : 'filed.') . PHP_EOL;
+            $controllerRoot = "{$root}Controllers";
+            echo "Create directory: \"{$controllerRoot}\" - ";
+            if (mkdir($controllerRoot)) {
+                echo 'success.' . PHP_EOL;
+
+                $controller = '<?php
+namespace App\Controllers;
+
+
+use SFramework\Classes\Controller;
+
+class ControllerMain extends Controller {
+
+    public function actionIndex() {
+        // TODO: Здесь твой код
+    }
+
+}';
+                echo "Create file: \"{$controllerRoot}ControllerMain.php\" - ";
+                echo (file_put_contents("{$controllerRoot}ControllerMain.php", $view) !== false ? 'success.' : 'filed.') . PHP_EOL;
+            } else {
+                echo 'filed.' . PHP_EOL;
+            }
+
             echo 'Create directory: "' . $root . 'app\Frames" - ';
-            echo (mkdir($appRoot . 'Frames') ? 'success.' : 'filed.') . PHP_EOL;;
+            echo (mkdir($appRoot . 'Frames') ? 'success.' : 'filed.') . PHP_EOL;
             echo 'Create directory: "' . $root . 'app\Migrations" - ';
-            echo (mkdir($appRoot . 'Migrations') ? 'success.' : 'filed.') . PHP_EOL;;
+            echo (mkdir($appRoot . 'Migrations') ? 'success.' : 'filed.') . PHP_EOL;
             echo 'Create directory: "' . $root . 'app\Models" - ';
-            echo (mkdir($appRoot . 'Models') ? 'success.' : 'filed.') . PHP_EOL;;
-            echo 'Create directory: "' . $root . 'app\Views" - ';
-            echo (mkdir($appRoot . 'Views') ? 'success.' : 'filed.') . PHP_EOL;;
+            echo (mkdir($appRoot . 'Models') ? 'success.' : 'filed.') . PHP_EOL;
+
+            $viewRoot = "{$appRoot}Views" . DIRECTORY_SEPARATOR;
+            echo "Create directory: \"{$viewRoot}\" - ";
+            if (mkdir($viewRoot)) {
+                echo 'success.' . PHP_EOL;
+
+                $view = '<?php
+namespace App\Views;
+
+
+use SFramework\Classes\View;
+
+class ViewMain extends View {
+
+    public function currentRender() {
+        // TODO: Рендер вьюшки
+    }
+
+}';
+                echo "Create file: \"{$viewRoot}ViewMain.php\" - ";
+                echo (file_put_contents("{$viewRoot}ViewMain.php", $view) !== false ? 'success.' : 'filed.') . PHP_EOL;
+            } else {
+                echo 'filed.' . PHP_EOL;
+            }
         } else {
             echo 'filed.' . PHP_EOL;
         }
