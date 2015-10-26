@@ -37,7 +37,7 @@ return [
                 echo 'filed.' . PHP_EOL;
             }
 
-            $controllerRoot = "{$appRoot}Controllers";
+            $controllerRoot = "{$appRoot}Controllers" . DIRECTORY_SEPARATOR;
             echo "Create directory: \"{$controllerRoot}\" - ";
             if (mkdir($controllerRoot)) {
                 echo 'success.' . PHP_EOL;
