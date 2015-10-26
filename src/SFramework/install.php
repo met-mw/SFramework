@@ -82,7 +82,7 @@ use SFramework\\Classes\\Registry;
 
 require_once(\'vendor\' . DIRECTORY_SEPARATOR . \'autoload.php\');
 
-require_once(\'vendor\' . DIRECTORY_SEPARATOR . \'met_mw\' . DIRECTORY_SEPARATOR . \'sframework\' . DIRECTORY_SEPARATOR . \'src\' . DIRECTORY_SEPARATOR . \'SFramework\' . DIRECTORY_SEPARATOR . \'bootstrap.php\');
+Registry::set(\'router\', new Router(), true);
 
 $configFileName = \'App\' .
     DIRECTORY_SEPARATOR . \'Config\' .
@@ -97,7 +97,11 @@ Registry::frame(\'example\')->setFavicon();
 Registry::frame(\'example\')->addMeta([
     \'name\' => \'viewport\',
     \'content\' => \'width=device-width, initial-scale=1.0\'
-]);';
+]);
+
+$router = Registry::router();
+$router->setRoute($_SERVER[\'REQUEST_URI\']);
+$router->route();';
         echo 'Create file: "' . $root . 'bootstrap.php" - ';
         echo (file_put_contents("{$root}bootstrap.php", $bootstrap) !== false ? 'success.' : 'filed.') . PHP_EOL;
 
