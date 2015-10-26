@@ -56,7 +56,7 @@ class ControllerMain extends Controller {
 
 }';
                 echo "Create file: \"{$controllerRoot}ControllerMain.php\" - ";
-                echo (file_put_contents("{$controllerRoot}ControllerMain.php", $view) !== false ? 'success.' : 'filed.') . PHP_EOL;
+                echo (file_put_contents("{$controllerRoot}ControllerMain.php", $controller) !== false ? 'success.' : 'filed.') . PHP_EOL;
             } else {
                 echo 'filed.' . PHP_EOL;
             }
