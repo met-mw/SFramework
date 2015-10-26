@@ -81,8 +81,8 @@ class ControllerMain extends Controller {
         <!--label[content]-->
     </body>
 </html>';
-                echo "Create file: \"{$frameRoot}main.php\" - ";
-                echo (file_put_contents("{$frameRoot}main.php", $frame) !== false ? 'success.' : 'filed.') . PHP_EOL;
+                echo "Create file: \"{$frameRoot}main.html\" - ";
+                echo (file_put_contents("{$frameRoot}main.html", $frame) !== false ? 'success.' : 'filed.') . PHP_EOL;
             } else {
                 echo 'filed.' . PHP_EOL;
             }
