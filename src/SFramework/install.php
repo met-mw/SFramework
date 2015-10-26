@@ -51,13 +51,71 @@ return [
             echo 'filed.' . PHP_EOL;
         }
 
+        $publicRoot = "{$root}public" . DIRECTORY_SEPARATOR;
+        echo "Create directory: \"{$publicRoot}\" - ";
+        if (mkdir($publicRoot)) {
+            echo 'success.' . PHP_EOL;
+        } else {
+            echo 'filed.' . PHP_EOL;
+        }
+
+        $gitignore = '/.idea/
+/vendor/';
+        echo 'Create file: "' . $root . '.gitignore" - ';
+        echo (file_put_contents("{$root}.gitignore", $gitignore) !== false ? 'success.' : 'filed.') . PHP_EOL;
+
+        $htaccess = '<IfModule mod_rewrite.c>
+RewriteEngine On
+Options +FollowSymlinks
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^\/public/(.*).(.*)
+RewriteRule ^.*$ index.php [NC,L]
+</IfModule>';
+        echo 'Create file: "' . $root . '.htaccess" - ';
+        echo (file_put_contents("{$root}.htaccess", $htaccess) !== false ? 'success.' : 'filed.') . PHP_EOL;
+
+        $composer = '{
+    "name": "met_mw/sframework",
+    "authors": [
+        {
+            "name": "met-mw",
+            "email": "met-mw@rambler.ru"
+        }
+    ],
+    "version": "1.0.0",
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/met-mw/SORM.git"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "met_mw/sorm": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "SFramework\\\\": "src/SFramework",
+            "App\\\\": "App/"
+        }
+    }
+}
+';
+        echo 'Create file: "' . $root . 'composer.json" - ';
+        echo (file_put_contents("{$root}composer.json", $composer) !== false ? 'success.' : 'filed.') . PHP_EOL;
+
         // Создаём файл bootstrap
         $bootstrap = '<?php
 use SFramework\\Classes\\Frame;
 use SFramework\\Classes\\Registry;
 
-$configFileName = \'app\' .
-    DIRECTORY_SEPARATOR . \'config\' .
+$configFileName = \'App\' .
+    DIRECTORY_SEPARATOR . \'Config\' .
     DIRECTORY_SEPARATOR . \'route.php\';
 if (file_exists($configFileName)) {
     Registry::router()->setConfig(include($configFileName));
@@ -73,6 +131,18 @@ Registry::frame(\'example\')->addMeta([
         echo 'Create file: "' . $root . 'bootstrap.php" - ';
         echo (file_put_contents("{$root}bootstrap.php", $bootstrap) !== false ? 'success.' : 'filed.') . PHP_EOL;
 
+
+        $index = '<?php
+define(\'SFW_ROOT\', __DIR__ . DIRECTORY_SEPARATOR);
+define(\'SFW_APP_ROOT\', SFW_ROOT . \'App\' . DIRECTORY_SEPARATOR);
+define(\'SFW_PUBLIC_ROOT\', SFW_ROOT . \'public\' . DIRECTORY_SEPARATOR);
+
+define(\'SFW_PUBLIC_HREF\', \'/public/\');
+
+
+include_once(\'bootstrap.php\');';
+        echo 'Create file: "' . $root . 'index.php" - ';
+        echo (file_put_contents("{$root}index.php", $index) !== false ? 'success.' : 'filed.') . PHP_EOL;
     }
 
     echo  PHP_EOL . 'Congratulations! Install successful.';
