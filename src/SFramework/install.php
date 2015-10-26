@@ -80,6 +80,8 @@ RewriteRule ^.*$ index.php [NC,L]
 use SFramework\\Classes\\Frame;
 use SFramework\\Classes\\Registry;
 
+require_once(\'vendor\' . DIRECTORY_SEPARATOR . \'autoload.php\');
+
 $configFileName = \'App\' .
     DIRECTORY_SEPARATOR . \'Config\' .
     DIRECTORY_SEPARATOR . \'route.php\';
@@ -106,7 +108,7 @@ define(\'SFW_PUBLIC_ROOT\', SFW_ROOT . \'public\' . DIRECTORY_SEPARATOR);
 define(\'SFW_PUBLIC_HREF\', \'/public/\');
 
 
-include_once(\'bootstrap.php\');';
+require_once(\'bootstrap.php\');';
         echo 'Create file: "' . $root . 'index.php" - ';
         echo (file_put_contents("{$root}index.php", $index) !== false ? 'success.' : 'filed.') . PHP_EOL;
     }
