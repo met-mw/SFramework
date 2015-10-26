@@ -93,7 +93,7 @@ if (file_exists($configFileName)) {
     Registry::router()->setConfig(include($configFileName));
 }
 
-Registry::set(\'example\', new Frame(), true);
+Registry::set(\'example\', new Frame(\'App\\Frames\\\'), true);
 Registry::frame(\'example\')->setFrame(\'example\');
 Registry::frame(\'example\')->setFavicon();
 Registry::frame(\'example\')->addMeta([

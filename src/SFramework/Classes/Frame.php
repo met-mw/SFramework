@@ -26,10 +26,8 @@ class Frame {
     /** @var InterfaceView[]|mixed */
     protected $binds = [];
 
-    public function __construct($framesRoot = null) {
-        $this->root = is_null($framesRoot)
-            ? 'application' . DIRECTORY_SEPARATOR . 'frames'. DIRECTORY_SEPARATOR
-            : $framesRoot;
+    public function __construct($framesRoot) {
+        $this->root = $framesRoot;
     }
 
     public function setFrame($framePath) {
