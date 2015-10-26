@@ -61,8 +61,31 @@ class ControllerMain extends Controller {
                 echo 'filed.' . PHP_EOL;
             }
 
-            echo 'Create directory: "' . $root . 'app\Frames" - ';
-            echo (mkdir($appRoot . 'Frames') ? 'success.' : 'filed.') . PHP_EOL;
+            $frameRoot = "{$appRoot}Frames" . DIRECTORY_SEPARATOR;
+            echo "Create directory: \"{$configRoot}\" - ";
+            if (mkdir($frameRoot)) {
+                echo 'success.' . PHP_EOL;
+
+                $frame = '<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            <!--label[title]-->
+        </title>
+        <!--label[meta]-->
+        <!--label[favicon]-->
+        <!--label[css]-->
+        <!--label[js]-->
+    </head>
+    <body>
+        <!--label[content]-->
+    </body>
+</html>';
+                echo "Create file: \"{$frameRoot}main.php\" - ";
+                echo (file_put_contents("{$frameRoot}main.php", $frame) !== false ? 'success.' : 'filed.') . PHP_EOL;
+            } else {
+                echo 'filed.' . PHP_EOL;
+            }
             echo 'Create directory: "' . $root . 'app\Migrations" - ';
             echo (mkdir($appRoot . 'Migrations') ? 'success.' : 'filed.') . PHP_EOL;
             echo 'Create directory: "' . $root . 'app\Models" - ';
@@ -137,10 +160,10 @@ if (file_exists($configFileName)) {
     Registry::router()->setConfig(include($configFileName));
 }
 
-Registry::set(\'example\', new Frame(SFW_APP_ROOT . \'Frames\' . DIRECTORY_SEPARATOR), true);
-Registry::frame(\'example\')->setFrame(\'example\');
-Registry::frame(\'example\')->setFavicon();
-Registry::frame(\'example\')->addMeta([
+Registry::set(\'main\', new Frame(SFW_APP_ROOT . \'Frames\' . DIRECTORY_SEPARATOR), true);
+Registry::frame(\'main\')->setFrame(\'main\');
+Registry::frame(\'main\')->setFavicon();
+Registry::frame(\'main\')->addMeta([
     \'name\' => \'viewport\',
     \'content\' => \'width=device-width, initial-scale=1.0\'
 ]);
