@@ -20,8 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SFramework\\": "src/SFramework",
-            "App\\": "App/"
+            "SFramework\\": "src/SFramework"
         }
     }
 }
