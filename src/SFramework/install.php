@@ -75,40 +75,6 @@ RewriteRule ^.*$ index.php [NC,L]
         echo 'Create file: "' . $root . '.htaccess" - ';
         echo (file_put_contents("{$root}.htaccess", $htaccess) !== false ? 'success.' : 'filed.') . PHP_EOL;
 
-        $composer = '{
-    "name": "met_mw/sframework",
-    "authors": [
-        {
-            "name": "met-mw",
-            "email": "met-mw@rambler.ru"
-        }
-    ],
-    "version": "1.0.0",
-    "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/met-mw/SORM.git"
-        }
-    ],
-    "require": {
-        "php": ">=5.6.0",
-        "met_mw/sorm": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "SFramework\\\\": "src/SFramework",
-            "App\\\\": "App/"
-        }
-    }
-}
-';
-        echo 'Create file: "' . $root . 'composer.json" - ';
-        echo (file_put_contents("{$root}composer.json", $composer) !== false ? 'success.' : 'filed.') . PHP_EOL;
-
         // Создаём файл bootstrap
         $bootstrap = '<?php
 use SFramework\\Classes\\Frame;
