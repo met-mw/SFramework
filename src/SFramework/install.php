@@ -79,6 +79,8 @@ RewriteRule ^.*$ index.php [NC,L]
         $bootstrap = '<?php
 use SFramework\\Classes\\Frame;
 use SFramework\\Classes\\Registry;
+use SFramework\\Classes\\Router;
+
 
 require_once(\'vendor\' . DIRECTORY_SEPARATOR . \'autoload.php\');
 
