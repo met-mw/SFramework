@@ -82,6 +82,8 @@ use SFramework\\Classes\\Registry;
 
 require_once(\'vendor\' . DIRECTORY_SEPARATOR . \'autoload.php\');
 
+require_once(\'vendor\' . DIRECTORY_SEPARATOR . \'met_mw\' . DIRECTORY_SEPARATOR . \'sframework\' . DIRECTORY_SEPARATOR . \'src\' . DIRECTORY_SEPARATOR . \'SFramework\' . DIRECTORY_SEPARATOR . \'bootstrap.php\');
+
 $configFileName = \'App\' .
     DIRECTORY_SEPARATOR . \'Config\' .
     DIRECTORY_SEPARATOR . \'route.php\';
