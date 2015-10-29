@@ -1,5 +1,6 @@
 {
     "name": "met_mw/sframework",
+    "type": "framework",
     "authors": [
         {
             "name": "met-mw",
@@ -20,7 +21,8 @@
     },
     "autoload": {
         "psr-4": {
-            "SFramework\\": "src/SFramework"
+            "SFramework\\": "src/SFramework",
+            "App\\": "App/"
         }
     }
 }

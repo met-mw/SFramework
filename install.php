@@ -4,9 +4,9 @@
  * User: metr
  * Date: 25.10.15
  */
-if ($argc == 2) {
+if ($argc >= 1) {
 
-    $root = $argv[1];
+    $root = isset($argv[1]) ? $argv[1] : __DIR__;
     if (is_dir($root)) {
         echo 'Install...' . PHP_EOL . PHP_EOL;
 
