@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 07.10.15
- */
-
 namespace SFramework\Interfaces;
 
 

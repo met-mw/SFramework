@@ -1,9 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 25.10.15
- */
 if ($argc >= 1) {
 
     $root = isset($argv[1]) ? $argv[1] : __DIR__ . DIRECTORY_SEPARATOR;

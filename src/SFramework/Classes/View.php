@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 07.10.15
- */
-
 namespace SFramework\Classes;
 
 
@@ -12,8 +6,20 @@ use Exception;
 use ReflectionProperty;
 use SFramework\Interfaces\InterfaceView;
 
+/**
+ * Class View
+ * @package SFramework\Classes
+ *
+ * Базовый класс представлений
+ */
 abstract class View implements InterfaceView {
 
+    /**
+     * Отрисовка представления
+     * Предварительно проверяется заполнение полей представления
+     *
+     * @throws Exception
+     */
     final public function render() {
         $objectFields = get_object_vars($this);
         foreach ($objectFields as $field => $value) {
@@ -25,7 +31,5 @@ abstract class View implements InterfaceView {
 
         $this->currentRender();
     }
-
-    abstract public function currentRender();
 
 } 

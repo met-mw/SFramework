@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 07.10.15
- */
-
 namespace SFramework\Classes;
 
 
 use SFramework\Interfaces\InterfaceController;
 
+/**
+ * Class Controller
+ * @package SFramework\Classes
+ *
+ * Базовый класс контроллера
+ */
 abstract class Controller implements InterfaceController {
 
     /** @var Customization[] */
@@ -19,6 +19,13 @@ abstract class Controller implements InterfaceController {
         $this->params = $params;
     }
 
+    /**
+     * Получить параметр
+     *
+     * @param string $name Имя параметра
+     *
+     * @return Customization
+     */
     public function param($name) {
         return new Customization($this->params[$name]);
     }

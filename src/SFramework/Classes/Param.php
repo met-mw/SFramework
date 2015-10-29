@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 07.10.15
- */
-
 namespace SFramework\Classes;
 
 
@@ -12,6 +6,8 @@ use SFramework\Interfaces\InterfaceParam;
 
 /**
  * Class Param
+ *
+ * Обработчик параметров, переданных серверу
  */
 class Param implements InterfaceParam {
 

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 04.10.15
- */
-
 namespace SFramework\Classes;
 
 

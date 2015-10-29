@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 07.10.15
- */
-
 namespace SFramework\Classes;
 
 
@@ -12,6 +6,12 @@ use Exception;
 use SFramework\Classes\Customization\File;
 use SFramework\Interfaces\InterfaceCustomization;
 
+/**
+ * Class Customization
+ * @package SFramework\Classes
+ *
+ * Приводит значение к определённому типу, совместно является базовой валидацией
+ */
 class Customization implements InterfaceCustomization {
 
     private $value = null;

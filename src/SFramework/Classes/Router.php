@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 06.10.15
- */
-
 namespace SFramework\Classes;
 
 
@@ -13,8 +7,7 @@ use Exception;
 /**
  * Class Router
  *
- * Роутер. Находит контроллер и вызывает его определённый метод,
- * определённый по uri
+ * Роутер
  */
 class Router {
 
@@ -55,6 +48,15 @@ class Router {
         $controllerObject->$action();
     }
 
+    /**
+     * Найти контроллер
+     *
+     * @param string $controller
+     * @param array $explodedRoute
+     * @param string $controllerPrefix
+     *
+     * @return string
+     */
     private function searchController($controller, array &$explodedRoute, $controllerPrefix) {
         $current = array_shift($explodedRoute);
         $currentClassLastName = ucfirst($current);

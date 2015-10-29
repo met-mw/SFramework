@@ -1,13 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: metr
- * Date: 08.10.15
- */
-
 namespace SFramework\Classes\Customization;
 
 
+/**
+ * Class File
+ * @package SFramework\Classes\Customization
+ */
 class File {
 
     public $name;
