@@ -6,7 +6,7 @@
  */
 if ($argc >= 1) {
 
-    $root = isset($argv[1]) ? $argv[1] : __DIR__;
+    $root = isset($argv[1]) ? $argv[1] : __DIR__ . DIRECTORY_SEPARATOR;
     if (is_dir($root)) {
         echo 'Install...' . PHP_EOL . PHP_EOL;
 
