@@ -18,13 +18,7 @@ if ($argc >= 1) {
                 // Создаём файл конфигурации роутера
             $configRoute = '<?php
 return [
-    \'controllersRoot\' => \'App\\\\Controllers\\\\\',
-
-    \'defaultController\' => \'Main\',
-    \'defaultControllerPrefix\' => \'Controller\',
-
-    \'defaultAction\' => \'Index\',
-    \'defaultActionPrefix\' => \'action\'
+    \'controllersRoot\' => \'App\\\\Controllers\\\\\'
 ];';
             echo 'Create file: "' . $configRoot . 'route.php" - ';
             echo (file_put_contents("{$configRoot}route.php", $configRoute) !== false ? 'success.' : 'filed.') . PHP_EOL;

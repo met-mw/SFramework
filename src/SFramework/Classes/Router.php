@@ -23,26 +23,12 @@ class Router {
      */
     public function route() {
         list($route, $parametersString) = explode('?', $this->route);
+        $route = trim($route, '/');
         $parameters = $this->parseParameters($parametersString);
 
         $exploded = array_diff(explode('/', $route), ['']);
-        if (count($exploded) == 0) {
-            $controller = $this->config['controllersRoot'] . $this->config['defaultControllerPrefix'] . $this->config['defaultController'];
-            $action = $this->config['defaultActionPrefix'] . $this->config['defaultAction'];
-            if (!class_exists($controller) || !method_exists($controller, $action)) {
-                $controller = $this->error404();
-            }
-        } else {
-            $controller = $this->searchController($this->config['controllersRoot'], $exploded, $this->config['defaultControllerPrefix']);
-            if (count($exploded) == 0 && method_exists($controller, $this->config['defaultActionPrefix'] . $this->config['defaultAction'])) {
-                $action = $this->config['defaultActionPrefix'] . $this->config['defaultAction'];
-            } elseif (method_exists($controller, $this->config['defaultActionPrefix'] . ucfirst(reset($exploded)))) {
-                $action = $this->config['defaultActionPrefix'] . ucfirst(array_shift($exploded));
-            } else {
-                $action = $this->config['defaultActionPrefix'] . $this->config['defaultAction'];
-                $controller = $this->error404();
-            }
-        }
+        $controller = $this->searchController($this->config['controllersRoot'], $exploded);
+        $action = empty($exploded) ? 'actionIndex' : 'action' . ucfirst(array_shift($exploded));
 
         $controllerObject = new $controller($parameters);
         $controllerObject->$action();
@@ -53,27 +39,24 @@ class Router {
      *
      * @param string $controller
      * @param array $explodedRoute
-     * @param string $controllerPrefix
      *
      * @return string
      */
-    private function searchController($controller, array &$explodedRoute, $controllerPrefix) {
+    private function searchController($controller, array &$explodedRoute) {
         $current = array_shift($explodedRoute);
-        $currentClassLastName = ucfirst($current);
+        $currentClassLastName = is_null($current) ? 'Main' : ucfirst($current);
         $routesCount = count($explodedRoute);
-        $probeClassName = "{$controller}{$controllerPrefix}{$currentClassLastName}";
+        $probeClassName = "{$controller}Controller{$currentClassLastName}";
         if ($routesCount <= 1 && class_exists($probeClassName)) {
-            if (($routesCount == 1 && $this->checkControllerAction($probeClassName, $this->config['defaultActionPrefix'] . ucfirst(reset($explodedRoute)))) || $routesCount == 0) {
+            if (($routesCount == 1 && $this->checkControllerAction($probeClassName, 'action' . ucfirst(reset($explodedRoute)))) || $routesCount == 0) {
                 return $probeClassName;
-            } else {
-                $controller = $this->searchController("{$controller}{$current}\\", $explodedRoute, "{$controllerPrefix}{$currentClassLastName}_");
             }
+            $controller = $this->searchController("{$controller}{$currentClassLastName}\\", $explodedRoute, $currentClassLastName);
         } else {
-            if (count($explodedRoute) == 0) {
+            if (is_null($current) && $routesCount == 0) {
                 return $this->error404();
-            } else {
-                $controller = $this->searchController("{$controller}{$current}\\", $explodedRoute, "{$controllerPrefix}{$currentClassLastName}_");
             }
+            $controller = $this->searchController("{$controller}{$currentClassLastName}\\", $explodedRoute, $currentClassLastName);
         }
 
         return $controller;
@@ -103,8 +86,8 @@ class Router {
      * Контроллер или действие контроллера не найдено
      */
     public function error404() {
-        $className = $this->config['controllersRoot'] . $this->config['defaultControllerPrefix'] . '404';
-        $action = $this->config['defaultActionPrefix'] . $this->config['defaultAction'];
+        $className = "{$this->config['controllersRoot']}Controller404";
+        $action = "actionIndex";
         if (!class_exists($className) || !method_exists($className, $action)) {
             throw new Exception("Системе не удалось найти указанный адрес: \"{$this->route}\"");
         }
