@@ -24,10 +24,10 @@ abstract class Controller implements InterfaceController {
      *
      * @param string $name Имя параметра
      *
-     * @return Customization
+     * @return Customization|null
      */
     public function param($name) {
-        return new Customization($this->params[$name]);
+        return isset($this->params[$name]) ? new Customization($this->params[$name]) : null;
     }
 
 }
