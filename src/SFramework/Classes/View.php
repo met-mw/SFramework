@@ -14,6 +14,8 @@ use SFramework\Interfaces\InterfaceView;
  */
 abstract class View implements InterfaceView {
 
+    protected $optional = [];
+
     /**
      * Отрисовка представления
      * Предварительно проверяется заполнение полей представления
@@ -24,7 +26,7 @@ abstract class View implements InterfaceView {
         $objectFields = get_object_vars($this);
         foreach ($objectFields as $field => $value) {
             $reflection = new ReflectionProperty(get_class($this), $field);
-            if ($reflection->isPublic() && is_null($value)) {
+            if (!in_array($field, $this->optional) && $reflection->isPublic() && is_null($value)) {
                 throw new Exception("Поле \"{$field}\" в представлении не заполнено.");
             }
         }
