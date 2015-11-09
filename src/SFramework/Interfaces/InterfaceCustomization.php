@@ -14,4 +14,6 @@ interface InterfaceCustomization {
 
     public function asArray();
 
+    public function exists();
+
 } 

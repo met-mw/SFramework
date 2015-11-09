@@ -74,4 +74,9 @@ class Customization implements InterfaceCustomization {
 
         throw new Exception("Параметр не является массивом информации о файле");
     }
+
+    public function exists() {
+        return !is_null($this->value);
+    }
+
 }
