@@ -25,51 +25,52 @@ class Customization implements InterfaceCustomization {
     }
 
     public function asInteger() {
-        return (int)$this->value;
+        return is_null($this->original()) ? $this->original() : (int)$this->original();
     }
 
     public function asString() {
-        return (string)$this->value;
+        return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
     public function asEmail() {
-        if (filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
-            return $this->value;
+        if (filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
+            return $this->original();
         }
 
         throw new Exception("Параметр не является адресом email");
     }
 
     public function asBool() {
-        return (bool)$this->value;
+        return is_null($this->original()) ? $this->original() : (bool)$this->original();
     }
 
     public function asArray() {
-        if (is_array($this->value)) {
-            return (array)$this->value;
+        if (is_array($this->original())) {
+            return (array)$this->original();
         }
 
         throw new Exception("Параметр не является массивом");
     }
 
     public function asFile() {
-        if (is_array($this->value)) {
-            return new File($this->value);
+        if (is_array($this->original())) {
+            return new File($this->original());
         }
 
         throw new Exception("Параметр не является массивом информации о файле");
     }
 
     public function asFilesArray() {
-        if (is_array($this->value)) {
+        if (is_array($this->original())) {
+            $original = $this->original();
             $files = [];
-            for ($i = 0; $i < count($this->value['name']); $i++) {
+            for ($i = 0; $i < count($original['name']); $i++) {
                 $files[] = new File([
-                    'name' => $this->value['name'][$i],
-                    'type' => $this->value['type'][$i],
-                    'tmp_name' => $this->value['tmp_name'][$i],
-                    'error' => $this->value['error'][$i],
-                    'size' => $this->value['size'][$i]
+                    'name' => $original['name'][$i],
+                    'type' => $original['type'][$i],
+                    'tmp_name' => $original['tmp_name'][$i],
+                    'error' => $original['error'][$i],
+                    'size' => $original['size'][$i]
                 ]);
             }
 
@@ -80,7 +81,7 @@ class Customization implements InterfaceCustomization {
     }
 
     public function exists() {
-        return !is_null($this->value);
+        return !is_null($this->original());
     }
 
 }
