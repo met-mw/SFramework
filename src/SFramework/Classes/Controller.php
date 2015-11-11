@@ -12,22 +12,4 @@ use SFramework\Interfaces\InterfaceController;
  */
 abstract class Controller implements InterfaceController {
 
-    /** @var Customization[] */
-    private $params = [];
-
-    public function __construct(array $params = []) {
-        $this->params = $params;
-    }
-
-    /**
-     * Получить параметр
-     *
-     * @param string $name Имя параметра
-     *
-     * @return Customization|null
-     */
-    public function param($name) {
-        return isset($this->params[$name]) ? new Customization($this->params[$name]) : null;
-    }
-
 }

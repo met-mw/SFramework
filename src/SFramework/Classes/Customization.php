@@ -20,6 +20,10 @@ class Customization implements InterfaceCustomization {
         $this->value = $value;
     }
 
+    public function original() {
+        return $this->value;
+    }
+
     public function asInteger() {
         return (int)$this->value;
     }
