@@ -18,6 +18,16 @@ class Router {
         $this->config = $config;
     }
 
+    public function explodeRoute() {
+        $route = trim(explode('?', $this->route)[0], '/');
+        return array_diff(explode('/', $route), ['']);
+    }
+
+    public function getParameters() {
+        $parametersString = explode('?', $this->route)[1];
+        return $this->parseParameters($parametersString);
+    }
+
     /**
      * Осуществить роутинг
      */
