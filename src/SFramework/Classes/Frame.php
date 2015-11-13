@@ -56,10 +56,12 @@ class Frame {
 
     public function addCss($cssPath) {
         $this->binds['css'][] = $cssPath;
+        return $this;
     }
 
     public function addJs($jsPath) {
         $this->binds['js'][] = $jsPath;
+        return $this;
     }
 
     public function setFavicon(array $faviconData = ['href' => '/favicon.ico', 'type' => 'image/x-icon']) {
@@ -68,10 +70,12 @@ class Frame {
         }
 
         $this->binds['favicon'] = $faviconData;
+        return $this;
     }
 
     public function addMeta(array $metaParams) {
         $this->binds['meta'][] = $metaParams;
+        return $this;
     }
 
     public function bindView($label, InterfaceView $view) {
@@ -79,6 +83,8 @@ class Frame {
             throw new Exception("Метка \"{$label}\" является системной, её нельзя использовать. Системные метки: " . implode(',', $this->systemLabels));
         }
         $this->binds[$label] = $view;
+
+        return $this;
     }
 
     public function bindData($label, $data) {
@@ -86,10 +92,13 @@ class Frame {
             throw new Exception("Метка \"{$label}\" является системной, её нельзя использовать. Системные метки: " . implode(',', $this->systemLabels));
         }
         $this->binds[$label] = $data;
+
+        return $this;
     }
 
     public function setTitle($title) {
         $this->binds['title'] = $title;
+        return $this;
     }
 
     public function render() {
