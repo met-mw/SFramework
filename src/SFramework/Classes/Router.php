@@ -11,6 +11,9 @@ use Exception;
  */
 class Router {
 
+    public $currentControllerName = null;
+    public $currentActionName = null;
+
     private $route;
     private $config = [];
 
@@ -37,11 +40,11 @@ class Router {
         $parameters = $this->parseParameters($parametersString);
 
         $exploded = array_diff(explode('/', $route), ['']);
-        $controller = $this->searchController($this->config['controllersRoot'], $exploded);
-        $action = empty($exploded) ? 'actionIndex' : 'action' . ucfirst(array_shift($exploded));
+        $this->currentControllerName = $this->searchController($this->config['controllersRoot'], $exploded);
+        $this->currentActionName = empty($exploded) ? 'actionIndex' : 'action' . ucfirst(array_shift($exploded));
 
-        $controllerObject = new $controller($parameters);
-        $controllerObject->$action();
+        $controllerObject = new $this->currentControllerName($parameters);
+        $controllerObject->{$this->currentActionName}();
     }
 
     /**
