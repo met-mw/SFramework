@@ -12,4 +12,7 @@ use SFramework\Interfaces\InterfaceController;
  */
 abstract class Controller implements InterfaceController {
 
+    /** @var Frame */
+    protected $frame;
+
 }
