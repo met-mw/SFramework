@@ -101,6 +101,10 @@ class Frame {
         return $this;
     }
 
+    public function unbind($label) {
+        unset($this->binds[$label]);
+    }
+
     public function render() {
         if ($this->currentFrame == '') {
             return;
