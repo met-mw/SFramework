@@ -94,6 +94,10 @@ class Pagination {
         return $this->parameterName;
     }
 
+    public function getCurrentPage() {
+        return $this->current;
+    }
+
     /**
      * @return $this
      */
