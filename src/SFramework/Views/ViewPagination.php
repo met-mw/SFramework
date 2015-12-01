@@ -20,10 +20,23 @@ class ViewPagination extends View {
     }
 
     public function currentRender() {
+        $isFirst = (int)$this->currentPage <= 1;
+
+        $previousUrl = '#';
+        if (!$isFirst) {
+            $previousUrl = $this->currentURL . (strpos($this->currentURL, '?') === false ? '?' : '&') . "{$this->parameterName}=" . ($this->currentPage - 1);
+        }
+
+        $isLast = (int)$this->currentPage >= $this->pagesCount;
+        $nextUrl = '#';
+        if (!$isLast) {
+            $nextUrl = $this->currentURL . (strpos($this->currentURL, '?') === false ? '?' : '&') . "{$this->parameterName}=" . ($this->currentPage + 1);
+        }
+
         ?>
         <ul>
             <li>
-                <a href="<?= $this->currentURL ?>&<?= $this->parameterName ?>=<?= ((int)$this->currentPage <= 1 ? 1 : $this->currentPage - 1) ?>">
+                <a href="<?= $previousUrl ?>">
                     <span>&laquo;</span>
                 </a>
             </li>
@@ -37,7 +50,7 @@ class ViewPagination extends View {
                 </li>
             <? endfor; ?>
             <li>
-                <a href="<?= $this->currentURL ?>&<?= $this->parameterName ?>=<?= ((int)$this->currentPage >= $this->pagesCount ? $this->pagesCount : $this->currentPage + 1) ?>">
+                <a href="<?= $nextUrl ?>">
                     <span>&raquo;</span>
                 </a>
             </li>
