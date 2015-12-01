@@ -70,7 +70,7 @@ class Pagination {
     }
 
     public function getOffset() {
-        return (int)$this->current * $this->limit;
+        return ((int)$this->current == 0 ? (int)$this->current : (int)$this->current - 1) * $this->limit;
     }
 
     public function getLimit() {
