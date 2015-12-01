@@ -87,7 +87,7 @@ class Pagination {
     }
 
     public function getPagesCount() {
-        return floor($this->fullCount / $this->limit);
+        return $this->pagesCount;
     }
 
     public function getParameterName() {
