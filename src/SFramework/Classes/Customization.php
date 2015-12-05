@@ -2,7 +2,6 @@
 namespace SFramework\Classes;
 
 
-use Exception;
 use SFramework\Classes\Customization\File;
 use SFramework\Interfaces\InterfaceCustomization;
 
@@ -14,9 +13,11 @@ use SFramework\Interfaces\InterfaceCustomization;
  */
 class Customization implements InterfaceCustomization {
 
+    private $name;
     private $value = null;
 
-    public function __construct($value) {
+    public function __construct($name, $value) {
+        $this->name = $name;
         $this->value = $value;
     }
 
@@ -37,7 +38,8 @@ class Customization implements InterfaceCustomization {
             return $this->original();
         }
 
-        throw new Exception("Параметр не является адресом email");
+        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является адресом email.");
+        return false;
     }
 
     public function asBool() {
@@ -49,7 +51,8 @@ class Customization implements InterfaceCustomization {
             return (array)$this->original();
         }
 
-        throw new Exception("Параметр не является массивом");
+        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом.");
+        return false;
     }
 
     public function asFile() {
@@ -57,7 +60,8 @@ class Customization implements InterfaceCustomization {
             return new File($this->original());
         }
 
-        throw new Exception("Параметр не является массивом информации о файле");
+        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом информации о файле.");
+        return false;
     }
 
     public function asFilesArray() {
@@ -77,7 +81,8 @@ class Customization implements InterfaceCustomization {
             return $files;
         }
 
-        throw new Exception("Параметр не является массивом информации о файле");
+        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом информации о файлах.");
+        return false;
     }
 
     public function exists() {
