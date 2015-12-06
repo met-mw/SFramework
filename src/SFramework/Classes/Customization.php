@@ -25,40 +25,40 @@ class Customization implements InterfaceCustomization {
         return $this->value;
     }
 
-    public function asInteger() {
-        if (!is_numeric($this->original())) {
+    public function asInteger($required = true) {
+        if ($required && !is_numeric($this->original())) {
             NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не явялется числом.");
         }
 
         return is_null($this->original()) ? $this->original() : (int)$this->original();
     }
 
-    public function asString() {
-        if (!is_string($this->original())) {
+    public function asString($required = true) {
+        if ($required && !is_string($this->original())) {
             NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не явялется строкой.");
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asEmail() {
-        if (!filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
+    public function asEmail($required = true) {
+        if ($required && !filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
             NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является адресом email.");
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asBool() {
-        if (!is_bool($this->original())) {
+    public function asBool($required = true) {
+        if ($required && !is_bool($this->original())) {
             NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является булевским типом.");
         }
 
-
+        return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asArray() {
-        if (!is_array($this->original())) {
+    public function asArray($required = true) {
+        if ($required && !is_array($this->original())) {
             NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом.");
         }
 
