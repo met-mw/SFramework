@@ -74,7 +74,7 @@ class NotificationLog {
         return !empty($this->warnings);
     }
 
-    public function hasNotice() {
+    public function hasNotices() {
         return !empty($this->notice);
     }
 
