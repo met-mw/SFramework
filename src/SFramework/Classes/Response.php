@@ -16,8 +16,8 @@ class Response {
     }
 
     public function sendAny(array $data, $success = true) {
-        echo $this->arrayToJSON(array_merge(['success' => $success], $data));
         $this->sendHeader($success);
+        echo $this->arrayToJSON(array_merge(['success' => $success], $data));
     }
 
     public function send() {
@@ -48,8 +48,16 @@ class Response {
             $messages[] = $message;
         }
 
-        echo $this->arrayToJSON(array_merge(['success' => $success], $errors, $warnings, $notices, $messages));
         $this->sendHeader($success);
+        echo $this->arrayToJSON(
+            [
+                'success' => $success,
+                'errors' => $errors,
+                'warnings' => $warnings,
+                'notices' => $notices,
+                'messages' => $messages
+            ]
+        );
     }
 
     private function sendHeader($success) {
