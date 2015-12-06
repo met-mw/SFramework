@@ -15,8 +15,9 @@ class Response {
         return json_encode($data);
     }
 
-    public function sendAny(array $data) {
-        echo $this->arrayToJSON($data);
+    public function sendAny(array $data, $success = true) {
+        echo $this->arrayToJSON(array_merge(['success' => $success], $data));
+        $this->sendHeader($success);
     }
 
     public function send() {
@@ -48,6 +49,13 @@ class Response {
         }
 
         echo $this->arrayToJSON(array_merge(['success' => $success], $errors, $warnings, $notices, $messages));
+        $this->sendHeader($success);
+    }
+
+    private function sendHeader($success) {
+        if (!$success) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+        }
     }
 
 } 
