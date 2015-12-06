@@ -19,7 +19,7 @@ class Response {
         echo $this->arrayToJSON(array_merge(['success' => $success], $data));
     }
 
-    public function send($redirect = '') {
+    public function send($redirect = '', array $additionalData = []) {
         $success = !($this->notificationLog->hasErrors()
             || $this->notificationLog->hasWarnings()
             || $this->notificationLog->hasNotices());
@@ -54,7 +54,8 @@ class Response {
                 'warnings' => $warnings,
                 'notices' => $notices,
                 'messages' => $messages,
-                'redirect' => $redirect
+                'redirect' => $redirect,
+                'additional_data' => $additionalData
             ]
         );
     }
