@@ -26,33 +26,43 @@ class Customization implements InterfaceCustomization {
     }
 
     public function asInteger() {
+        if (!is_numeric($this->original())) {
+            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не явялется числом.");
+        }
+
         return is_null($this->original()) ? $this->original() : (int)$this->original();
     }
 
     public function asString() {
+        if (!is_string($this->original())) {
+            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не явялется строкой.");
+        }
+
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
     public function asEmail() {
-        if (filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
-            return $this->original();
+        if (!filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
+            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является адресом email.");
         }
 
-        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является адресом email.");
-        return false;
+        return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
     public function asBool() {
-        return is_null($this->original()) ? $this->original() : (bool)$this->original();
+        if (!is_bool($this->original())) {
+            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является булевским типом.");
+        }
+
+
     }
 
     public function asArray() {
-        if (is_array($this->original())) {
-            return (array)$this->original();
+        if (!is_array($this->original())) {
+            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом.");
         }
 
-        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом.");
-        return false;
+        return is_null($this->original()) ? $this->original() : (bool)$this->original();
     }
 
     public function asFile() {
