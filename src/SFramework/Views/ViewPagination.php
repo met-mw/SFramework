@@ -16,7 +16,10 @@ class ViewPagination extends View {
     public $parameterName;
 
     public function __construct() {
+        $this->optional[] = 'pagesCount';
         $this->optional[] = 'currentPage';
+        $this->optional[] = 'currentURL';
+        $this->optional[] = 'parameterName';
     }
 
     public function currentRender() {
