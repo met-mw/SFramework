@@ -82,6 +82,10 @@ class NotificationLog {
         return !empty($this->messages);
     }
 
+    public function hasProblems() {
+        return $this->hasErrors() || $this->hasWarnings() || $this->hasNotices();
+    }
+
     public function getErrors() {
         return $this->errors;
     }
