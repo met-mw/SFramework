@@ -16,7 +16,6 @@ class Response {
     }
 
     public function sendAny(array $data, $success = true) {
-        $this->sendHeader($success);
         echo $this->arrayToJSON(array_merge(['success' => $success], $data));
     }
 
@@ -48,7 +47,6 @@ class Response {
             $messages[] = $message;
         }
 
-        $this->sendHeader($success);
         echo $this->arrayToJSON(
             [
                 'success' => $success,
@@ -58,12 +56,6 @@ class Response {
                 'messages' => $messages
             ]
         );
-    }
-
-    private function sendHeader($success) {
-        if (!$success) {
-            header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
-        }
     }
 
 } 
