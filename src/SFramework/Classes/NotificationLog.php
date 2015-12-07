@@ -143,7 +143,7 @@ class NotificationLog {
     }
 
     public function getLastNotice() {
-        return $this->hasNotice() ? $this->getNotice(count($this->notice) - 1) : null;
+        return $this->hasNotices() ? $this->getNotice(count($this->notice) - 1) : null;
     }
 
     public function getLastMessage() {
