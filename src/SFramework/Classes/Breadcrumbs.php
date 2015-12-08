@@ -10,10 +10,14 @@ class Breadcrumbs {
     protected $root;
     /** @var string */
     protected $url;
+    /** @var string */
+    protected $startingPath;
 
-    public function __construct($url, $rootName, $rootPath = 'main') {
-        $this->root = new Node($rootName, $rootPath);
+    public function __construct($url, $rootName, $rootPath = 'main', $startingPath = '') {
+        $prefix = $startingPath == '' ? '' : "{$startingPath}/";
+        $this->root = new Node($rootName, $prefix . $rootPath);
         $this->url = $url;
+        $this->startingPath = $startingPath;
     }
 
     public function getRoot() {
@@ -26,7 +30,7 @@ class Breadcrumbs {
         $urlParts = explode('/', $this->url);
         if (count($urlParts) > 1) {
             $urlParts = array_diff($urlParts, ['']);
-            if (reset($urlParts) == 'main') {
+            while (in_array(reset($urlParts), ['main', $this->startingPath])) {
                 array_shift($urlParts);
             }
         }

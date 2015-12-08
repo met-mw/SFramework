@@ -26,12 +26,7 @@ class Node {
         return $this->path;
     }
 
-    /**
-     * @param string $startingPath
-     *
-     * @return string
-     */
-    public function getRealPath($startingPath = '') {
+    public function getRealPath() {
         $node = $this;
         $pathParts = [];
         while (!is_null($node)) {
@@ -39,7 +34,7 @@ class Node {
             $node = $node->getParentNode();
         }
 
-        return ($startingPath != '' ? "/{$startingPath}/" : '/') . implode('/', array_reverse($pathParts));
+        return '/' . implode('/', array_reverse($pathParts));
     }
 
     public function getChildNodes() {
