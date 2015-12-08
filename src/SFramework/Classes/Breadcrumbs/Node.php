@@ -35,6 +35,11 @@ class Node {
         return $this->path;
     }
 
+    public function setPath($path) {
+        $this->path = $path;
+        return $this;
+    }
+
     public function isPseudo() {
         return $this->isPseudoParent;
     }
