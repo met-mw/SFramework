@@ -13,9 +13,13 @@ class Node {
     /** @var Node[] */
     private $childNodes = [];
 
-    public function __construct($name, $path = '') {
+    /** @var bool */
+    private $isPseudoParent;
+
+    public function __construct($name, $path = '', $isPseudoParent = false) {
         $this->name = $name;
         $this->path = $path;
+        $this->isPseudoParent = $isPseudoParent;
     }
 
     public function getName() {
@@ -26,12 +30,16 @@ class Node {
         return $this->path;
     }
 
+    public function isPseudo() {
+        return $this->isPseudoParent;
+    }
+
     public function getRealPath() {
         $node = $this;
         $pathParts = [];
         while (!is_null($node)) {
             $pathParts[] = $node->getPath();
-            $node = $node->getParentNode();
+            $node = $node->getRealParentNode();
         }
 
         return '/' . implode('/', array_reverse($pathParts));
@@ -39,6 +47,15 @@ class Node {
 
     public function getChildNodes() {
         return $this->childNodes;
+    }
+
+    public function getRealParentNode() {
+        $parent = $this->getParentNode();
+        while (!is_null($parent) && $parent->isPseudo()) {
+            $parent = $parent->getParentNode();
+        }
+
+        return $parent;
     }
 
     public function getParentNode() {
@@ -50,9 +67,9 @@ class Node {
         return $this;
     }
 
-    public function addChildNode($name, $path) {
+    public function addChildNode($name, $path, $isPseudoParent = false) {
         if (is_null($this->findChildNodeByPath($path))) {
-            $childNode = new Node($name, $path);
+            $childNode = new Node($name, $path, $isPseudoParent);
             $childNode->setParentNode($this);
             $this->childNodes[] = $childNode;
         } else {
@@ -79,6 +96,17 @@ class Node {
             if ($childNode->getPath() == $path) {
                 $node = $childNode;
                 break;
+            }
+        }
+
+        if (is_null($node)) {
+            foreach ($this->getChildNodes() as $childNode) {
+                if ($childNode->isPseudo()) {
+                    $node = $childNode->findChildNodeByPath($path);
+                    if (!is_null($node)) {
+                        break;
+                    }
+                }
             }
         }
 

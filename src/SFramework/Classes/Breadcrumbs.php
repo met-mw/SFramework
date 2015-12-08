@@ -9,13 +9,13 @@ class Breadcrumbs {
     /** @var Node */
     protected $root;
     /** @var string */
-    protected $url;
+    protected $route;
     /** @var string */
     protected $startingPath;
 
-    public function __construct($url, $rootName, $rootPath = '', $startingPath = '') {
+    public function __construct($route, $rootName, $rootPath = '', $startingPath = '') {
         $this->root = new Node($rootName, $rootPath == '' ? $startingPath : $startingPath . '/' . $rootPath);
-        $this->url = $url;
+        $this->route = $route;
         $this->startingPath = $startingPath;
     }
 
@@ -26,7 +26,7 @@ class Breadcrumbs {
     public function build() {
         $nodes = [];
 
-        $urlParts = explode('/', $this->url);
+        $urlParts = explode('/', $this->route);
         if (count($urlParts) > 1) {
             $urlParts = array_diff($urlParts, ['']);
             while (in_array(reset($urlParts), ['main', $this->startingPath])) {
