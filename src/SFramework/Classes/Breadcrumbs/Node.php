@@ -15,11 +15,14 @@ class Node {
 
     /** @var bool */
     private $isPseudoParent;
+    /** @var bool */
+    private $hidden;
 
-    public function __construct($name, $path = '', $isPseudoParent = false) {
+    public function __construct($name, $path = '', $isPseudoParent = false, $hidden = false) {
         $this->name = $name;
         $this->path = $path;
         $this->isPseudoParent = $isPseudoParent;
+        $this->hidden = $hidden;
     }
 
     public function getName() {
@@ -72,7 +75,9 @@ class Node {
         $node = $this;
         $nodes = [];
         while ($node->isPseudo()) {
-            $nodes[] = $node;
+            if (!$node->isHidden()) {
+                $nodes[] = $node;
+            }
             $node = $node->getParentNode();
         }
 
@@ -134,6 +139,18 @@ class Node {
         return $node;
     }
 
+    public function hide() {
+        $this->hidden = true;
+    }
+
+    public function show() {
+        $this->hidden = false;
+    }
+
+    public function isHidden() {
+        return $this->hidden;
+    }
+
     public function build(array $urlParts) {
         $path = array_shift($urlParts);
 
@@ -142,7 +159,9 @@ class Node {
         if ($node->isPseudo()) {
             $nodes = $node->getPseudoParentsChain();
         } else {
-            $nodes[] = $node;
+            if (!$node->isHidden()) {
+                $nodes[] = $node;
+            }
         }
         if (!empty($urlParts)) {
             $nodes = array_merge($nodes, $node->build($urlParts));
