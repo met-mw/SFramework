@@ -13,9 +13,8 @@ class Breadcrumbs {
     /** @var string */
     protected $startingPath;
 
-    public function __construct($url, $rootName, $rootPath = 'main', $startingPath = '') {
-        $prefix = $startingPath == '' ? '' : "{$startingPath}/";
-        $this->root = new Node($rootName, $prefix . $rootPath);
+    public function __construct($url, $rootName, $rootPath = '', $startingPath = '') {
+        $this->root = new Node($rootName, $rootPath == '' ? $startingPath : $startingPath . '/' . $rootPath);
         $this->url = $url;
         $this->startingPath = $startingPath;
     }

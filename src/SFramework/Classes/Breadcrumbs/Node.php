@@ -13,7 +13,7 @@ class Node {
     /** @var Node[] */
     private $childNodes = [];
 
-    public function __construct($name, $path = 'main') {
+    public function __construct($name, $path = '') {
         $this->name = $name;
         $this->path = $path;
     }
