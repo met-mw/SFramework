@@ -26,6 +26,11 @@ class Node {
         return $this->name;
     }
 
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
+
     public function getPath() {
         return $this->path;
     }
