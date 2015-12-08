@@ -93,9 +93,9 @@ class Node {
         return $this;
     }
 
-    public function addChildNode($name, $path, $isPseudoParent = false) {
+    public function addChildNode($name, $path, $isPseudoParent = false, $hidden = false) {
         if (is_null($this->findChildNodeByPath($path))) {
-            $childNode = new Node($name, $path, $isPseudoParent);
+            $childNode = new Node($name, $path, $isPseudoParent, $hidden);
             $childNode->setParentNode($this);
             $this->childNodes[] = $childNode;
         } else {
