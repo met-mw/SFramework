@@ -58,6 +58,17 @@ class Node {
         return $parent;
     }
 
+    public function getPseudoParentsChain() {
+        $node = $this;
+        $nodes = [];
+        while ($node->isPseudo()) {
+            $nodes[] = $node;
+            $node = $node->getParentNode();
+        }
+
+        return array_reverse($nodes);
+    }
+
     public function getParentNode() {
         return $this->parentNode;
     }
@@ -118,7 +129,11 @@ class Node {
 
         $nodes = [];
         $node = $this->findChildNodeByPath($path);
-        $nodes[] = $node;
+        if ($node->isPseudo()) {
+            $nodes = $node->getPseudoParentsChain();
+        } else {
+            $nodes[] = $node;
+        }
         if (!empty($urlParts)) {
             $nodes = array_merge($nodes, $node->build($urlParts));
         }
