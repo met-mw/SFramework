@@ -67,6 +67,10 @@ class Item {
         return $this->childItems[$index];
     }
 
+    public function getChildItems() {
+        return $this->childItems;
+    }
+
     public function findChildItemByPath($path) {
         $item = null;
         foreach ($this->childItems as $childItem) {
