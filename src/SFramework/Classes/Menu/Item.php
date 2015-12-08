@@ -12,7 +12,7 @@ class Item {
     private $path;
 
     /** @var Item[] */
-    private $childItems;
+    private $childItems = [];
     /** @var Item|null */
     private $parentItem = null;
 
