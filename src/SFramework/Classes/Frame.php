@@ -59,8 +59,8 @@ class Frame {
         return $this;
     }
 
-    public function addJs($jsPath) {
-        $this->binds['js'][] = $jsPath;
+    public function addJs($jsPath, $dataAttributes = []) {
+        $this->binds['js'][] = ['path' => $jsPath, 'data' => $dataAttributes];
         return $this;
     }
 
@@ -140,8 +140,12 @@ class Frame {
             $content = implode("\n", $css);
         } elseif ($label == 'js') {
             $js = [];
-            foreach ($this->binds[$label] as $jsPath) {
-                $js[] = "<script type=\"text/javascript\" src=\"{$jsPath}\"></script>";
+            foreach ($this->binds[$label] as $jsData) {
+                $data = [];
+                foreach ($jsData['data'] as $name => $value) {
+                    $data[] = "{$name}=\"{$value}\"";
+                }
+                $js[] = "<script" . (!empty($data) ? ' ' . implode(' ', $data) : '') . " type=\"text/javascript\" src=\"{$jsData['path']}\"></script>";
             }
             $content = implode("\n", $js);
         } elseif ($label == 'meta') {
