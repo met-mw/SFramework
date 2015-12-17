@@ -25,9 +25,17 @@ class Customization implements InterfaceCustomization {
         return $this->value;
     }
 
+    public function noEmpty() {
+        if ($this->original() == '') {
+            NotificationLog::instance()->pushError("\"{$this->name}\" не должен быть пуст.");
+        }
+
+        return $this;
+    }
+
     public function asInteger($required = true) {
         if ($required && !is_numeric($this->original())) {
-            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не явялется числом.");
+            NotificationLog::instance()->pushError("\"{$this->name}\" не явялется числом.");
         }
 
         return is_null($this->original()) ? $this->original() : (int)$this->original();
@@ -35,7 +43,7 @@ class Customization implements InterfaceCustomization {
 
     public function asString($required = true) {
         if ($required && !is_string($this->original())) {
-            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не явялется строкой.");
+            NotificationLog::instance()->pushError("\"{$this->name}\" не явялется строкой.");
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
@@ -43,7 +51,7 @@ class Customization implements InterfaceCustomization {
 
     public function asEmail($required = true) {
         if ($required && !filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
-            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является адресом email.");
+            NotificationLog::instance()->pushError("\"{$this->name}\" не является адресом email.");
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
@@ -51,7 +59,7 @@ class Customization implements InterfaceCustomization {
 
     public function asBool($required = true) {
         if ($required && !is_bool($this->original())) {
-            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является булевским типом.");
+            NotificationLog::instance()->pushError("\"{$this->name}\" не является булевским типом.");
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
@@ -59,7 +67,7 @@ class Customization implements InterfaceCustomization {
 
     public function asArray($required = true) {
         if ($required && !is_array($this->original())) {
-            NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом.");
+            NotificationLog::instance()->pushError("\"{$this->name}\" не является массивом.");
         }
 
         return is_null($this->original()) ? $this->original() : (bool)$this->original();
@@ -70,7 +78,7 @@ class Customization implements InterfaceCustomization {
             return new File($this->original());
         }
 
-        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом информации о файле.");
+        NotificationLog::instance()->pushError("\"{$this->name}\" не является массивом информации о файле.");
         return false;
     }
 
@@ -91,7 +99,7 @@ class Customization implements InterfaceCustomization {
             return $files;
         }
 
-        NotificationLog::instance()->pushError("Параметр \"{$this->name}\" не является массивом информации о файлах.");
+        NotificationLog::instance()->pushError("\"{$this->name}\" не является массивом информации о файлах.");
         return false;
     }
 
