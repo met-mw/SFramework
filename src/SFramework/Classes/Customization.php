@@ -25,49 +25,49 @@ class Customization implements InterfaceCustomization {
         return $this->value;
     }
 
-    public function noEmpty() {
+    public function noEmpty($errorText = null) {
         if ($this->original() == '') {
-            NotificationLog::instance()->pushError("\"{$this->name}\" не должен быть пуст.");
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не должен быть пуст." : $errorText);
         }
 
         return $this;
     }
 
-    public function asInteger($required = true) {
+    public function asInteger($required = true, $errorText = null) {
         if ($required && !is_numeric($this->original())) {
-            NotificationLog::instance()->pushError("\"{$this->name}\" не явялется числом.");
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется числом." : $errorText);
         }
 
         return is_null($this->original()) ? $this->original() : (int)$this->original();
     }
 
-    public function asString($required = true) {
+    public function asString($required = true, $errorText = null) {
         if ($required && !is_string($this->original())) {
-            NotificationLog::instance()->pushError("\"{$this->name}\" не явялется строкой.");
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется строкой." : $errorText);
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asEmail($required = true) {
+    public function asEmail($required = true, $errorText = null) {
         if ($required && !filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
-            NotificationLog::instance()->pushError("\"{$this->name}\" не является адресом email.");
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не является адресом email." : $errorText);
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asBool($required = true) {
+    public function asBool($required = true, $errorText = null) {
         if ($required && !is_bool($this->original())) {
-            NotificationLog::instance()->pushError("\"{$this->name}\" не является булевским типом.");
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не является булевским типом." : $errorText);
         }
 
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asArray($required = true) {
+    public function asArray($required = true, $errorText = null) {
         if ($required && !is_array($this->original())) {
-            NotificationLog::instance()->pushError("\"{$this->name}\" не является массивом.");
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не является массивом." : $errorText);
         }
 
         return is_null($this->original()) ? $this->original() : (bool)$this->original();
