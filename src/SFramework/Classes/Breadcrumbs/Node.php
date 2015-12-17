@@ -17,12 +17,15 @@ class Node {
     private $isPseudoParent;
     /** @var bool */
     private $hidden;
+    /** @var bool */
+    private $isParam = false;
 
-    public function __construct($name, $path = '', $isPseudoParent = false, $hidden = false) {
+    public function __construct($name, $path = '', $isPseudoParent = false, $hidden = false, $isParam = false) {
         $this->name = $name;
         $this->path = $path;
         $this->isPseudoParent = $isPseudoParent;
         $this->hidden = $hidden;
+        $this->isParam = $isParam;
     }
 
     public function getName() {
@@ -47,15 +50,29 @@ class Node {
         return $this->isPseudoParent;
     }
 
+    public function isParam() {
+        return $this->isParam;
+    }
+
     public function getRealPath() {
         $node = $this;
         $pathParts = [];
+        $params = [];
         while (!is_null($node)) {
-            $pathParts[] = $node->getPath();
+            if ($node->isParam()) {
+                $params[] = $node->getPath();
+            } else {
+                $pathParts[] = $node->getPath();
+            }
             $node = $node->getRealParentNode();
         }
 
-        return '/' . implode('/', array_reverse($pathParts));
+        $result = '/' . implode('/', array_reverse($pathParts));
+        if (!empty($params)) {
+            $result .= '?' . implode('&', array_reverse($params));
+        }
+
+        return $result;
     }
 
     public function getChildNodes() {
@@ -93,9 +110,9 @@ class Node {
         return $this;
     }
 
-    public function addChildNode($name, $path, $isPseudoParent = false, $hidden = false) {
+    public function addChildNode($name, $path, $isPseudoParent = false, $hidden = false, $isParam = false) {
         if (is_null($this->findChildNodeByPath($path))) {
-            $childNode = new Node($name, $path, $isPseudoParent, $hidden);
+            $childNode = new Node($name, $path, $isPseudoParent, $hidden, $isParam);
             $childNode->setParentNode($this);
             $this->childNodes[] = $childNode;
         } else {
@@ -151,8 +168,12 @@ class Node {
         return $this->hidden;
     }
 
-    public function build(array $urlParts) {
-        $path = array_shift($urlParts);
+    public function build(array $urlParts, array $filteredParams) {
+        if (!empty($urlParts)) {
+            $path = array_shift($urlParts);
+        } else {
+            $path = array_shift($filteredParams);
+        }
 
         $nodes = [];
         $node = $this->findChildNodeByPath($path);
@@ -163,8 +184,8 @@ class Node {
                 $nodes[] = $node;
             }
         }
-        if (!empty($urlParts)) {
-            $nodes = array_merge($nodes, $node->build($urlParts));
+        if (!empty($urlParts) || !empty($filteredParams)) {
+            $nodes = array_merge($nodes, $node->build($urlParts, $filteredParams));
         }
 
         return $nodes;

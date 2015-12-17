@@ -12,11 +12,20 @@ class Breadcrumbs {
     protected $route;
     /** @var string */
     protected $startingPath;
+    /** @var string[] */
+    protected $ignoreUrlParts = [];
 
     public function __construct($route, $rootName, $rootPath = '', $startingPath = '') {
         $this->root = new Node($rootName, $rootPath == '' ? $startingPath : $startingPath . '/' . $rootPath);
         $this->route = $route;
         $this->startingPath = $startingPath;
+    }
+
+    /**
+     * @param string[] $ignores
+     */
+    public function setIgnores(array $ignores) {
+        $this->ignoreUrlParts = $ignores;
     }
 
     public function getRoot() {
@@ -26,7 +35,14 @@ class Breadcrumbs {
     public function build() {
         $nodes = [];
 
-        $urlParts = explode('/', $this->route);
+        list($urlPath, $urlParams) = explode('?', $this->route);
+        $filteredParams = [];
+        foreach (array_diff(explode('&', $urlParams), ['']) as $param) {
+            if (!in_array(reset(explode('=', $param)), $this->ignoreUrlParts)) {
+                $filteredParams[] = $param;
+            }
+        }
+        $urlParts = explode('/', $urlPath);
         if (count($urlParts) > 1) {
             $urlParts = array_diff($urlParts, ['']);
             while (in_array(reset($urlParts), ['main', $this->startingPath])) {
@@ -36,7 +52,7 @@ class Breadcrumbs {
 
         $nodes[] = $this->getRoot();
         if (!empty($urlParts)) {
-            $nodes = array_merge($nodes, $this->getRoot()->build($urlParts));
+            $nodes = array_merge($nodes, $this->getRoot()->build($urlParts, $filteredParams));
         }
         return $nodes;
     }
