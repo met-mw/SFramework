@@ -106,7 +106,8 @@ class Pagination {
         $builder->field('FOUND_ROWS()', 'count');
         $query = $builder->build();
         $this->driver->query($query);
-        $this->fullCount = (int)reset($this->driver->fetchAssoc());
+        $data = $this->driver->fetchAssoc();
+        $this->fullCount = (int)reset($data);
 
         return $this;
     }
