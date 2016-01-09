@@ -35,15 +35,20 @@ class Router {
      * Осуществить роутинг
      */
     public function route() {
-        list($route, $parametersString) = explode('?', $this->route);
+        $routeParts = explode('?', $this->route);
+        $route = isset($routeParts[0]) ? $routeParts[0] : '';
+        // TODO: Открыть после реализции фильтров.
+        // $parametersString = isset($routeParts[1]) ? $routeParts[1] : null;
+
         $route = trim($route, '/');
-        $parameters = $this->parseParameters($parametersString);
+        // TODO: Открыть после реализции фильтров.
+        // $parameters = $this->parseParameters($parametersString);
 
         $exploded = array_diff(explode('/', $route), ['']);
         $this->currentControllerName = $this->searchController($this->config['controllersRoot'], $exploded);
         $this->currentActionName = empty($exploded) ? 'actionIndex' : 'action' . ucfirst(array_shift($exploded));
 
-        $controllerObject = new $this->currentControllerName($parameters);
+        $controllerObject = new $this->currentControllerName(/* $parameters */); // TODO: Открыть после реализации фильров
         $controllerObject->{$this->currentActionName}();
     }
 
