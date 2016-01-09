@@ -4,6 +4,7 @@ namespace SFramework\Classes;
 
 use Exception;
 use SFramework\Interfaces\InterfaceView;
+use SFramework\Views\ViewErrors;
 
 
 /**
@@ -106,6 +107,13 @@ class Frame {
     }
 
     public function render() {
+        if (NotificationLog::instance()->hasProblems()) {
+            $nLog = NotificationLog::instance();
+            $errorsView = new ViewErrors();
+            $errorsView->messages = $nLog->getErrors() + $nLog->getNotices() + $nLog->getWarnings();
+            $this->bindView('content', $errorsView);
+        }
+
         if ($this->currentFrame == '') {
             return;
         }
