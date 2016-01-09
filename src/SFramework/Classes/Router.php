@@ -31,15 +31,21 @@ class Router {
         return $this->parseParameters($parametersString);
     }
 
-    /**
-     * Осуществить роутинг
-     */
-    public function route() {
+    public function splitRoute() {
         $routeParts = explode('?', $this->route);
         $route = isset($routeParts[0]) ? $routeParts[0] : '';
         // TODO: Открыть после реализции фильтров.
         // $parametersString = isset($routeParts[1]) ? $routeParts[1] : null;
+        $parametersString = null;
 
+        return [$route, $parametersString];
+    }
+
+    /**
+     * Осуществить роутинг
+     */
+    public function route() {
+        list($route, $parametersString) = $this->splitRoute();
         $route = trim($route, '/');
         // TODO: Открыть после реализции фильтров.
         // $parameters = $this->parseParameters($parametersString);

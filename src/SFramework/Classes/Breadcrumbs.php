@@ -35,7 +35,7 @@ class Breadcrumbs {
     public function build() {
         $nodes = [];
 
-        list($urlPath, $urlParams) = explode('?', $this->route);
+        list($urlPath, $urlParams) = Registry::router()->splitRoute();
         $filteredParams = [];
         foreach (array_diff(explode('&', $urlParams), ['']) as $param) {
             if (!in_array(reset(explode('=', $param)), $this->ignoreUrlParts)) {
