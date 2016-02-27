@@ -27,8 +27,8 @@ class Param implements InterfaceParam {
             NotificationLog::instance()->pushError("Не задан обязательный параметр \"{$name}\".");
         }
 
-        $value = isset($_GET[$name])
-            ? new CustomizationValue($_GET[$name])
+        $value = isset($_POST[$name])
+            ? new CustomizationValue($_POST[$name])
             : new CustomizationValueNull();
         return new Customization($name, $value);
     }
@@ -38,8 +38,8 @@ class Param implements InterfaceParam {
             NotificationLog::instance()->pushError("Не задан обязательный параметр \"{$name}\".");
         }
 
-        $value = isset($_GET[$name])
-            ? new CustomizationValue($_GET[$name])
+        $value = isset($_REQUEST[$name])
+            ? new CustomizationValue($_REQUEST[$name])
             : new CustomizationValueNull();
         return new Customization($name, $value);
     }
@@ -49,8 +49,8 @@ class Param implements InterfaceParam {
             NotificationLog::instance()->pushError("Не задан обязательный параметр \"{$name}\".");
         }
 
-        $value = isset($_GET[$name])
-            ? new CustomizationValue($_GET[$name])
+        $value = isset($_FILES[$name])
+            ? new CustomizationValue($_FILES[$name])
             : new CustomizationValueNull();
         return new Customization($name, $value);
     }
