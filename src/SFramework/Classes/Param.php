@@ -16,7 +16,10 @@ class Param implements InterfaceParam {
             NotificationLog::instance()->pushError("Не задан обязательный параметр \"{$name}\".");
         }
 
-        return new Customization($name, isset($_GET[$name]) ? $_GET[$name] : null);
+        $value = isset($_GET[$name])
+            ? new CustomizationValue($_GET[$name])
+            : new CustomizationValueNull();
+        return new Customization($name, $value);
     }
 
     static public function post($name, $required = true) {
@@ -24,7 +27,10 @@ class Param implements InterfaceParam {
             NotificationLog::instance()->pushError("Не задан обязательный параметр \"{$name}\".");
         }
 
-        return new Customization($name, isset($_POST[$name]) ? $_POST[$name] : null);
+        $value = isset($_GET[$name])
+            ? new CustomizationValue($_GET[$name])
+            : new CustomizationValueNull();
+        return new Customization($name, $value);
     }
 
     static public function request($name, $required = true) {
@@ -32,7 +38,10 @@ class Param implements InterfaceParam {
             NotificationLog::instance()->pushError("Не задан обязательный параметр \"{$name}\".");
         }
 
-        return new Customization($name, isset($_REQUEST[$name]) ? $_REQUEST[$name] : null);
+        $value = isset($_GET[$name])
+            ? new CustomizationValue($_GET[$name])
+            : new CustomizationValueNull();
+        return new Customization($name, $value);
     }
 
     static public function file($name, $required = true) {
@@ -40,7 +49,10 @@ class Param implements InterfaceParam {
             NotificationLog::instance()->pushError("Не задан обязательный параметр \"{$name}\".");
         }
 
-        return new Customization($name, isset($_FILES[$name]) ? $_FILES[$name] : null);
+        $value = isset($_GET[$name])
+            ? new CustomizationValue($_GET[$name])
+            : new CustomizationValueNull();
+        return new Customization($name, $value);
     }
 
 }
