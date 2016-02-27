@@ -7,7 +7,7 @@ abstract class CustomizationValueBase {
     protected $value = null;
 
     public function __construct($value = null) {
-        $this->setValue(null);
+        $this->setValue($value);
     }
 
     abstract public function isExists();
