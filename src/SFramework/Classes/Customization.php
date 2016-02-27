@@ -14,15 +14,16 @@ use SFramework\Interfaces\InterfaceCustomization;
 class Customization implements InterfaceCustomization {
 
     private $name;
-    private $value = null;
+    /** @var CustomizationValueBase */
+    private $customizationValue;
 
-    public function __construct($name, $value) {
+    public function __construct($name, CustomizationValueBase $oCustomizationValue) {
         $this->name = $name;
-        $this->value = $value;
+        $this->customizationValue = $oCustomizationValue;
     }
 
     public function original() {
-        return $this->value;
+        return $this->customizationValue->getValue();
     }
 
     public function noEmpty($errorText = null) {
@@ -104,7 +105,7 @@ class Customization implements InterfaceCustomization {
     }
 
     public function exists() {
-        return !is_null($this->original());
+        return $this->customizationValue->isExists();
     }
 
 }
