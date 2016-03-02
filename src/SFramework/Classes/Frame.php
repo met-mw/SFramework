@@ -159,11 +159,13 @@ class Frame {
         } elseif ($label == 'meta') {
             $meta = [];
             foreach ($this->binds[$label] as $metaData) {
+                $metaItem = [];
                 foreach ($metaData as $key => $value) {
-                    $meta[] = "{$key}=\"{$value}\"";
+                    $metaItem[] = "{$key}=\"{$value}\"";
                 }
+                $meta[] = '<meta ' . implode(' ', $metaItem) . " />\n";
             }
-            $content = '<meta ' . implode(' ', $meta) . ' />';
+            $content = implode("\n", $meta);
         } elseif ($this->binds[$label] instanceof InterfaceView) {
             ob_start();
             $this->binds[$label]->render();
