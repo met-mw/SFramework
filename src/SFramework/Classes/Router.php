@@ -34,9 +34,7 @@ class Router {
     public function splitRoute() {
         $routeParts = explode('?', $this->route);
         $route = isset($routeParts[0]) ? $routeParts[0] : '';
-        // TODO: Открыть после реализции фильтров.
-        // $parametersString = isset($routeParts[1]) ? $routeParts[1] : null;
-        $parametersString = null;
+        $parametersString = isset($routeParts[1]) ? $routeParts[1] : null;
 
         return [$route, $parametersString];
     }
@@ -47,8 +45,7 @@ class Router {
     public function route() {
         list($route, $parametersString) = $this->splitRoute();
         $route = trim($route, '/');
-        // TODO: Открыть после реализции фильтров.
-        // $parameters = $this->parseParameters($parametersString);
+//        $parameters = $this->parseParameters($parametersString);
 
         $exploded = array_diff(explode('/', $route), ['']);
         $this->currentControllerName = $this->searchController($this->config['controllersRoot'], $exploded);

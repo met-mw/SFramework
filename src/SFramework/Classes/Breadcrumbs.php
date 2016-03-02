@@ -38,7 +38,8 @@ class Breadcrumbs {
         list($urlPath, $urlParams) = Registry::router()->splitRoute();
         $filteredParams = [];
         foreach (array_diff(explode('&', $urlParams), ['']) as $param) {
-            if (!in_array(reset(explode('=', $param)), $this->ignoreUrlParts)) {
+            $paramsParts = explode('=', $param);
+            if (!in_array(reset($paramsParts), $this->ignoreUrlParts)) {
                 $filteredParams[] = $param;
             }
         }
