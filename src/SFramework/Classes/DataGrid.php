@@ -14,6 +14,8 @@ use SORM\DataSource;
  */
 class DataGrid {
 
+    const DEFAULT_ITEMS_PER_PAGE = 20;
+
     /** @var string */
     protected $key;
     /** @var string */
@@ -38,7 +40,7 @@ class DataGrid {
             ->setDescription($description);
         ;
 
-        $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber, $elementsOnPage);
+        $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $elementsOnPage ? $elementsOnPage : self::DEFAULT_ITEMS_PER_PAGE);
     }
 
     public function fillPager(ViewPagination $view) {
