@@ -6,6 +6,10 @@ use SFramework\Classes\DataGrid\Action;
 use SFramework\Classes\DataGrid\DataSet;
 use SFramework\Classes\DataGrid\Header;
 
+/**
+ * Class DataGrid
+ * @package SFramework\Classes
+ */
 class DataGrid {
 
     /** @var string */
@@ -23,9 +27,10 @@ class DataGrid {
     /** @var Action[] */
     protected $actions = [];
 
-    public function __construct($key, $caption) {
+    public function __construct($key, $caption, $description = '') {
         $this->setKey($key)
             ->setCaption($caption)
+            ->setDescription($description);
         ;
     }
 
@@ -131,6 +136,11 @@ class DataGrid {
         return $data;
     }
 
+    /**
+     * @param $caption
+     *
+     * @return $this
+     */
     public function setCaption($caption) {
         $this->caption = $caption;
         return $this;
