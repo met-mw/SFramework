@@ -33,14 +33,16 @@ class DataGrid {
 
     /** @var Pagination */
     public $pagination;
+    protected $itemsPerPage = DEFAULT_INCLUDE_PATH;
 
-    public function __construct($key, $caption, $pageNumber, $elementsOnPage, $description = '') {
+    public function __construct($key, $caption, $pageNumber, $itemsPerPage, $description = '') {
         $this->setKey($key)
             ->setCaption($caption)
-            ->setDescription($description);
+            ->setDescription($description)
+            ->setItemsPerPage($itemsPerPage);
         ;
 
-        $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $elementsOnPage ? $elementsOnPage : self::DEFAULT_ITEMS_PER_PAGE);
+        $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $this->getItemsPerPage());
     }
 
     public function fillPager(ViewPagination $view) {
@@ -52,6 +54,15 @@ class DataGrid {
 
     public function preparePager() {
         $this->pagination->prepare();
+    }
+
+    public function setItemsPerPage($itemsPerPage) {
+        $this->itemsPerPage = $itemsPerPage;
+        return $this;
+    }
+
+    public function getItemsPerPage() {
+        return $this->itemsPerPage;
     }
 
     public function addAction(Action $action) {
