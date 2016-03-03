@@ -12,6 +12,8 @@ class DataGrid {
     protected $key;
     /** @var string */
     protected $caption;
+    /** @var string */
+    protected $description;
     /** @var Header[] */
     protected $headers = [];
 
@@ -86,6 +88,10 @@ class DataGrid {
         return $this->caption;
     }
 
+    public function getDescription() {
+        return $this->description;
+    }
+
     public function getHeaders() {
         return $this->headers;
     }
@@ -114,6 +120,11 @@ class DataGrid {
 
     public function setCaption($caption) {
         $this->caption = $caption;
+        return $this;
+    }
+
+    public function setDescription($description) {
+        $this->description = $description;
         return $this;
     }
 
