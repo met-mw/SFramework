@@ -5,6 +5,8 @@ namespace SFramework\Classes;
 use SFramework\Classes\DataGrid\Action;
 use SFramework\Classes\DataGrid\DataSet;
 use SFramework\Classes\DataGrid\Header;
+use SFramework\Views\ViewPagination;
+use SORM\DataSource;
 
 /**
  * Class DataGrid
@@ -27,11 +29,23 @@ class DataGrid {
     /** @var Action[] */
     protected $actions = [];
 
-    public function __construct($key, $caption, $description = '') {
+    /** @var Pagination */
+    public $pagination;
+
+    public function __construct($key, $caption, $pageNumber, $elementsOnPage, $description = '') {
         $this->setKey($key)
             ->setCaption($caption)
             ->setDescription($description);
         ;
+
+        $this->pager = new Pagination(DataSource::getCurrent(), $pageNumber, $elementsOnPage);
+    }
+
+    public function fillPager(ViewPagination $view) {
+        $view->pagesCount = $this->pager->getPagesCount();
+        $view->currentURL = $this->pager->getUrl();
+        $view->currentPage = $this->pager->getCurrentPage();
+        $view->parameterName = $this->pager->getParameterName();
     }
 
     public function addAction(Action $action) {
