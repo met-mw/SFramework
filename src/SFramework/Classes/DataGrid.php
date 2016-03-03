@@ -44,6 +44,19 @@ class DataGrid {
         return $this;
     }
 
+    public function getFilterConditions() {
+        $conditions = '';
+        foreach ($this->getHeaders() as $header) {
+            $headerValue = $header->getFilterValue();
+            if ($header->isFiltered() && !empty($headerValue)) {
+                $conditions .= empty($conditions) ? ' ' : ' and';
+                $conditions .= " {$header->getKey()} like '%{$header->getFilterValue()}%'";
+            }
+        }
+
+        return $conditions;
+    }
+
     public function hasFiltered() {
         $result = false;
         foreach ($this->getHeaders() as $header) {
