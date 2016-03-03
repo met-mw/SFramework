@@ -48,6 +48,10 @@ class DataGrid {
         $view->parameterName = $this->pagination->getParameterName();
     }
 
+    public function preparePager() {
+        $this->pagination->prepare();
+    }
+
     public function addAction(Action $action) {
         $this->actions[] = $action;
         return $this;
