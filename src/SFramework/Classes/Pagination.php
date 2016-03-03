@@ -107,7 +107,7 @@ class Pagination {
         $query = $builder->build();
         $this->driver->query($query);
         $data = $this->driver->fetchAssoc();
-        $this->fullCount = (int)$data[0][0];
+        $this->fullCount = (int)$data[0]['count'];
 
         return $this;
     }
