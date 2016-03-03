@@ -48,8 +48,8 @@ class DataGrid {
         $conditions = '';
         foreach ($this->getHeaders() as $header) {
             $headerValue = $header->getFilterValue();
-            if ($header->isFiltered() && !empty($headerValue)) {
-                $conditions .= empty($conditions) ? ' ' : ' and';
+            if ($header->isFiltered() && $headerValue != '') {
+                $conditions .= $conditions != '' ? ' ' : ' and';
                 $conditions .= " {$header->getKey()} like '%{$header->getFilterValue()}%'";
             }
         }
