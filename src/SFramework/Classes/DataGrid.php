@@ -35,11 +35,11 @@ class DataGrid {
     public $pagination;
     protected $itemsPerPage = DEFAULT_INCLUDE_PATH;
 
-    public function __construct($key, $caption, $pageNumber, $itemsPerPage, $description = '') {
+    public function __construct($key, $caption, $pageNumber, $itemsPerPage = null, $description = '') {
         $this->setKey($key)
             ->setCaption($caption)
             ->setDescription($description)
-            ->setItemsPerPage($itemsPerPage);
+            ->setItemsPerPage($itemsPerPage ? $itemsPerPage : self::DEFAULT_ITEMS_PER_PAGE);
         ;
 
         $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $this->getItemsPerPage());
