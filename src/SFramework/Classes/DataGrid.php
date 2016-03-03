@@ -38,14 +38,14 @@ class DataGrid {
             ->setDescription($description);
         ;
 
-        $this->pager = new Pagination(DataSource::getCurrent(), $pageNumber, $elementsOnPage);
+        $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber, $elementsOnPage);
     }
 
     public function fillPager(ViewPagination $view) {
-        $view->pagesCount = $this->pager->getPagesCount();
-        $view->currentURL = $this->pager->getUrl();
-        $view->currentPage = $this->pager->getCurrentPage();
-        $view->parameterName = $this->pager->getParameterName();
+        $view->pagesCount = $this->pagination->getPagesCount();
+        $view->currentURL = $this->pagination->getUrl();
+        $view->currentPage = $this->pagination->getCurrentPage();
+        $view->parameterName = $this->pagination->getParameterName();
     }
 
     public function addAction(Action $action) {
