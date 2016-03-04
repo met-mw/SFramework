@@ -26,6 +26,7 @@ class Header {
             ->setFiltered($filtered)
             ->setFilterValue($filterValue)
             ->setAttributes($attributes)
+            ->setValueAttributes($valueAttributes)
             ->setDecoration($decoration);
     }
 
