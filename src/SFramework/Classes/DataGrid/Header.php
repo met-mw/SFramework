@@ -12,13 +12,15 @@ class Header {
     protected $displayName;
     /** @var string[] Атрибуты ['name' => 'value', ...] */
     protected $attributes = [];
+    /** @var string[] Атрибуты значений ['name' => 'value', ...] */
+    protected $valueAttributes = [];
     /** @var bool */
     protected $filtered = false;
     protected $filterValue = '';
     /** @var ViewDecoration */
     protected $decoration = null;
 
-    public function __construct($key, $displayName, ViewDecoration $decoration = null, array $attributes = [], $filtered = false, $filterValue = '') {
+    public function __construct($key, $displayName, ViewDecoration $decoration = null, array $attributes = [], array $valueAttributes = [], $filtered = false, $filterValue = '') {
         $this->setKey($key)
             ->setDisplayName($displayName)
             ->setFiltered($filtered)
@@ -77,6 +79,10 @@ class Header {
         return $this->attributes;
     }
 
+    public function getValueAttributes() {
+        return $this->valueAttributes;
+    }
+
     public function getFilterValue() {
         return $this->filterValue;
     }
@@ -106,6 +112,11 @@ class Header {
      */
     public function setAttributes(array $attributes = []) {
         $this->attributes = $attributes;
+        return $this;
+    }
+
+    public function setValueAttributes(array $valueAttributes = []) {
+        $this->valueAttributes = $valueAttributes;
         return $this;
     }
 
