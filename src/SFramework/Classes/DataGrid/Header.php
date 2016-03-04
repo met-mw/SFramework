@@ -2,6 +2,8 @@
 namespace SFramework\Classes\DataGrid;
 
 
+use SFramework\Views\DataGrid\ViewDecoration;
+
 class Header {
 
     /** @var string */
@@ -13,13 +15,22 @@ class Header {
     /** @var bool */
     protected $filtered = false;
     protected $filterValue = '';
+    /** @var ViewDecoration */
+    protected $decoration = null;
 
-    public function __construct($key, $displayName, array $attributes = [], $filtered = false, $filterValue = '') {
+    public function __construct($key, $displayName, ViewDecoration $decoration = null, array $attributes = [], $filtered = false, $filterValue = '') {
         $this->setKey($key)
             ->setDisplayName($displayName)
             ->setFiltered($filtered)
             ->setFilterValue($filterValue)
-            ->setAttributes($attributes);
+            ->setAttributes($attributes)
+            ->setDecoration($decoration);
+    }
+
+    public function decorate($value) {
+        $this->getDecoration()
+            ->setValue($value)
+            ->render();
     }
 
     /**
@@ -62,6 +73,10 @@ class Header {
         return $this->filterValue;
     }
 
+    public function getDecoration() {
+        return $this->decoration;
+    }
+
     public function isFiltered() {
         return $this->filtered == true;
     }
@@ -94,6 +109,10 @@ class Header {
     public function setFilterValue($filterValue) {
         $this->filterValue = $filterValue;
         return $this;
+    }
+
+    public function setDecoration(ViewDecoration $decoration) {
+        $this->decoration = $decoration;
     }
 
 } 
