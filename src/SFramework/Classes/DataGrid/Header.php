@@ -54,13 +54,21 @@ class Header {
         return $this;
     }
 
-    public function buildAttributes() {
+    private function buildArrayToString(array $source, $delimiter = ' ') {
         $attributes = [];
-        foreach ($this->getAttributes() as $name => $value) {
+        foreach ($source as $name => $value) {
             $attributes[] = "{$name}=\"{$value}\"";
         }
 
-        return implode(' ', $attributes);
+        return implode($delimiter, $attributes);
+    }
+
+    public function buildAttributes() {
+        return $this->buildArrayToString($this->getAttributes());
+    }
+
+    public function buildValueAttributes() {
+        return $this->buildArrayToString($this->getValueAttributes());
     }
 
     public function getKey() {
