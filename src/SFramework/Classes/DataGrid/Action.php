@@ -42,7 +42,7 @@ class Action {
     public function buildClasses() {
         $classes = '';
         foreach ($this->getClasses() as $class) {
-            if (empty($classes)) {
+            if ($classes == '') {
                 $classes .= ' ';
             }
 
