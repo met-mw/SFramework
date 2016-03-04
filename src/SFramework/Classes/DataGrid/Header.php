@@ -28,9 +28,17 @@ class Header {
     }
 
     public function decorate($value) {
-        $this->getDecoration()
-            ->setValue($value)
-            ->render();
+        $result = $value;
+        if (!is_null($this->getDecoration())) {
+            ob_start();
+            $this->getDecoration()
+                ->setValue($value)
+                ->render();
+            $result = ob_get_contents();
+            ob_end_clean();
+        }
+
+        return $result;
     }
 
     /**
@@ -111,7 +119,7 @@ class Header {
         return $this;
     }
 
-    public function setDecoration(ViewDecoration $decoration) {
+    public function setDecoration(ViewDecoration $decoration = null) {
         $this->decoration = $decoration;
     }
 
