@@ -16,8 +16,9 @@ class ViewMoney extends ViewDecoration {
         $isEmpty = is_null($this->getValue()) || $this->getValue() === '';
         ?>
         <span class="label label-<?= $isEmpty ? 'default' : 'success' ?>">
-            <?= $isEmpty ? '--.-- ' : $this->getValue() . ' ' ?><?= $this->currencySymbol ?>
+            <?= $isEmpty ? '--.--' : $this->getValue() ?>
         </span>
+        <?= $this->currencySymbol ?>
     <?
     }
 
