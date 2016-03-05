@@ -9,7 +9,7 @@ class Menu {
     /** @var string */
     protected $name;
     /** @var Element[] */
-    protected $elements;
+    protected $elements = [];
 
     public function __construct($name = '') {
         $this->setName($name);

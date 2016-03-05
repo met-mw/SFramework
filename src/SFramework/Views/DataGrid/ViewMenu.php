@@ -15,7 +15,7 @@ class ViewMenu extends View {
     public $menu;
 
     public function currentRender() {
-        echo $this->menu->getName();
+        echo $this->menu->getName() . ': ';
         foreach ($this->menu->getElements() as $element) {
             if ($element instanceof Separator){
                 (new ViewSeparator())->render();
