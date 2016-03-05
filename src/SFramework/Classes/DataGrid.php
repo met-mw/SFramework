@@ -66,6 +66,10 @@ class DataGrid {
         return $this;
     }
 
+    public function getMenu() {
+        return $this->menu;
+    }
+
     public function getItemsPerPage() {
         return $this->itemsPerPage;
     }
@@ -170,6 +174,11 @@ class DataGrid {
         }
 
         return $data;
+    }
+
+    public function setMenu(Menu $menu) {
+        $this->menu = $menu;
+        return $this;
     }
 
     /**
