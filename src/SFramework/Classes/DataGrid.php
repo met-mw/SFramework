@@ -5,6 +5,7 @@ namespace SFramework\Classes;
 use SFramework\Classes\DataGrid\Action;
 use SFramework\Classes\DataGrid\DataSet;
 use SFramework\Classes\DataGrid\Header;
+use SFramework\Classes\DataGrid\Menu;
 use SFramework\Views\ViewPagination;
 use SORM\DataSource;
 
@@ -15,6 +16,9 @@ use SORM\DataSource;
 class DataGrid {
 
     const DEFAULT_ITEMS_PER_PAGE = 20;
+
+    /** @var Menu */
+    protected $menu;
 
     /** @var string */
     protected $key;
@@ -42,6 +46,7 @@ class DataGrid {
             ->setItemsPerPage($itemsPerPage ? $itemsPerPage : self::DEFAULT_ITEMS_PER_PAGE);
         ;
 
+        $this->menu = new Menu();
         $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $this->getItemsPerPage());
     }
 
