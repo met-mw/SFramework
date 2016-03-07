@@ -2,8 +2,13 @@
 namespace SFramework\Classes\DataGrid;
 
 
+use SFramework\Classes\CoreFunctions;
 use SFramework\Views\DataGrid\ViewDecoration;
 
+/**
+ * Class Header
+ * @package SFramework\Classes\DataGrid
+ */
 class Header {
 
     /** @var string */
@@ -16,11 +21,18 @@ class Header {
     protected $valueAttributes = [];
     /** @var bool */
     protected $filtered = false;
+    /** @var string */
     protected $filterValue = '';
     /** @var ViewDecoration */
     protected $decoration = null;
 
-    public function __construct($key, $displayName, ViewDecoration $decoration = null, array $attributes = [], array $valueAttributes = [], $filtered = false, $filterValue = '') {
+    public function __construct($key,
+                                $displayName,
+                                ViewDecoration $decoration = null,
+                                array $attributes = [],
+                                array $valueAttributes = [],
+                                $filtered = false,
+                                $filterValue = '') {
         $this->setKey($key)
             ->setDisplayName($displayName)
             ->setFiltered($filtered)
@@ -55,21 +67,12 @@ class Header {
         return $this;
     }
 
-    private function buildArrayToString(array $source, $delimiter = ' ') {
-        $attributes = [];
-        foreach ($source as $name => $value) {
-            $attributes[] = "{$name}=\"{$value}\"";
-        }
-
-        return implode($delimiter, $attributes);
-    }
-
     public function buildAttributes() {
-        return $this->buildArrayToString($this->getAttributes());
+        return CoreFunctions::tagAttributesToString($this->getAttributes());
     }
 
     public function buildValueAttributes() {
-        return $this->buildArrayToString($this->getValueAttributes());
+        return CoreFunctions::tagAttributesToString($this->getValueAttributes());
     }
 
     public function getKey() {
@@ -104,43 +107,82 @@ class Header {
         return $this->filtered == true;
     }
 
+    /**
+     * @param string $key
+     *
+     * @return Header $this
+     */
     public function setKey($key) {
         $this->key = $key;
         return $this;
     }
 
+    /**
+     * Установить название колонки
+     *
+     * @param string $value
+     *
+     * @return Header $this
+     */
     public function setDisplayName($value) {
         $this->displayName = $value;
         return $this;
     }
 
     /**
-     * @param string[] $attributes
+     * @param array $attributes
      *
-     * @return $this
+     * @return Header $this
      */
     public function setAttributes(array $attributes = []) {
         $this->attributes = $attributes;
         return $this;
     }
 
+    /**
+     * @param array $valueAttributes
+     *
+     * @return Header $this
+     */
     public function setValueAttributes(array $valueAttributes = []) {
         $this->valueAttributes = $valueAttributes;
         return $this;
     }
 
+    /**
+     * Установить флаг фильтруемой колонки
+     *
+     * @param bool $filtered
+     *
+     * @return Header $this
+     */
     public function setFiltered($filtered = false) {
         $this->filtered = $filtered;
         return $this;
     }
 
+    /**
+     * Установить текущее значение фильтра
+     *
+     * @param $filterValue
+     *
+     * @return Header $this
+     */
     public function setFilterValue($filterValue) {
         $this->filterValue = $filterValue;
         return $this;
     }
 
+    /**
+     * Установить декоратор колонки
+     *
+     * @param ViewDecoration $decoration
+     *
+     * @return Header $this
+     */
     public function setDecoration(ViewDecoration $decoration = null) {
         $this->decoration = $decoration;
+        return $this;
     }
 
 } 

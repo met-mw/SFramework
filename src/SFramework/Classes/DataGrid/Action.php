@@ -2,6 +2,12 @@
 namespace SFramework\Classes\DataGrid;
 
 
+use SFramework\Classes\CoreFunctions;
+
+/**
+ * Class Action
+ * @package SFramework\Classes\DataGrid
+ */
 class Action {
 
     /** @var string */
@@ -15,46 +21,31 @@ class Action {
     /** @var string */
     protected $title;
     /** @var string[] */
-    protected $classes = [];
+    protected $attributes = [];
     /** @var bool */
     protected $group = false;
 
-    public function __construct($paramName, $uri, $name, $displayName, $title = '', array $classes = [], $group = false) {
+    public function __construct($paramName, $uri, $name, $displayName, array $attributes = [], $title = '', $group = false) {
         $this->setURI($uri)
             ->setParamName($paramName)
             ->setName($name)
             ->setDisplayName($displayName)
+            ->setAttributes($attributes)
             ->setTitle($title)
-            ->setClasses($classes)
             ->setGroup($group);
     }
 
     public function buildURI($value = null) {
         $uri = $this->getURI();
         if (!is_null($value)) {
-            $uri .= mb_strpos($uri, '?') === false ? '?' : '&';
-            $uri .= "{$this->getParamName()}={$value}";
+            CoreFunctions::addGETParamToURI($uri, $this->getParamName(), $value);
         }
 
         return $uri;
     }
 
     public function buildClasses() {
-        $classes = '';
-        foreach ($this->getClasses() as $class) {
-            if ($classes != '') {
-                $classes .= ' ';
-            }
-
-            $classes .= $class;
-        }
-
-        return $classes;
-    }
-
-    public function addClass($class) {
-        $this->classes[] = $class;
-        return $this;
+        CoreFunctions::tagAttributesToString($this->getAttributes());
     }
 
     public function getParamName() {
@@ -77,44 +68,93 @@ class Action {
         return $this->title;
     }
 
-    public function getClasses() {
-        return $this->classes;
+    public function getAttributes() {
+        return $this->attributes;
     }
 
     public function isGroup() {
         return $this->group;
     }
 
+    /**
+     * Установить имя параметра, передаваемое на сервер (Ключ колонки)
+     *
+     * @param string $paramName
+     *
+     * @return Action $this
+     */
     public function setParamName($paramName) {
         $this->paramName = $paramName;
         return $this;
     }
 
+    /**
+     * Установить адрес
+     *
+     * @param string $uri
+     *
+     * @return Action $this
+     */
     public function setURI($uri) {
         $this->uri = $uri;
         return $this;
     }
 
+    /**
+     * Установить имя (применяется при генерации имени поля формы)
+     *
+     * @param string $name
+     *
+     * @return Action $this
+     */
     public function setName($name) {
         $this->name = $name;
         return $this;
     }
 
+    /**
+     * Установить название для отображения
+     *
+     * @param string $displayName
+     *
+     * @return Action $this
+     */
     public function setDisplayName($displayName) {
         $this->displayName = $displayName;
         return $this;
     }
 
+    /**
+     * Установить "всплывающую" подсказку
+     *
+     * @param string $title
+     *
+     * @return Action $this
+     */
     public function setTitle($title) {
         $this->title = $title;
         return $this;
     }
 
-    public function setClasses(array $classes = []) {
-        $this->classes = $classes;
+    /**
+     * Установить аттрибуты
+     *
+     * @param array $attributes
+     *
+     * @return Action $this
+     */
+    public function setAttributes(array $attributes = []) {
+        $this->attributes = $attributes;
         return $this;
     }
 
+    /**
+     * Установить флаг группового действия
+     *
+     * @param bool $group
+     *
+     * @return Action $this
+     */
     public function setGroup($group = false) {
         $this->group = $group;
         return $this;
