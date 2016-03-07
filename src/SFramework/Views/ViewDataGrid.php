@@ -61,7 +61,7 @@ class ViewDataGrid extends View {
                             <td>
                                 <? foreach ($this->dataGrid->getActions() as $action): ?>
                                     <a name="action-<?= $action->getName() ?>-<?= $row[$this->dataGrid->getKey()] ?>" href="<?= $action->buildURI($row[$this->dataGrid->getKey()]) ?>">
-                                        <span class="<?= $action->buildClasses() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
+                                        <span class="<?= $action->buildAttributes() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
                                     </a>
                                 <? endforeach; ?>
                             </td>
@@ -74,7 +74,7 @@ class ViewDataGrid extends View {
                             Групповые операции:&nbsp;
                             <? foreach ($this->dataGrid->getGroupActions() as $action): ?>
                                 <button name="action-<?= $action->getName() ?>-selected" formmethod="post" type="submit" formaction="<?= $action->buildURI() ?>" >
-                                    <span class="<?= $action->buildClasses() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
+                                    <span class="<?= $action->buildAttributes() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
                                 </button>
                             <? endforeach; ?>
                         </td>

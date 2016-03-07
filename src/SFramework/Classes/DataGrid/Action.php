@@ -44,8 +44,8 @@ class Action {
         return $uri;
     }
 
-    public function buildClasses() {
-        CoreFunctions::tagAttributesToString($this->getAttributes());
+    public function buildAttributes() {
+        return CoreFunctions::tagAttributesToString($this->getAttributes());
     }
 
     public function getParamName() {
