@@ -21,6 +21,8 @@ class DataGrid {
     protected $menu;
 
     /** @var string */
+    protected $name;
+    /** @var string */
     protected $key;
     /** @var string */
     protected $caption;
@@ -39,8 +41,9 @@ class DataGrid {
     public $pagination;
     protected $itemsPerPage = DEFAULT_INCLUDE_PATH;
 
-    public function __construct($key, $caption, $pageNumber, $itemsPerPage = null, $description = '') {
-        $this->setKey($key)
+    public function __construct($name, $key, $caption, $pageNumber, $itemsPerPage = null, $description = '') {
+        $this->setName($name)
+            ->setKey($key)
             ->setCaption($caption)
             ->setDescription($description)
             ->setItemsPerPage($itemsPerPage ? $itemsPerPage : self::DEFAULT_ITEMS_PER_PAGE);
@@ -64,6 +67,10 @@ class DataGrid {
     public function setItemsPerPage($itemsPerPage) {
         $this->itemsPerPage = $itemsPerPage;
         return $this;
+    }
+
+    public function getName() {
+        return $this->name;
     }
 
     public function getMenu() {
@@ -176,26 +183,53 @@ class DataGrid {
         return $data;
     }
 
+    /**
+     * Наименование таблицы (используется для именования полей формы таблицы)
+     *
+     * @param string $name
+     *
+     * @return DataGrid $this
+     */
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @param Menu $menu
+     *
+     * @return DataGrid $this
+     */
     public function setMenu(Menu $menu) {
         $this->menu = $menu;
         return $this;
     }
 
     /**
-     * @param $caption
+     * @param string $caption
      *
-     * @return $this
+     * @return DataGrid $this
      */
     public function setCaption($caption) {
         $this->caption = $caption;
         return $this;
     }
 
+    /**
+     * @param string $description
+     *
+     * @return DataGrid $this
+     */
     public function setDescription($description) {
         $this->description = $description;
         return $this;
     }
 
+    /**
+     * @param string $key
+     *
+     * @return DataGrid $this
+     */
     public function setKey($key) {
         $this->key = $key;
         return $this;
@@ -204,7 +238,7 @@ class DataGrid {
     /**
      * @param DataSet[] $dataSets
      *
-     * @return $this
+     * @return DataGrid $this
      */
     public function setDataSets(array $dataSets) {
         $this->dataSets = $dataSets;
