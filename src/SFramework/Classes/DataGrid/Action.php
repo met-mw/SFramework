@@ -38,7 +38,7 @@ class Action {
     public function buildURI($value = null) {
         $uri = $this->getURI();
         if (!is_null($value)) {
-            CoreFunctions::addGETParamToURI($uri, $this->getParamName(), $value);
+            $uri = CoreFunctions::addGETParamToURI($uri, $this->getParamName(), $value);
         }
 
         return $uri;
