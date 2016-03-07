@@ -23,6 +23,8 @@ class DataGrid {
     /** @var string */
     protected $name;
     /** @var string */
+    protected $action;
+    /** @var string */
     protected $key;
     /** @var string */
     protected $caption;
@@ -41,8 +43,9 @@ class DataGrid {
     public $pagination;
     protected $itemsPerPage = DEFAULT_INCLUDE_PATH;
 
-    public function __construct($name, $key, $caption, $pageNumber, $itemsPerPage = null, $description = '') {
+    public function __construct($name, $action, $key, $caption, $pageNumber, $itemsPerPage = null, $description = '') {
         $this->setName($name)
+            ->setAction($action)
             ->setKey($key)
             ->setCaption($caption)
             ->setDescription($description)
@@ -67,6 +70,10 @@ class DataGrid {
     public function setItemsPerPage($itemsPerPage) {
         $this->itemsPerPage = $itemsPerPage;
         return $this;
+    }
+
+    public function getAction() {
+        return $this->action;
     }
 
     public function getName() {
@@ -192,6 +199,18 @@ class DataGrid {
      */
     public function setName($name) {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * URL формы
+     *
+     * @param string $url
+     *
+     * @return DataGrid $this
+     */
+    public function setAction($url) {
+        $this->action = $url;
         return $this;
     }
 
