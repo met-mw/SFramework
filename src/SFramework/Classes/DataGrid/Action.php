@@ -35,11 +35,11 @@ class Action {
             ->setGroup($group);
     }
 
-    public function buildURI($value = null) {
+    public function buildGroupURI() {
         $uri = $this->getURI();
-        if (!is_null($value)) {
-            $uri = CoreFunctions::addGETParamToURI($uri, $this->getParamName(), $value);
-        }
+        $parts = explode('?', $uri);
+        $parts[0] .= 'Group';
+        $uri = implode('?', $parts);
 
         return $uri;
     }

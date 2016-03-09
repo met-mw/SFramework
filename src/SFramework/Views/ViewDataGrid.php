@@ -2,6 +2,7 @@
 namespace SFramework\Views;
 
 
+use SFramework\Classes\CoreFunctions;
 use SFramework\Classes\DataGrid;
 use SFramework\Classes\View;
 
@@ -60,7 +61,7 @@ class ViewDataGrid extends View {
                             <? endforeach; ?>
                             <td>
                                 <? foreach ($this->dataGrid->getActions() as $action): ?>
-                                    <a name="action-<?= $action->getName() ?>-<?= $row[$this->dataGrid->getKey()] ?>" href="<?= $action->buildURI($row[$this->dataGrid->getKey()]) ?>">
+                                    <a name="action-<?= $action->getName() ?>-<?= $row[$this->dataGrid->getKey()] ?>" href="<?= CoreFunctions::addGETParamToURI($action->getURI(), $action->getParamName(), $row[$this->dataGrid->getKey()]) ?>">
                                         <span class="<?= $action->buildAttributes() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
                                     </a>
                                 <? endforeach; ?>
@@ -73,7 +74,7 @@ class ViewDataGrid extends View {
                         <td colspan="<?= (count($this->dataGrid->getHeaders()) + ($this->dataGrid->hasGroupActions() ? 2 : 1)) ?>">
                             Групповые операции:&nbsp;
                             <? foreach ($this->dataGrid->getGroupActions() as $action): ?>
-                                <button name="action-<?= $action->getName() ?>-selected" formmethod="post" type="submit" formaction="<?= $action->buildURI() ?>" >
+                                <button name="action-<?= $action->getName() ?>-selected" formmethod="post" type="submit" formaction="<?= $action->buildGroupURI() ?>" >
                                     <span class="<?= $action->buildAttributes() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
                                 </button>
                             <? endforeach; ?>
