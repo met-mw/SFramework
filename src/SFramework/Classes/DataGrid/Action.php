@@ -24,15 +24,18 @@ class Action {
     protected $attributes = [];
     /** @var bool */
     protected $group = false;
+    /** @var bool */
+    protected $ajax = false;
 
-    public function __construct($paramName, $uri, $name, $displayName, array $attributes = [], $title = '', $group = false) {
+    public function __construct($paramName, $uri, $name, $displayName, array $attributes = [], $title = '', $group = false, $ajax = false) {
         $this->setURI($uri)
             ->setParamName($paramName)
             ->setName($name)
             ->setDisplayName($displayName)
             ->setAttributes($attributes)
             ->setTitle($title)
-            ->setGroup($group);
+            ->setGroup($group)
+            ->setAJAX($ajax);
     }
 
     public function buildGroupURI($groupActionName = 'group') {
@@ -74,6 +77,10 @@ class Action {
 
     public function isGroup() {
         return $this->group;
+    }
+
+    public function isAjax() {
+        return $this->ajax;
     }
 
     /**
@@ -157,6 +164,18 @@ class Action {
      */
     public function setGroup($group = false) {
         $this->group = $group;
+        return $this;
+    }
+
+    /**
+     * Установить флаг AJAX
+     *
+     * @param bool $ajax
+     *
+     * @return $this
+     */
+    public function setAJAX($ajax = false) {
+        $this->ajax = $ajax;
         return $this;
     }
 
