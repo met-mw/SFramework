@@ -35,10 +35,10 @@ class Action {
             ->setGroup($group);
     }
 
-    public function buildGroupURI() {
+    public function buildGroupURI($groupActionName = 'group') {
         $uri = $this->getURI();
         $parts = explode('?', $uri);
-        $parts[0] .= 'Group';
+        $parts[0] .= $groupActionName;
         $uri = implode('?', $parts);
 
         return $uri;
