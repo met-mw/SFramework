@@ -10,6 +10,8 @@ class ViewLink extends ViewDecoration {
     public $valueFieldName;
 
     public function __construct($urlTemplate, $valueFieldName = null) {
+        $this->optional[] = 'valueFieldName';
+
         $this->urlTemplate = $urlTemplate;
         $this->valueFieldName = $valueFieldName;
     }
