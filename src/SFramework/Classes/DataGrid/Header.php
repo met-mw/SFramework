@@ -42,7 +42,7 @@ class Header {
             ->setDecoration($decoration);
     }
 
-    public function decorate($value) {
+    public function decorate($value, array $additionalData = []) {
         $result = $value;
         if (!is_null($this->getDecoration())) {
             ob_start();
