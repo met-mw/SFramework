@@ -6,13 +6,22 @@ class ViewLink extends ViewDecoration {
 
     /** @var string Формат: /path/to/{label}/ */
     public $urlTemplate;
+    /** @var string|null */
+    public $valueFieldName;
 
-    public function __construct($urlTemplate) {
+    public function __construct($urlTemplate, $valueFieldName = null) {
         $this->urlTemplate = $urlTemplate;
+        $this->valueFieldName = $valueFieldName;
     }
 
     public function currentRender() {
-        ?><a target="_blank" href="<?= str_replace('{label}', !empty($this->getAdditionalData()) ? reset($this->getAdditionalData()) : $this->getValue(), $this->urlTemplate) ?>"><?= $this->getValue() ?></a><?
+        $additionalData = $this->getAdditionalData();
+        $label = $this->getValue();
+        if ($this->valueFieldName !== null && isset($additionalData[$this->valueFieldName])) {
+            $label = $additionalData[$this->valueFieldName];
+        }
+
+        ?><a target="_blank" href="<?= str_replace('{label}', $label, $this->urlTemplate) ?>"><?= $this->getValue() ?></a><?
     }
 
 }
