@@ -39,6 +39,8 @@ class DataGrid {
     /** @var Action[] */
     protected $actions = [];
 
+    protected $hiddenFields = [];
+
     /** @var Pagination */
     public $pagination;
     protected $itemsPerPage = DEFAULT_INCLUDE_PATH;
@@ -54,6 +56,31 @@ class DataGrid {
 
         $this->menu = new Menu();
         $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $this->getItemsPerPage());
+    }
+
+    public function getHiddenFields() {
+        return $this->hiddenFields;
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     *
+     * @return DataGrid
+     */
+    public function addHiddenField($name, $value) {
+        $this->hiddenFields[$name] = $value;
+        return $this;
+    }
+
+    /**
+     * @param array $hiddenFields
+     *
+     * @return DataGrid
+     */
+    public function setHiddenFields(array $hiddenFields = []) {
+        $this->hiddenFields = $hiddenFields;
+        return $this;
     }
 
     public function fillPager(ViewPagination $view) {
