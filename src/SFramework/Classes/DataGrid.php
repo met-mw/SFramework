@@ -109,7 +109,7 @@ class DataGrid {
             $headerValue = $header->getFilterValue();
             if ($header->isFiltered() && $headerValue != '') {
                 $conditions .= $conditions == '' ? ' ' : ' and';
-                $conditions .= ($tableName != '' ? "`{$tableName}`" : '') . " {$header->getKey()} like '%{$header->getFilterValue()}%'";
+                $conditions .= ($tableName != '' ? " `{$tableName}`." : ' ') . "{$header->getKey()} like '%{$header->getFilterValue()}%'";
             }
         }
 
