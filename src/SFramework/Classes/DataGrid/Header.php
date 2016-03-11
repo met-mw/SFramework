@@ -48,6 +48,7 @@ class Header {
             ob_start();
             $this->getDecoration()
                 ->setValue($value)
+                ->setAdditionalData($additionalData)
                 ->render();
             $result = ob_get_contents();
             ob_end_clean();
