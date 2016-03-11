@@ -8,11 +8,14 @@ class ViewLink extends ViewDecoration {
     public $urlTemplate;
     /** @var string|null */
     public $valueFieldName;
+    /** @var bool */
+    public $blank;
 
-    public function __construct($urlTemplate, $valueFieldName = null) {
+    public function __construct($urlTemplate, $blank = false, $valueFieldName = null) {
         $this->optional[] = 'valueFieldName';
 
         $this->urlTemplate = $urlTemplate;
+        $this->blank = $blank;
         $this->valueFieldName = $valueFieldName;
     }
 
@@ -23,7 +26,7 @@ class ViewLink extends ViewDecoration {
             $label = $additionalData[$this->valueFieldName];
         }
 
-        ?><a target="_blank" href="<?= str_replace('{label}', $label, $this->urlTemplate) ?>"><?= $this->getValue() ?></a><?
+        ?><a<?= $this->blank ? ' target="_blank"' : '' ?> href="<?= str_replace('{label}', $label, $this->urlTemplate) ?>"><?= $this->getValue() ?></a><?
     }
 
 }
