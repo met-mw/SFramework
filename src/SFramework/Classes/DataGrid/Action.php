@@ -20,6 +20,8 @@ class Action {
     protected $displayName;
     /** @var string */
     protected $title;
+    /** @var array */
+    protected $additionalParameters = [];
     /** @var string[] */
     protected $attributes = [];
     /** @var bool */
@@ -27,7 +29,7 @@ class Action {
     /** @var bool */
     protected $ajax = false;
 
-    public function __construct($paramName, $uri, $name, $displayName, array $attributes = [], $title = '', $group = false, $ajax = false) {
+    public function __construct($paramName, $uri, $name, $displayName, array $additionalParameters = [], array $attributes = [], $title = '', $group = false, $ajax = false) {
         $this->setURI($uri)
             ->setParamName($paramName)
             ->setName($name)
@@ -71,6 +73,10 @@ class Action {
         return $this->title;
     }
 
+    public function getAdditionalParameters() {
+        return $this->additionalParameters;
+    }
+
     public function getAttributes() {
         return $this->attributes;
     }
@@ -88,7 +94,7 @@ class Action {
      *
      * @param string $paramName
      *
-     * @return Action $this
+     * @return Action
      */
     public function setParamName($paramName) {
         $this->paramName = $paramName;
@@ -100,7 +106,7 @@ class Action {
      *
      * @param string $uri
      *
-     * @return Action $this
+     * @return Action
      */
     public function setURI($uri) {
         $this->uri = $uri;
@@ -112,7 +118,7 @@ class Action {
      *
      * @param string $name
      *
-     * @return Action $this
+     * @return Action
      */
     public function setName($name) {
         $this->name = $name;
@@ -124,7 +130,7 @@ class Action {
      *
      * @param string $displayName
      *
-     * @return Action $this
+     * @return Action
      */
     public function setDisplayName($displayName) {
         $this->displayName = $displayName;
@@ -136,10 +142,20 @@ class Action {
      *
      * @param string $title
      *
-     * @return Action $this
+     * @return Action
      */
     public function setTitle($title) {
         $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @param array $additionalParameters
+     *
+     * @return Action
+     */
+    public function setAdditionalParameters(array $additionalParameters) {
+        $this->additionalParameters = $additionalParameters;
         return $this;
     }
 
@@ -148,7 +164,7 @@ class Action {
      *
      * @param array $attributes
      *
-     * @return Action $this
+     * @return Action
      */
     public function setAttributes(array $attributes = []) {
         $this->attributes = $attributes;
@@ -160,7 +176,7 @@ class Action {
      *
      * @param bool $group
      *
-     * @return Action $this
+     * @return Action
      */
     public function setGroup($group = false) {
         $this->group = $group;
@@ -172,7 +188,7 @@ class Action {
      *
      * @param bool $ajax
      *
-     * @return $this
+     * @return Action
      */
     public function setAJAX($ajax = false) {
         $this->ajax = $ajax;
