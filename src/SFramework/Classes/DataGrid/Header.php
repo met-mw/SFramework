@@ -23,6 +23,8 @@ class Header {
     protected $filtered = false;
     /** @var string */
     protected $filterValue = '';
+    protected $filterFieldAlias = null;
+    protected $filterTableName = null;
     /** @var ViewDecoration */
     protected $decoration = null;
 
@@ -32,14 +34,18 @@ class Header {
                                 array $attributes = [],
                                 array $valueAttributes = [],
                                 $filtered = false,
-                                $filterValue = '') {
+                                $filterValue = '',
+                                $filterFieldAlias = null,
+                                $filterTableName = null) {
         $this->setKey($key)
             ->setDisplayName($displayName)
             ->setFiltered($filtered)
             ->setFilterValue($filterValue)
             ->setAttributes($attributes)
             ->setValueAttributes($valueAttributes)
-            ->setDecoration($decoration);
+            ->setDecoration($decoration)
+            ->setFilterFieldAlias($filterFieldAlias)
+            ->setFilterTableName($filterTableName);
     }
 
     public function decorate($value, array $additionalData = []) {
@@ -104,6 +110,14 @@ class Header {
         return $this->decoration;
     }
 
+    public function getFilterFieldAlias() {
+        return $this->filterFieldAlias;
+    }
+
+    public function getFilterTableName() {
+        return $this->filterTableName;
+    }
+
     public function isFiltered() {
         return $this->filtered == true;
     }
@@ -111,7 +125,7 @@ class Header {
     /**
      * @param string $key
      *
-     * @return Header $this
+     * @return Header
      */
     public function setKey($key) {
         $this->key = $key;
@@ -123,7 +137,7 @@ class Header {
      *
      * @param string $value
      *
-     * @return Header $this
+     * @return Header
      */
     public function setDisplayName($value) {
         $this->displayName = $value;
@@ -133,7 +147,7 @@ class Header {
     /**
      * @param array $attributes
      *
-     * @return Header $this
+     * @return Header
      */
     public function setAttributes(array $attributes = []) {
         $this->attributes = $attributes;
@@ -143,7 +157,7 @@ class Header {
     /**
      * @param array $valueAttributes
      *
-     * @return Header $this
+     * @return Header
      */
     public function setValueAttributes(array $valueAttributes = []) {
         $this->valueAttributes = $valueAttributes;
@@ -155,7 +169,7 @@ class Header {
      *
      * @param bool $filtered
      *
-     * @return Header $this
+     * @return Header
      */
     public function setFiltered($filtered = false) {
         $this->filtered = $filtered;
@@ -167,10 +181,30 @@ class Header {
      *
      * @param $filterValue
      *
-     * @return Header $this
+     * @return Header
      */
     public function setFilterValue($filterValue) {
         $this->filterValue = $filterValue;
+        return $this;
+    }
+
+    /**
+     * @param $filterFieldAlias
+     *
+     * @return Header
+     */
+    public function setFilterFieldAlias($filterFieldAlias) {
+        $this->filterFieldAlias = $filterFieldAlias;
+        return $this;
+    }
+
+    /**
+     * @param $filterTableName
+     *
+     * @return Header
+     */
+    public function setFilterTableName($filterTableName) {
+        $this->filterTableName = $filterTableName;
         return $this;
     }
 
@@ -179,7 +213,7 @@ class Header {
      *
      * @param ViewDecoration $decoration
      *
-     * @return Header $this
+     * @return Header
      */
     public function setDecoration(ViewDecoration $decoration = null) {
         $this->decoration = $decoration;
