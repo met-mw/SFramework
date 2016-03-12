@@ -34,6 +34,7 @@ class Action {
             ->setParamName($paramName)
             ->setName($name)
             ->setDisplayName($displayName)
+            ->setAdditionalParameters($additionalParameters)
             ->setAttributes($attributes)
             ->setTitle($title)
             ->setGroup($group)
