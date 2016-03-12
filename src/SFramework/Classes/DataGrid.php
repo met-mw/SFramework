@@ -130,13 +130,28 @@ class DataGrid {
         return $this;
     }
 
-    public function getFilterConditions($tableName = '') {
+    public function getFilterConditions($tableName = null) {
         $conditions = '';
         foreach ($this->getHeaders() as $header) {
             $headerValue = $header->getFilterValue();
             if ($header->isFiltered() && $headerValue != '') {
                 $conditions .= $conditions == '' ? ' ' : ' and';
-                $conditions .= ($tableName != '' ? " `{$tableName}`." : ' ') . "{$header->getKey()} like '%{$header->getFilterValue()}%'";
+
+                if ($header->getFilterTableName() !== null) {
+                    $conditions .= "`{$header->getFilterTableName()}`.";
+                } elseif ($tableName !== null) {
+                    $conditions .= "`{$tableName}`.";
+                } else {
+                    $conditions .= ' ';
+                }
+
+                if ($header->getFilterFieldAlias() !== null) {
+                    $conditions .= "`{$header->getFilterFieldAlias()}`";
+                } else {
+                    $conditions .= "`{$header->getKey()}`";
+                }
+
+                $conditions .= " like '%{$header->getFilterValue()}%'";
             }
         }
 
