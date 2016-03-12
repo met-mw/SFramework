@@ -14,7 +14,7 @@ class ViewChange extends ViewDecoration {
     public function currentRender() {
         foreach ($this->changes as $change) {
             list($value, $display) = $change;
-            if ($value === $this->getValue()) {
+            if ($value == $this->getValue()) {
                 echo $display;
                 break;
             }
