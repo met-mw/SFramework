@@ -14,7 +14,7 @@ class ViewMoney extends ViewDecoration {
 
     public function currentRender() {
         $isEmpty = is_null($this->getValue()) || $this->getValue() === '';
-        echo ($isEmpty ? '--.--' : $this->getValue()), $this->currencySymbol;
+        echo ($isEmpty ? '--.--' : $this->getValue()), ' ', $this->currencySymbol;
     }
 
 }
