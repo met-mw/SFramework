@@ -16,8 +16,15 @@ class ViewCondition extends ViewDecoration {
 
     public function currentRender() {
         foreach ($this->conditions as $condition) {
-            if ($this->additionalData[$condition['field']] == $condition['value']) {
-                $condition['view']->render();
+            $field = $condition['field'];
+            $value = $condition['value'];
+            /** @var ViewDecoration $view */
+            $view = $condition['view'];
+            $view->setValue($this->getValue());
+            $view->setAdditionalData($this->getAdditionalData());
+
+            if ($this->additionalData[$field] == $value) {
+                $view->render();
                 return;
             }
         }
