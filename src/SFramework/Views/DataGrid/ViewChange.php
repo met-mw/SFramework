@@ -6,9 +6,12 @@ class ViewChange extends ViewDecoration {
 
     /** @var array */
     public $changes;
+    /** @var mixed */
+    public $default;
 
-    public function __construct(array $changes) {
+    public function __construct($default, array $changes) {
         $this->changes = $changes;
+        $this->default = $default;
     }
 
     public function currentRender() {
@@ -16,9 +19,11 @@ class ViewChange extends ViewDecoration {
             list($value, $display) = $change;
             if ($value == $this->getValue()) {
                 echo $display;
-                break;
+                return;
             }
         }
+
+        echo $this->default;
     }
 
 }
