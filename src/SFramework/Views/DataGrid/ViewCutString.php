@@ -1,6 +1,4 @@
 <?php
-
-
 namespace SFramework\Views\DataGrid;
 
 
