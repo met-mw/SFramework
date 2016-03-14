@@ -43,11 +43,11 @@ class Customization implements InterfaceCustomization {
     }
 
     public function asDouble($required = true, $errorText = null) {
-        if ($required && !is_double($this->original())) {
+        if ($required && !is_float((float)$this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется вещественным числов." : $errorText);
         }
 
-        return is_null($this->original()) ? $this->original() : (double)$this->original();
+        return is_null($this->original()) ? $this->original() : (float)$this->original();
     }
 
     public function asString($required = true, $errorText = null) {
