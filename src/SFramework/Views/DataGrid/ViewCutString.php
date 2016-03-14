@@ -24,9 +24,9 @@ class ViewCutString extends ViewDecoration {
 
     public function currentRender() {
         $content = $this->stripTags ? strip_tags($this->getValue()) : $this->getValue();
-        $content = mb_substr($content, mb_strpos($content, ' ', $this->offset));
-        ?><a<?= !empty($this->attributesLink) ? CoreFunctions::tagAttributesToString($this->attributesLink) : '' ?>><?= $content ?>...</a><?
-        ?><div<?= !empty($this->attributesFullContent) ? CoreFunctions::tagAttributesToString($this->attributesFullContent) : '' ?>><?= $this->getValue() ?></div><?
+        $content = mb_substr($content, 0, mb_strpos($content, ' ', $this->offset));
+        ?><a<?= !empty($this->attributesLink) ? ' ' . CoreFunctions::tagAttributesToString($this->attributesLink) : '' ?>><?= $content ?>...</a><?
+        ?><div<?= !empty($this->attributesFullContent) ? ' ' . CoreFunctions::tagAttributesToString($this->attributesFullContent) : '' ?>><?= $this->getValue() ?></div><?
     }
 
 }
