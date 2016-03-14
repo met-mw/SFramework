@@ -35,11 +35,19 @@ class Customization implements InterfaceCustomization {
     }
 
     public function asInteger($required = true, $errorText = null) {
+        if ($required && !is_int($this->original())) {
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется целым числом." : $errorText);
+        }
+
+        return is_null($this->original()) ? $this->original() : (int)$this->original();
+    }
+
+    public function asNumber($required = true, $errorText = null) {
         if ($required && !is_numeric($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется числом." : $errorText);
         }
 
-        return is_null($this->original()) ? $this->original() : (int)$this->original();
+        return is_null($this->original()) ? $this->original() : (float)$this->original();
     }
 
     public function asDouble($required = true, $errorText = null) {
