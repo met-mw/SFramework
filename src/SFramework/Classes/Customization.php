@@ -42,6 +42,14 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (int)$this->original();
     }
 
+    public function asDouble($required = true, $errorText = null) {
+        if ($required && !is_double($this->original())) {
+            NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется вещественным числов." : $errorText);
+        }
+
+        return is_null($this->original()) ? $this->original() : (double)$this->original();
+    }
+
     public function asString($required = true, $errorText = null) {
         if ($required && !is_string($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется строкой." : $errorText);

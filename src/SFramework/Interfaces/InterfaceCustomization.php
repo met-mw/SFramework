@@ -6,6 +6,8 @@ interface InterfaceCustomization {
 
     public function asInteger();
 
+    public function asDouble();
+
     public function asString();
 
     public function asEmail();
