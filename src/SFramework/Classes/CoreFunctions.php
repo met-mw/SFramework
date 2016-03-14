@@ -4,7 +4,7 @@ namespace SFramework\Classes;
 
 class CoreFunctions {
 
-    static public function tagAttributesToString(array $tagAttributes, $separator = '') {
+    static public function tagAttributesToString(array $tagAttributes, $separator = ' ') {
         $attributes = [];
         foreach ($tagAttributes as $name => $value) {
             $attributes[] = "{$name}=\"{$value}\"";
