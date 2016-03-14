@@ -35,7 +35,7 @@ class Customization implements InterfaceCustomization {
     }
 
     public function asInteger($required = true, $errorText = null) {
-        if ($required && !is_int($this->original())) {
+        if ($required && !is_numeric($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется целым числом." : $errorText);
         }
 
