@@ -13,7 +13,7 @@ class ViewImage extends ViewDecoration {
     }
 
     public function currentRender() {
-        ?><img src="<?= $this->getValue() ?>"<?= !empty($this->attributes) ? '' : CoreFunctions::tagAttributesToString($this->attributes) ?>/><?
+        ?><img src="<?= $this->getValue() ?>"<?= empty($this->attributes) ? '' : CoreFunctions::tagAttributesToString($this->attributes) ?>/><?
     }
 
 }
