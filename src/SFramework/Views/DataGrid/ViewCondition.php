@@ -29,6 +29,8 @@ class ViewCondition extends ViewDecoration {
             }
         }
 
+        $this->default->setValue($this->getValue());
+        $this->default->setAdditionalData($this->getAdditionalData());
         $this->default->render();
     }
 
