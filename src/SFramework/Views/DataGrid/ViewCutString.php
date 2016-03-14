@@ -6,7 +6,7 @@ namespace SFramework\Views\DataGrid;
 
 use SFramework\Classes\CoreFunctions;
 
-class ViewModal extends ViewDecoration {
+class ViewCutString extends ViewDecoration {
 
     /** @var integer */
     public $offset;
