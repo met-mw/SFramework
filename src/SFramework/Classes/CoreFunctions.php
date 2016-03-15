@@ -39,7 +39,7 @@ class CoreFunctions {
         for ($i = 0; $i < $countWithoutCurrentAndLast; $i++) {
             $oBreadcrumb = $aBreadcrumbs[$i];
             if (!$oBreadcrumb->isParam()) {
-                $currentRoot .= $oBreadcrumb->getName();
+                $currentRoot .= $oBreadcrumb->getPath();
             }
         }
         $currentRoot .= $aBreadcrumbs[$countWithoutCurrentAndLast + 1]->getPath();
