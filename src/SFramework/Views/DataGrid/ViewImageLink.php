@@ -14,9 +14,7 @@ class ViewImageLink extends ViewDecoration {
     public $attributesLink = [];
     public $attributesImage = [];
 
-    public function __construct($urlTemplate, $blank = false, $valueFieldName = null, array $attributesLink = [], array $attributesImage = []) {
-        $this->optional[] = 'valueFieldName';
-
+    public function __construct($blank = false, array $attributesLink = [], array $attributesImage = []) {
         $this->blank = $blank;
         $this->attributesLink = $attributesLink;
         $this->attributesImage = $attributesImage;
