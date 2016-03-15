@@ -28,4 +28,23 @@ class CoreFunctions {
             && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 
+    /**
+     * @param Breadcrumb[] $aBreadcrumbs
+     *
+     * @return string
+     */
+    static public function buildUrlByBreadcrumbs(array $aBreadcrumbs) {
+        $countWithoutCurrentAndLast = sizeof($aBreadcrumbs) - 2;
+        $currentRoot = '';
+        for ($i = 0; $i < $countWithoutCurrentAndLast; $i++) {
+            $oBreadcrumb = $aBreadcrumbs[$i];
+            if (!$oBreadcrumb->isParam()) {
+                $currentRoot .= $oBreadcrumb->getName();
+            }
+        }
+        $currentRoot .= $aBreadcrumbs[$countWithoutCurrentAndLast + 1]->getPath();
+
+        return $currentRoot;
+    }
+
 } 
