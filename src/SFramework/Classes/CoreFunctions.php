@@ -42,7 +42,7 @@ class CoreFunctions {
                 $currentRoot .= $oBreadcrumb->getPath();
             }
         }
-        $currentRoot .= $aBreadcrumbs[$countWithoutCurrentAndLast + 1]->getPath();
+        $currentRoot .= $aBreadcrumbs[$countWithoutCurrentAndLast]->getPath();
 
         return $currentRoot;
     }
