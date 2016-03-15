@@ -31,10 +31,12 @@ class CoreFunctions {
     /**
      * @param Breadcrumb[] $aBreadcrumbs
      *
+     * @param int $endOffset
+     *
      * @return string
      */
-    static public function buildUrlByBreadcrumbs(array $aBreadcrumbs) {
-        $countWithoutCurrentAndLast = sizeof($aBreadcrumbs) - 2;
+    static public function buildUrlByBreadcrumbs(array $aBreadcrumbs, $endOffset = 0) {
+        $countWithoutCurrentAndLast = sizeof($aBreadcrumbs) - 1 - $endOffset;
         $currentRoot = '';
         for ($i = 0; $i < $countWithoutCurrentAndLast; $i++) {
             $oBreadcrumb = $aBreadcrumbs[$i];
