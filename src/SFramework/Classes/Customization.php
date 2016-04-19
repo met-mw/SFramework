@@ -87,7 +87,7 @@ class Customization implements InterfaceCustomization {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не является массивом." : $errorText);
         }
 
-        return is_null($this->original()) ? $this->original() : (bool)$this->original();
+        return is_null($this->original()) ? $this->original() : (array)$this->original();
     }
 
     public function asFile() {
