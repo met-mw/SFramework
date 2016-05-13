@@ -2,17 +2,25 @@
 namespace SFramework\Classes;
 
 
-use SFramework\Interfaces\InterfaceController;
-
 /**
  * Class Controller
  * @package SFramework\Classes
  *
  * Базовый класс контроллера
  */
-abstract class Controller implements InterfaceController {
+abstract class Controller {
 
     /** @var Frame */
-    protected $frame;
+    protected $frame = null;
+
+    public function getFrame()
+    {
+        return $this->frame;
+    }
+
+    public function setFrame(Frame $frame)
+    {
+        $this->frame = $frame;
+    }
 
 }
