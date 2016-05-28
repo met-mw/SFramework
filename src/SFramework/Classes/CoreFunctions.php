@@ -40,6 +40,9 @@ class CoreFunctions {
     static public function buildUrlByBreadcrumbs(array $aBreadcrumbs, $endOffset = 0)
     {
         $countWithoutCurrentAndLast = sizeof($aBreadcrumbs) - 1 - $endOffset;
+        if ($countWithoutCurrentAndLast < 0) {
+            $countWithoutCurrentAndLast = 0;
+        }
         $currentRoot = '';
         for ($i = 0; $i < $countWithoutCurrentAndLast; $i++) {
             $oBreadcrumb = $aBreadcrumbs[$i];
