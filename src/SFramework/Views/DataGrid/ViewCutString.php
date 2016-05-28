@@ -15,14 +15,16 @@ class ViewCutString extends ViewDecoration {
     /** @var array */
     public $attributesFullContent = [];
 
-    public function __construct($offset, $stripTags = true, array $attributesLink = [], array $attributesFullContent = []) {
+    public function __construct($offset, $stripTags = true, array $attributesLink = [], array $attributesFullContent = [])
+    {
         $this->attributesLink = $attributesLink;
         $this->attributesFullContent = $attributesFullContent;
         $this->offset = $offset;
         $this->stripTags = $stripTags;
     }
 
-    public function currentRender() {
+    public function currentRender()
+    {
         $content = $this->stripTags ? strip_tags($this->getValue()) : $this->getValue();
         if (mb_strlen($content) > $this->offset) {
             $content = mb_substr($content, 0, mb_strpos($content, ' ', $this->offset));

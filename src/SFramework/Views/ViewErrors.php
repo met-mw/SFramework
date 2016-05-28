@@ -4,7 +4,8 @@ namespace SFramework\Views;
 
 use SFramework\Classes\View;
 
-class ViewErrors extends View {
+class ViewErrors extends View
+{
 
     /** @var string[] */
     public $messages;

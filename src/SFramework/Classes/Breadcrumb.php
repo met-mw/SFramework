@@ -8,17 +8,20 @@ class Breadcrumb {
     protected $path;
     protected $isParam;
 
-    public function __construct($name, $path, $isParam = false) {
+    public function __construct($name, $path, $isParam = false)
+    {
         $this->setName($name)
             ->setPath($path)
             ->setIsParam($isParam);
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
 
@@ -27,7 +30,8 @@ class Breadcrumb {
      *
      * @return Breadcrumb
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
@@ -37,7 +41,8 @@ class Breadcrumb {
      *
      * @return Breadcrumb
      */
-    public function setPath($path) {
+    public function setPath($path)
+    {
         $this->path = $path;
         return $this;
     }
@@ -47,12 +52,14 @@ class Breadcrumb {
      *
      * @return Breadcrumb
      */
-    public function setIsParam($isParam) {
+    public function setIsParam($isParam)
+    {
         $this->isParam = $isParam;
         return $this;
     }
 
-    public function isParam() {
+    public function isParam()
+    {
         return $this->isParam;
     }
 

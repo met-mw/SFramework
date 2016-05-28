@@ -2,9 +2,11 @@
 namespace SFramework\Views\DataGrid;
 
 
-class ViewDefault extends ViewDecoration {
+class ViewDefault extends ViewDecoration
+{
 
-    public function currentRender() {
+    public function currentRender()
+    {
         echo $this->getValue();
     }
 

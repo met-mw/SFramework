@@ -4,7 +4,8 @@ namespace SFramework\Classes;
 
 class CoreFunctions {
 
-    static public function tagAttributesToString(array $tagAttributes, $separator = ' ') {
+    static public function tagAttributesToString(array $tagAttributes, $separator = ' ')
+    {
         $attributes = [];
         foreach ($tagAttributes as $name => $value) {
             $attributes[] = "{$name}=\"{$value}\"";
@@ -13,7 +14,8 @@ class CoreFunctions {
         return implode($separator, $attributes);
     }
 
-    static public function addGETParamToURI($uri, $name, $value) {
+    static public function addGETParamToURI($uri, $name, $value)
+    {
         if (mb_strpos($uri, '?') !== false && preg_match('/(test=[^&]*){1}/', $uri)) {
             $uri = preg_replace('/(test=[^&]*){1}/', "{$name}={$value}", $uri);
         } else {
@@ -35,7 +37,8 @@ class CoreFunctions {
      *
      * @return string
      */
-    static public function buildUrlByBreadcrumbs(array $aBreadcrumbs, $endOffset = 0) {
+    static public function buildUrlByBreadcrumbs(array $aBreadcrumbs, $endOffset = 0)
+    {
         $countWithoutCurrentAndLast = sizeof($aBreadcrumbs) - 1 - $endOffset;
         $currentRoot = '';
         for ($i = 0; $i < $countWithoutCurrentAndLast; $i++) {

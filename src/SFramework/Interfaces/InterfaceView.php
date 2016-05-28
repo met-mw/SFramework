@@ -2,7 +2,8 @@
 namespace SFramework\Interfaces;
 
 
-interface InterfaceView {
+interface InterfaceView
+{
 
     /**
      * Рендеринг представления. Обязательный метод для всех представлений.

@@ -2,7 +2,8 @@
 namespace SFramework\Interfaces;
 
 
-interface InterfaceParam {
+interface InterfaceParam
+{
 
     static public function get($name);
 

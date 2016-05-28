@@ -4,7 +4,8 @@ namespace SFramework\Views;
 
 use SFramework\Classes\View;
 
-class ViewPagination extends View {
+class ViewPagination extends View
+{
 
     /** @var int */
     public $pagesCount;
@@ -15,14 +16,16 @@ class ViewPagination extends View {
     /** @var string */
     public $parameterName;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->optional[] = 'pagesCount';
         $this->optional[] = 'currentPage';
         $this->optional[] = 'currentURL';
         $this->optional[] = 'parameterName';
     }
 
-    public function currentRender() {
+    public function currentRender()
+    {
         $isFirst = (int)$this->currentPage <= 1;
 
         $previousUrl = '#';

@@ -11,22 +11,26 @@ use SFramework\Interfaces\InterfaceCustomization;
  *
  * Приводит значение к определённому типу, совместно является базовой валидацией
  */
-class Customization implements InterfaceCustomization {
+class Customization implements InterfaceCustomization
+{
 
     private $name;
     /** @var CustomizationValueBase */
-    private $customizationValue;
+    private $CustomizationValue;
 
-    public function __construct($name, CustomizationValueBase $oCustomizationValue) {
+    public function __construct($name, CustomizationValueBase $oCustomizationValue)
+    {
         $this->name = $name;
-        $this->customizationValue = $oCustomizationValue;
+        $this->CustomizationValue = $oCustomizationValue;
     }
 
-    public function original() {
-        return $this->customizationValue->getValue();
+    public function original()
+    {
+        return $this->CustomizationValue->getValue();
     }
 
-    public function noEmpty($errorText = null) {
+    public function noEmpty($errorText = null)
+    {
         if ($this->original() == '') {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не должен быть пуст." : $errorText);
         }
@@ -34,7 +38,8 @@ class Customization implements InterfaceCustomization {
         return $this;
     }
 
-    public function asInteger($required = true, $errorText = null) {
+    public function asInteger($required = true, $errorText = null)
+    {
         if ($required && !is_numeric($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется целым числом." : $errorText);
         }
@@ -42,7 +47,8 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (int)$this->original();
     }
 
-    public function asNumber($required = true, $errorText = null) {
+    public function asNumber($required = true, $errorText = null)
+    {
         if ($required && !is_numeric($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется числом." : $errorText);
         }
@@ -50,7 +56,8 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (float)$this->original();
     }
 
-    public function asDouble($required = true, $errorText = null) {
+    public function asDouble($required = true, $errorText = null)
+    {
         if ($required && !is_float((float)$this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется вещественным числов." : $errorText);
         }
@@ -58,7 +65,8 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (float)$this->original();
     }
 
-    public function asString($required = true, $errorText = null) {
+    public function asString($required = true, $errorText = null)
+    {
         if ($required && !is_string($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не явялется строкой." : $errorText);
         }
@@ -66,7 +74,8 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asEmail($required = true, $errorText = null) {
+    public function asEmail($required = true, $errorText = null)
+    {
         if ($required && !filter_var($this->original(), FILTER_VALIDATE_EMAIL)) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не является адресом email." : $errorText);
         }
@@ -74,7 +83,8 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asBool($required = true, $errorText = null) {
+    public function asBool($required = true, $errorText = null)
+    {
         if ($required && !is_bool($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не является булевским типом." : $errorText);
         }
@@ -82,7 +92,8 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (string)$this->original();
     }
 
-    public function asArray($required = true, $errorText = null) {
+    public function asArray($required = true, $errorText = null)
+    {
         if ($required && !is_array($this->original())) {
             NotificationLog::instance()->pushError(is_null($errorText) ? "Параметр \"{$this->name}\" не является массивом." : $errorText);
         }
@@ -90,7 +101,8 @@ class Customization implements InterfaceCustomization {
         return is_null($this->original()) ? $this->original() : (array)$this->original();
     }
 
-    public function asFile() {
+    public function asFile()
+    {
         if (is_array($this->original())) {
             return new File($this->original());
         }
@@ -99,7 +111,8 @@ class Customization implements InterfaceCustomization {
         return false;
     }
 
-    public function asFilesArray() {
+    public function asFilesArray()
+    {
         if (is_array($this->original())) {
             $original = $this->original();
             $files = [];
@@ -120,8 +133,9 @@ class Customization implements InterfaceCustomization {
         return false;
     }
 
-    public function exists() {
-        return $this->customizationValue->isExists();
+    public function exists()
+    {
+        return $this->CustomizationValue->isExists();
     }
 
 }

@@ -8,19 +8,20 @@ namespace SFramework\Classes;
  *
  * Базовый класс контроллера
  */
-abstract class Controller {
+abstract class Controller
+{
 
     /** @var Frame */
-    protected $frame = null;
+    protected $Frame = null;
 
     public function getFrame()
     {
-        return $this->frame;
+        return $this->Frame;
     }
 
-    public function setFrame(Frame $frame)
+    public function setFrame(Frame $Frame)
     {
-        $this->frame = $frame;
+        $this->Frame = $Frame;
     }
 
 }

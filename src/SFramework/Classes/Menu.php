@@ -4,109 +4,129 @@ namespace SFramework\Classes;
 
 use SFramework\Classes\Menu\Item;
 
-class Menu {
+class Menu
+{
 
     /** @var Item[] */
-    private $leftItems = [];
+    private $LeftItems = [];
     /** @var Item[] */
-    private $rightItems = [];
+    private $RightItems = [];
 
     /** @var string */
     private $projectName;
     /** @var string */
     private $startingPath;
 
-    public function __construct($projectName, $startingPath = '') {
+    public function __construct($projectName, $startingPath = '')
+    {
         $this->projectName = $projectName;
         $this->startingPath = $startingPath;
     }
 
-    public function addLeftItem($name, $path, $tooltip = '') {
-        $this->leftItems[] = new Item($name, $path, $tooltip);
+    public function addLeftItem($name, $path, $tooltip = '')
+    {
+        $this->LeftItems[] = new Item($name, $path, $tooltip);
         return $this;
     }
 
-    public function addRightItem($name, $path, $tooltip = '') {
-        $this->rightItems[] = new Item($name, $path, $tooltip);
+    public function addRightItem($name, $path, $tooltip = '')
+    {
+        $this->RightItems[] = new Item($name, $path, $tooltip);
         return $this;
     }
 
-    public function getProjectName() {
+    public function getProjectName()
+    {
         return $this->projectName;
     }
 
-    public function getStartingPath() {
+    public function getStartingPath()
+    {
         return $this->startingPath;
     }
 
-    public function getLeft() {
-        return $this->leftItems;
+    public function getLeftItems()
+    {
+        return $this->LeftItems;
     }
 
-    public function getRight() {
-        return $this->rightItems;
+    public function getRightItems()
+    {
+        return $this->RightItems;
     }
 
-    public function getLeftItem($index) {
-        return $this->leftItems[$index];
+    public function getLeftItem($index)
+    {
+        return $this->LeftItems[$index];
     }
 
-    public function getRightItem($index) {
-        return $this->rightItems[$index];
+    public function getRightItem($index)
+    {
+        return $this->RightItems[$index];
     }
 
-    public function findLeftItemByPath($path) {
-        $item = null;
-        foreach ($this->getLeft() as $leftItem) {
-            if ($leftItem->getPath() == $path) {
-                $item = $leftItem;
+    public function findLeftItemByPath($path)
+    {
+        $Item = null;
+        $LeftItems = $this->getLeftItems();
+        foreach ($LeftItems as $LeftItem) {
+            if ($LeftItem->getPath() == $path) {
+                $Item = $LeftItem;
                 break;
             }
         }
 
-        return $item;
+        return $Item;
     }
 
-    public function findRightItemByPath($path) {
-        $item = null;
-        foreach ($this->getRight() as $rightItem) {
-            if ($rightItem->getPath() == $path) {
-                $item = $rightItem;
+    public function findRightItemByPath($path)
+    {
+        $Items = null;
+        $RightItems = $this->getRightItems();
+        foreach ($RightItems as $RightItem) {
+            if ($RightItem->getPath() == $path) {
+                $Items = $RightItem;
                 break;
             }
         }
 
-        return $item;
+        return $Items;
     }
 
-    public function findLeftItemsByName($name) {
-        $items = [];
-        foreach ($this->getLeft() as $leftItem) {
-            if ($leftItem->getName() == $name) {
-                $items[] = $leftItem;
+    public function findLeftItemsByName($name)
+    {
+        $Items = [];
+        $LeftItems = $this->getLeftItems();
+        foreach ($LeftItems as $LeftItem) {
+            if ($LeftItem->getName() == $name) {
+                $Items[] = $LeftItem;
             }
         }
 
-        return $items;
+        return $Items;
     }
 
-    public function findRightItemsByName($name) {
-        $items = [];
-        foreach ($this->getRight() as $rightItem) {
-            if ($rightItem->getName() == $name) {
-                $items[] = $rightItem;
+    public function findRightItemsByName($name)
+    {
+        $Items = [];
+        $RightItems = $this->getRightItems();
+        foreach ($RightItems as $RightItem) {
+            if ($RightItem->getName() == $name) {
+                $Items[] = $RightItem;
             }
         }
 
-        return $items;
+        return $Items;
     }
 
-    public function setProjectName($projectName) {
+    public function setProjectName($projectName)
+    {
         $this->projectName = $projectName;
         return $this;
     }
 
-    public function setStartingPath($startingPath = '') {
+    public function setStartingPath($startingPath = '')
+    {
         $this->startingPath = $startingPath;
         return $this;
     }

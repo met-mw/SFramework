@@ -12,25 +12,28 @@ use SFramework\Views\ViewErrors;
  *
  * Основной макет страницы
  */
-class Frame {
+class Frame
+{
 
     private $systemLabels = ['title', 'css', 'js', 'meta', 'favicon'];
 
-    private $root = '';
-    protected $currentFrame = '';
+    private $framesRoot = '';
+    protected $currentFrameName = '';
     protected $frameContent = '';
 
     /** @var InterfaceView[]|mixed */
     protected $binds = [];
 
-    public function __construct($framesRoot) {
-        $this->root = $framesRoot;
+    public function __construct($framesRoot)
+    {
+        $this->framesRoot = $framesRoot;
     }
 
-    public function setFrame($framePath) {
-        if (file_exists("{$this->root}{$framePath}.html")) {
+    public function setFrame($framePath)
+    {
+        if (file_exists("{$this->framesRoot}{$framePath}.html")) {
             $this->clear();
-            $this->currentFrame = $framePath;
+            $this->currentFrameName = $framePath;
         } else {
             throw new Exception("Фрейм \"{$framePath}\" не существует.");
         }
@@ -38,34 +41,41 @@ class Frame {
         return $this;
     }
 
-    public function getFrame() {
-        return $this->currentFrame;
+    public function getFrame()
+    {
+        return $this->currentFrameName;
     }
 
-    public function getFramePath() {
-        return "{$this->root}{$this->currentFrame}.html";
+    public function getFramePath()
+    {
+        return "{$this->framesRoot}{$this->currentFrameName}.html";
     }
 
-    public function install() {
+    public function install()
+    {
         $this->frameContent = file_get_contents($this->getFramePath());
     }
 
-    public function clear() {
-        $this->currentFrame = '';
+    public function clear()
+    {
+        $this->currentFrameName = '';
         $this->frameContent = '';
     }
 
-    public function addCss($cssPath) {
+    public function addCss($cssPath)
+    {
         $this->binds['css'][] = $cssPath;
         return $this;
     }
 
-    public function addJs($jsPath, $dataAttributes = []) {
+    public function addJs($jsPath, $dataAttributes = [])
+    {
         $this->binds['js'][] = ['path' => $jsPath, 'data' => $dataAttributes];
         return $this;
     }
 
-    public function setFavicon(array $faviconData = ['href' => '/favicon.ico', 'type' => 'image/x-icon']) {
+    public function setFavicon(array $faviconData = ['href' => '/favicon.ico', 'type' => 'image/x-icon'])
+    {
         if (!isset($faviconData['href']) || !($faviconData['type'])) {
             throw new Exception('Неверные парметры иконки сайта.');
         }
@@ -74,12 +84,14 @@ class Frame {
         return $this;
     }
 
-    public function addMeta(array $metaParams) {
+    public function addMeta(array $metaParams)
+    {
         $this->binds['meta'][] = $metaParams;
         return $this;
     }
 
-    public function bindView($label, InterfaceView $view) {
+    public function bindView($label, InterfaceView $view)
+    {
         if (in_array($label, $this->systemLabels)) {
             throw new Exception("Метка \"{$label}\" является системной, её нельзя использовать. Системные метки: " . implode(',', $this->systemLabels));
         }
@@ -88,7 +100,8 @@ class Frame {
         return $this;
     }
 
-    public function bindData($label, $data) {
+    public function bindData($label, $data)
+    {
         if (in_array($label, $this->systemLabels)) {
             throw new Exception("Метка \"{$label}\" является системной, её нельзя использовать. Системные метки: " . implode(',', $this->systemLabels));
         }
@@ -97,16 +110,19 @@ class Frame {
         return $this;
     }
 
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->binds['title'] = $title;
         return $this;
     }
 
-    public function unbind($label) {
+    public function unbind($label)
+    {
         unset($this->binds[$label]);
     }
 
-    public function render() {
+    public function render()
+    {
         if (NotificationLog::instance()->hasProblems()) {
             $nLog = NotificationLog::instance();
             $errorsView = new ViewErrors();
@@ -114,7 +130,7 @@ class Frame {
             $this->bindView('content', $errorsView);
         }
 
-        if ($this->currentFrame == '') {
+        if ($this->currentFrameName == '') {
             return;
         }
         $this->install();
@@ -131,11 +147,13 @@ class Frame {
         echo $this->frameContent;
     }
 
-    protected function clearLabel($label) {
+    protected function clearLabel($label)
+    {
         $this->frameContent = str_replace("<!--label[{$label}]-->", '', $this->frameContent);
     }
 
-    protected function applyBind($label) {
+    protected function applyBind($label)
+    {
         $targetLabel = "<!--label[{$label}]-->";
 
         if ($label == 'favicon') {

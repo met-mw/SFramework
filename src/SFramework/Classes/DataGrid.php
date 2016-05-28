@@ -13,12 +13,13 @@ use SORM\DataSource;
  * Class DataGrid
  * @package SFramework\Classes
  */
-class DataGrid {
+class DataGrid
+{
 
     const DEFAULT_ITEMS_PER_PAGE = 20;
 
     /** @var Menu */
-    protected $menu;
+    protected $Menu;
 
     /** @var string */
     protected $name;
@@ -31,21 +32,22 @@ class DataGrid {
     /** @var string */
     protected $description;
     /** @var Header[] */
-    protected $headers = [];
+    protected $Headers = [];
 
     /** @var DataSet[] */
-    protected $dataSets = [];
+    protected $DataSets = [];
 
     /** @var Action[] */
-    protected $actions = [];
+    protected $Actions = [];
 
     protected $hiddenFields = [];
 
     /** @var Pagination */
-    public $pagination;
+    public $Pagination;
     protected $itemsPerPage = DEFAULT_INCLUDE_PATH;
 
-    public function __construct($name, $action, $key, $caption, $pageNumber, $itemsPerPage = null, $description = '') {
+    public function __construct($name, $action, $key, $caption, $pageNumber, $itemsPerPage = null, $description = '')
+    {
         $this->setName($name)
             ->setAction($action)
             ->setKey($key)
@@ -54,11 +56,12 @@ class DataGrid {
             ->setItemsPerPage($itemsPerPage ? $itemsPerPage : self::DEFAULT_ITEMS_PER_PAGE);
         ;
 
-        $this->menu = new Menu();
-        $this->pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $this->getItemsPerPage());
+        $this->Menu = new Menu();
+        $this->Pagination = new Pagination(DataSource::getCurrent(), $pageNumber ? $pageNumber : 1, $this->getItemsPerPage());
     }
 
-    public function getHiddenFields() {
+    public function getHiddenFields()
+    {
         return $this->hiddenFields;
     }
 
@@ -68,7 +71,8 @@ class DataGrid {
      *
      * @return DataGrid
      */
-    public function addHiddenField($name, $value) {
+    public function addHiddenField($name, $value)
+    {
         $this->hiddenFields[$name] = $value;
         return $this;
     }
@@ -78,59 +82,71 @@ class DataGrid {
      *
      * @return DataGrid
      */
-    public function setHiddenFields(array $hiddenFields = []) {
+    public function setHiddenFields(array $hiddenFields = [])
+    {
         $this->hiddenFields = $hiddenFields;
         return $this;
     }
 
-    public function fillPager(ViewPagination $view) {
-        $view->pagesCount = $this->pagination->getPagesCount();
-        $view->currentURL = $this->pagination->getUrl();
-        $view->currentPage = $this->pagination->getCurrentPage();
-        $view->parameterName = $this->pagination->getParameterName();
+    public function fillPager(ViewPagination $view)
+    {
+        $view->pagesCount = $this->Pagination->getPagesCount();
+        $view->currentURL = $this->Pagination->getUrl();
+        $view->currentPage = $this->Pagination->getCurrentPage();
+        $view->parameterName = $this->Pagination->getParameterName();
     }
 
-    public function preparePager() {
-        $this->pagination->prepare();
+    public function preparePager()
+    {
+        $this->Pagination->prepare();
     }
 
-    public function setItemsPerPage($itemsPerPage) {
+    public function setItemsPerPage($itemsPerPage)
+    {
         $this->itemsPerPage = $itemsPerPage;
         return $this;
     }
 
-    public function getAction() {
+    public function getAction()
+    {
         return $this->action;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getMenu() {
-        return $this->menu;
+    public function getMenu()
+    {
+        return $this->Menu;
     }
 
-    public function getItemsPerPage() {
+    public function getItemsPerPage()
+    {
         return $this->itemsPerPage;
     }
 
-    public function addAction(Action $action) {
-        $this->actions[] = $action;
+    public function addAction(Action $Action)
+    {
+        $this->Actions[] = $Action;
         return $this;
     }
 
-    public function addHeader(Header $header) {
-        $this->headers[] = $header;
+    public function addHeader(Header $Header)
+    {
+        $this->Headers[] = $Header;
         return $this;
     }
 
-    public function addDataSet(DataSet $dataSet) {
-        $this->dataSets[] = $dataSet;
+    public function addDataSet(DataSet $DataSet)
+    {
+        $this->DataSets[] = $DataSet;
         return $this;
     }
 
-    public function getFilterConditionsArray($tableName = null) {
+    public function getFilterConditionsArray($tableName = null)
+    {
         $conditions = [];
         foreach ($this->getHeaders() as $header) {
             $headerValue = $header->getFilterValue();
@@ -157,7 +173,8 @@ class DataGrid {
         return $conditions;
     }
 
-    public function getFilterConditions($tableName = null) {
+    public function getFilterConditions($tableName = null)
+    {
         $conditions = '';
         foreach ($this->getHeaders() as $header) {
             $headerValue = $header->getFilterValue();
@@ -185,7 +202,8 @@ class DataGrid {
         return $conditions;
     }
 
-    public function hasFiltered() {
+    public function hasFiltered()
+    {
         $result = false;
         foreach ($this->getHeaders() as $header) {
             if ($header->isFiltered()) {
@@ -197,9 +215,11 @@ class DataGrid {
         return $result;
     }
 
-    public function hasGroupActions() {
-        foreach ($this->getActions() as $action) {
-            if ($action->isGroup()) {
+    public function hasGroupActions()
+    {
+        $Actions = $this->getActions();
+        foreach ($Actions as $Action) {
+            if ($Action->isGroup()) {
                 return true;
             }
         }
@@ -207,53 +227,63 @@ class DataGrid {
         return false;
     }
 
-    public function getGroupActions() {
-        /** @var Action[] $groupActions */
-        $groupActions = [];
-        foreach ($this->getActions() as $action) {
-            if (!$action->isGroup()) {
+    public function getGroupActions()
+    {
+        /** @var Action[] $GroupActions */
+        $GroupActions = [];
+        $Actions = $this->getActions();
+        foreach ($Actions as $Action) {
+            if (!$Action->isGroup()) {
                 continue;
             }
 
-            $groupActions[] = $action;
+            $GroupActions[] = $Action;
         }
 
-        return $groupActions;
+        return $GroupActions;
     }
 
-    public function getKey() {
+    public function getKey()
+    {
         return $this->key;
     }
 
-    public function getCaption() {
+    public function getCaption()
+    {
         return $this->caption;
     }
 
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
-    public function getHeaders() {
-        return $this->headers;
+    public function getHeaders()
+    {
+        return $this->Headers;
     }
 
-    public function getActions() {
-        return $this->actions;
+    public function getActions()
+    {
+        return $this->Actions;
     }
 
-    public function getHeaderKeys() {
+    public function getHeaderKeys()
+    {
         $keys = [];
-        foreach ($this->getHeaders() as $header) {
-            $keys[] = $header->getKey();
+        $Headers = $this->getHeaders();
+        foreach ($Headers as $Header) {
+            $keys[] = $Header->getKey();
         }
 
         return $keys;
     }
 
-    public function getData() {
+    public function getData()
+    {
         $data = [];
-        foreach ($this->dataSets as $dataSet) {
-            $data = array_merge($data, $dataSet->asArray());
+        foreach ($this->DataSets as $DataSet) {
+            $data = array_merge($data, $DataSet->asArray());
         }
 
         return $data;
@@ -266,7 +296,8 @@ class DataGrid {
      *
      * @return DataGrid $this
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
@@ -278,18 +309,20 @@ class DataGrid {
      *
      * @return DataGrid $this
      */
-    public function setAction($url) {
+    public function setAction($url)
+    {
         $this->action = $url;
         return $this;
     }
 
     /**
-     * @param Menu $menu
+     * @param Menu $Menu
      *
      * @return DataGrid $this
      */
-    public function setMenu(Menu $menu) {
-        $this->menu = $menu;
+    public function setMenu(Menu $Menu)
+    {
+        $this->Menu = $Menu;
         return $this;
     }
 
@@ -298,7 +331,8 @@ class DataGrid {
      *
      * @return DataGrid $this
      */
-    public function setCaption($caption) {
+    public function setCaption($caption)
+    {
         $this->caption = $caption;
         return $this;
     }
@@ -308,7 +342,8 @@ class DataGrid {
      *
      * @return DataGrid $this
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
         return $this;
     }
@@ -318,18 +353,20 @@ class DataGrid {
      *
      * @return DataGrid $this
      */
-    public function setKey($key) {
+    public function setKey($key)
+    {
         $this->key = $key;
         return $this;
     }
 
     /**
-     * @param DataSet[] $dataSets
+     * @param DataSet[] $DataSets
      *
      * @return DataGrid $this
      */
-    public function setDataSets(array $dataSets) {
-        $this->dataSets = $dataSets;
+    public function setDataSets(array $DataSets)
+    {
+        $this->DataSets = $DataSets;
         return $this;
     }
 

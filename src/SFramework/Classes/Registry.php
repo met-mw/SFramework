@@ -2,14 +2,14 @@
 namespace SFramework\Classes;
 
 
-
 /**
  * Class Registry
  *
  * Реестр. Заменитель глобальных переменных. Сюда помещаются данные,
  * которые могут понадобиться в любой части проекта.
  */
-class Registry {
+class Registry
+{
 
     static private $container = [];
     static private $lock = [];
@@ -21,7 +21,8 @@ class Registry {
      *
      * @return mixed
      */
-    static public function get($name) {
+    static public function get($name)
+    {
         return self::$container[$name];
     }
 
@@ -32,7 +33,8 @@ class Registry {
      * @param mixed $value Данные
      * @param bool $lock Заблокировать от перезаписи
      */
-    static public function set($name, $value, $lock = false) {
+    static public function set($name, $value, $lock = false)
+    {
         if (!isset(self::$lock[$name])) {
             self::$container[$name] = $value;
             if ($lock) {
@@ -46,7 +48,8 @@ class Registry {
      *
      * @return Router
      */
-    static public function router() {
+    static public function router()
+    {
         return isset(self::$container['router']) ? self::$container['router'] : null;
     }
 
@@ -57,7 +60,8 @@ class Registry {
      *
      * @return Frame
      */
-    static public function frame($frameName) {
+    static public function frame($frameName)
+    {
         return isset(self::$container[$frameName]) ? self::$container[$frameName] : null;
     }
 

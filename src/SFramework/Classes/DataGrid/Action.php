@@ -8,7 +8,8 @@ use SFramework\Classes\CoreFunctions;
  * Class Action
  * @package SFramework\Classes\DataGrid
  */
-class Action {
+class Action
+{
 
     /** @var string */
     protected $paramName;
@@ -29,7 +30,8 @@ class Action {
     /** @var bool */
     protected $ajax = false;
 
-    public function __construct($paramName, $uri, $name, $displayName, array $additionalParameters = [], array $attributes = [], $title = '', $group = false, $ajax = false) {
+    public function __construct($paramName, $uri, $name, $displayName, array $additionalParameters = [], array $attributes = [], $title = '', $group = false, $ajax = false)
+    {
         $this->setURI($uri)
             ->setParamName($paramName)
             ->setName($name)
@@ -41,7 +43,8 @@ class Action {
             ->setAJAX($ajax);
     }
 
-    public function buildGroupURI($groupActionName = 'group') {
+    public function buildGroupURI($groupActionName = 'group')
+    {
         $uri = $this->getURI();
         $parts = explode('?', $uri);
         $parts[0] .= $groupActionName;
@@ -50,43 +53,53 @@ class Action {
         return $uri;
     }
 
-    public function buildAttributes() {
+    public function buildAttributes()
+    {
         return CoreFunctions::tagAttributesToString($this->getAttributes());
     }
 
-    public function getParamName() {
+    public function getParamName()
+    {
         return $this->paramName;
     }
 
-    public function getURI() {
+    public function getURI()
+    {
         return $this->uri;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getDisplayName() {
+    public function getDisplayName()
+    {
         return $this->displayName;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    public function getAdditionalParameters() {
+    public function getAdditionalParameters()
+    {
         return $this->additionalParameters;
     }
 
-    public function getAttributes() {
+    public function getAttributes()
+    {
         return $this->attributes;
     }
 
-    public function isGroup() {
+    public function isGroup()
+    {
         return $this->group;
     }
 
-    public function isAjax() {
+    public function isAjax()
+    {
         return $this->ajax;
     }
 
@@ -97,7 +110,8 @@ class Action {
      *
      * @return Action
      */
-    public function setParamName($paramName) {
+    public function setParamName($paramName)
+    {
         $this->paramName = $paramName;
         return $this;
     }
@@ -109,7 +123,8 @@ class Action {
      *
      * @return Action
      */
-    public function setURI($uri) {
+    public function setURI($uri)
+    {
         $this->uri = $uri;
         return $this;
     }
@@ -121,7 +136,8 @@ class Action {
      *
      * @return Action
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
@@ -133,7 +149,8 @@ class Action {
      *
      * @return Action
      */
-    public function setDisplayName($displayName) {
+    public function setDisplayName($displayName)
+    {
         $this->displayName = $displayName;
         return $this;
     }
@@ -145,7 +162,8 @@ class Action {
      *
      * @return Action
      */
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
         return $this;
     }
@@ -155,7 +173,8 @@ class Action {
      *
      * @return Action
      */
-    public function setAdditionalParameters(array $additionalParameters) {
+    public function setAdditionalParameters(array $additionalParameters)
+    {
         $this->additionalParameters = $additionalParameters;
         return $this;
     }
@@ -167,7 +186,8 @@ class Action {
      *
      * @return Action
      */
-    public function setAttributes(array $attributes = []) {
+    public function setAttributes(array $attributes = [])
+    {
         $this->attributes = $attributes;
         return $this;
     }
@@ -179,7 +199,8 @@ class Action {
      *
      * @return Action
      */
-    public function setGroup($group = false) {
+    public function setGroup($group = false)
+    {
         $this->group = $group;
         return $this;
     }
@@ -191,7 +212,8 @@ class Action {
      *
      * @return Action
      */
-    public function setAJAX($ajax = false) {
+    public function setAJAX($ajax = false)
+    {
         $this->ajax = $ajax;
         return $this;
     }

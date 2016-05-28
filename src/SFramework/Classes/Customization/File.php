@@ -6,7 +6,8 @@ namespace SFramework\Classes\Customization;
  * Class File
  * @package SFramework\Classes\Customization
  */
-class File {
+class File
+{
 
     public $name;
     public $type;
@@ -14,7 +15,8 @@ class File {
     public $error;
     public $size;
 
-    public function __construct(array $fileInfo) {
+    public function __construct(array $fileInfo)
+    {
         $this->name = $fileInfo['name'];
         $this->type = $fileInfo['type'];
         $this->tmpName = $fileInfo['tmpName'];

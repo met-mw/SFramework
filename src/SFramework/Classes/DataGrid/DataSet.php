@@ -2,7 +2,8 @@
 namespace SFramework\Classes\DataGrid;
 
 
-abstract class DataSet {
+abstract class DataSet
+{
 
     protected $dataSource;
 

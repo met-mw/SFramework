@@ -4,15 +4,18 @@
 namespace SFramework\Views\DataGrid;
 
 
-class ViewMoney extends ViewDecoration {
+class ViewMoney extends ViewDecoration
+{
 
     public $currencySymbol;
 
-    public function __construct($currencySymbol) {
+    public function __construct($currencySymbol)
+    {
         $this->currencySymbol = $currencySymbol;
     }
 
-    public function currentRender() {
+    public function currentRender()
+    {
         $isEmpty = is_null($this->getValue()) || $this->getValue() === '';
         echo ($isEmpty ? '--.--' : $this->getValue()), ' ', $this->currencySymbol;
     }

@@ -12,7 +12,8 @@ use SFramework\Interfaces\InterfaceView;
  *
  * Базовый класс представлений
  */
-abstract class View implements InterfaceView {
+abstract class View implements InterfaceView
+{
 
     protected $optional = [];
 
@@ -22,7 +23,8 @@ abstract class View implements InterfaceView {
      *
      * @throws Exception
      */
-    final public function render() {
+    final public function render()
+    {
         $objectFields = get_object_vars($this);
         foreach ($objectFields as $field => $value) {
             $reflection = new ReflectionProperty(get_class($this), $field);

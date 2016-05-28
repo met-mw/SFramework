@@ -5,13 +5,16 @@ namespace SFramework\Classes\DataGrid\DataSet;
 use SFramework\Classes\DataGrid\DataSet;
 use SORM\Entity;
 
-class SORMDataSet extends DataSet {
+class SORMDataSet extends DataSet
+{
 
-    public function __construct(array $entities = []) {
+    public function __construct(array $entities = [])
+    {
         $this->setDataSource($entities);
     }
 
-    public function addDataSourceItem(Entity $entity) {
+    public function addDataSourceItem(Entity $entity)
+    {
         $this->dataSource[] = $entity;
         return $this;
     }
@@ -19,7 +22,8 @@ class SORMDataSet extends DataSet {
     /**
      * @return Entity[]
      */
-    public function getDataSource() {
+    public function getDataSource()
+    {
         return $this->dataSource;
     }
 
@@ -28,12 +32,14 @@ class SORMDataSet extends DataSet {
      *
      * @return $this
      */
-    public function setDataSource(array $entities = []) {
+    public function setDataSource(array $entities = [])
+    {
         $this->dataSource = $entities;
         return $this;
     }
 
-    public function asArray() {
+    public function asArray()
+    {
         $result = [];
         foreach ($this->getDataSource() as $entity) {
             $row = [];

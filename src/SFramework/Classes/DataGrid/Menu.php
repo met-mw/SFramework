@@ -4,33 +4,39 @@ namespace SFramework\Classes\DataGrid;
 
 use SFramework\Classes\DataGrid\Menu\Element;
 
-class Menu {
+class Menu
+{
 
     /** @var string */
     protected $name;
     /** @var Element[] */
-    protected $elements = [];
+    protected $Elements = [];
 
-    public function __construct($name = '') {
+    public function __construct($name = '')
+    {
         $this->setName($name);
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
 
-    public function addElement(Element $element) {
-        $this->elements[] = $element;
+    public function addElement(Element $Element)
+    {
+        $this->Elements[] = $Element;
         return $this;
     }
 
-    public function getElements() {
-        return $this->elements;
+    public function getElements()
+    {
+        return $this->Elements;
     }
 
 }

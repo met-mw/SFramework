@@ -5,7 +5,8 @@ namespace SFramework\Classes;
 use SORM\Interfaces\InterfaceDriver;
 use SORM\Tools\Builder\Select;
 
-class Pagination {
+class Pagination
+{
 
     /** @var int */
     protected $fullCount = 0;
@@ -20,13 +21,14 @@ class Pagination {
     protected $parameterName = 'page';
 
     /** @var Select */
-    protected $builder;
+    protected $Builder;
     /** @var InterfaceDriver */
-    protected $driver;
+    protected $Driver;
 
-    public function __construct(InterfaceDriver $driver, $current = null, $limit = null, $parameterName = 'page') {
-        $this->driver = $driver;
-        $this->builder = new Select();
+    public function __construct(InterfaceDriver $Driver, $current = null, $limit = null, $parameterName = 'page')
+    {
+        $this->Driver = $Driver;
+        $this->Builder = new Select();
         $this->parameterName = $parameterName;
         $this->current = $current;
         $this->limit = $limit;
@@ -35,7 +37,8 @@ class Pagination {
     /**
      * @param int $linksLimit
      */
-    public function setLinksLimit($linksLimit) {
+    public function setLinksLimit($linksLimit)
+    {
         $this->linksLimit = $linksLimit;
     }
 
@@ -44,7 +47,8 @@ class Pagination {
      *
      * @return $this
      */
-    public function setCurrent($current) {
+    public function setCurrent($current)
+    {
         $this->current = $current;
         return $this;
     }
@@ -54,7 +58,8 @@ class Pagination {
      *
      * @return $this
      */
-    public function setLimit($limit) {
+    public function setLimit($limit)
+    {
         $this->limit = $limit;
         return $this;
     }
@@ -62,22 +67,26 @@ class Pagination {
     /**
      * @return $this
      */
-    public function prepare() {
+    public function prepare()
+    {
         $this->calcFullRowsCount();
         $this->calcPagesCount();
 
         return $this;
     }
 
-    public function getOffset() {
+    public function getOffset()
+    {
         return ((int)$this->current == 0 ? (int)$this->current : (int)$this->current - 1) * $this->limit;
     }
 
-    public function getLimit() {
+    public function getLimit()
+    {
         return (int)$this->limit;
     }
 
-    public function getUrl() {
+    public function getUrl()
+    {
         parse_str($_SERVER['QUERY_STRING'], $queryVars );
         if (isset($queryVars[$this->parameterName])) {
             unset($queryVars[$this->parameterName]);
@@ -86,33 +95,38 @@ class Pagination {
         return $_SERVER['REDIRECT_URL'] . '?' . http_build_query($queryVars);
     }
 
-    public function getPagesCount() {
+    public function getPagesCount()
+    {
         return $this->pagesCount;
     }
 
-    public function getParameterName() {
+    public function getParameterName()
+    {
         return $this->parameterName;
     }
 
-    public function getCurrentPage() {
+    public function getCurrentPage()
+    {
         return $this->current;
     }
 
     /**
      * @return $this
      */
-    protected function calcFullRowsCount() {
-        $builder = new Select();
-        $builder->field('FOUND_ROWS()', 'count');
-        $query = $builder->build();
-        $this->driver->query($query);
-        $data = $this->driver->fetchAssoc();
+    protected function calcFullRowsCount()
+    {
+        $Builder = new Select();
+        $Builder->field('FOUND_ROWS()', 'count');
+        $query = $Builder->build();
+        $this->Driver->query($query);
+        $data = $this->Driver->fetchAssoc();
         $this->fullCount = (int)$data[0]['count'];
 
         return $this;
     }
 
-    protected function calcPagesCount() {
+    protected function calcPagesCount()
+    {
         $this->pagesCount = ceil($this->fullCount / $this->limit);
     }
 

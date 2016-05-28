@@ -5,18 +5,21 @@ namespace SFramework\Views\DataGrid\Menu;
 use SFramework\Classes\DataGrid\Menu\Item;
 use SFramework\Classes\View;
 
-class ViewItem extends View {
+class ViewItem extends View
+{
 
     /** @var Item */
-    public $item;
+    public $Item;
 
-    public function __construct(Item $item) {
-        $this->item = $item;
+    public function __construct(Item $Item)
+    {
+        $this->Item = $Item;
     }
 
-    public function currentRender() {
+    public function currentRender()
+    {
         ?>
-        <a href="<?= $this->item->getUrl() ?>"<?= $this->item->hasAttributes() ? ' ' . $this->item->buildAttributes() : '' ?>><?= $this->item->getDisplayName() ?></a>
+        <a href="<?= $this->Item->getUrl() ?>"<?= $this->Item->hasAttributes() ? ' ' . $this->Item->buildAttributes() : '' ?>><?= $this->Item->getDisplayName() ?></a>
         <?
     }
 

@@ -2,7 +2,8 @@
 namespace SFramework\Interfaces;
 
 
-interface InterfaceCustomization {
+interface InterfaceCustomization
+{
 
     public function asInteger();
 

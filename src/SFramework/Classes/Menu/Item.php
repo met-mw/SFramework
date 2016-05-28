@@ -2,7 +2,8 @@
 namespace SFramework\Classes\Menu;
 
 
-class Item {
+class Item
+{
 
     /** @var string */
     private $name;
@@ -12,11 +13,12 @@ class Item {
     private $path;
 
     /** @var Item[] */
-    private $childItems = [];
+    private $ChildItems = [];
     /** @var Item|null */
-    private $parentItem = null;
+    private $ParentItem = null;
 
-    public function __construct($name, $path, $tooltip = '') {
+    public function __construct($name, $path, $tooltip = '')
+    {
         $this->name = $name;
         $this->path = $path;
         $this->tooltip = $tooltip;
@@ -29,26 +31,31 @@ class Item {
      *
      * @return Item
      */
-    public function addChildItem($name, $path, $tooltip = '') {
+    public function addChildItem($name, $path, $tooltip = '')
+    {
         $item = new Item($name, $path, $tooltip);
         $item->setParentItem($this);
-        $this->childItems[] = $item;
+        $this->ChildItems[] = $item;
         return $this;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getTooltip() {
+    public function getTooltip()
+    {
         return $this->tooltip;
     }
 
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
 
-    public function getRealPath() {
+    public function getRealPath()
+    {
         $pathParts = [$this->getPath()];
         $item = $this;
         do {
@@ -59,23 +66,27 @@ class Item {
         return '/' . implode('/', array_reverse($pathParts));
     }
 
-    public function getParentItem() {
-        return $this->parentItem;
+    public function getParentItem()
+    {
+        return $this->ParentItem;
     }
 
-    public function getChildItem($index) {
-        return $this->childItems[$index];
+    public function getChildItem($index)
+    {
+        return $this->ChildItems[$index];
     }
 
-    public function getChildItems() {
-        return $this->childItems;
+    public function getChildItems()
+    {
+        return $this->ChildItems;
     }
 
-    public function findChildItemByPath($path) {
+    public function findChildItemByPath($path)
+    {
         $item = null;
-        foreach ($this->childItems as $childItem) {
-            if ($childItem->getPath() == $path) {
-                $item = $childItem;
+        foreach ($this->ChildItems as $ChildItem) {
+            if ($ChildItem->getPath() == $path) {
+                $item = $ChildItem;
                 break;
             }
         }
@@ -83,11 +94,13 @@ class Item {
         return $item;
     }
 
-    public function setParentItem(Item $parentItem) {
-        $this->parentItem = $parentItem;
+    public function setParentItem(Item $ParentItem)
+    {
+        $this->ParentItem = $ParentItem;
     }
 
-    public function hasParentItem() {
+    public function hasParentItem()
+    {
         return !is_null($this->getParentItem());
     }
 

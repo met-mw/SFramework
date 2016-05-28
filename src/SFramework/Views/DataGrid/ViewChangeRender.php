@@ -2,19 +2,22 @@
 namespace SFramework\Views\DataGrid;
 
 
-class ViewChangeRender extends ViewDecoration {
+class ViewChangeRender extends ViewDecoration
+{
 
     /** @var array[] */
     public $changes;
     /** @var ViewDecoration */
-    public $defaultViewDecoration;
+    public $DefaultViewDecoration;
 
-    public function __construct(ViewDecoration $defaultViewDecoration, array $changes) {
+    public function __construct(ViewDecoration $DefaultViewDecoration, array $changes)
+    {
         $this->changes = $changes;
-        $this->defaultViewDecoration = $defaultViewDecoration;
+        $this->DefaultViewDecoration = $DefaultViewDecoration;
     }
 
-    public function currentRender() {
+    public function currentRender()
+    {
         foreach ($this->changes as $change) {
             /** @var ViewDecoration $view */
             list($value, $view) = $change;
@@ -24,7 +27,7 @@ class ViewChangeRender extends ViewDecoration {
             }
         }
 
-        $this->defaultViewDecoration->render();
+        $this->DefaultViewDecoration->render();
     }
 
 }

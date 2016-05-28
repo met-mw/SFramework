@@ -6,24 +6,25 @@ use SFramework\Classes\CoreFunctions;
 use SFramework\Classes\DataGrid;
 use SFramework\Classes\View;
 
-class ViewDataGrid extends View {
+class ViewDataGrid extends View
+{
 
     /** @var DataGrid */
-    public $dataGrid;
+    public $DataGrid;
 
     public function currentRender() {
         ?>
         <form method="get">
             <table border="1">
-                <caption><?= $this->dataGrid->getCaption() ?></caption>
+                <caption><?= $this->DataGrid->getCaption() ?></caption>
                 <thead>
                     <tr>
-                        <? if ($this->dataGrid->hasGroupActions()): ?>
+                        <? if ($this->DataGrid->hasGroupActions()): ?>
                             <th>
                                 <input type="checkbox" />
                             </th>
                         <? endif; ?>
-                        <? foreach ($this->dataGrid->getHeaders() as $header): ?>
+                        <? foreach ($this->DataGrid->getHeaders() as $header): ?>
                             <th <?= $header->buildAttributes() ?>>
                                 <?= $header->getDisplayName() ?>
                             </th>
@@ -32,12 +33,12 @@ class ViewDataGrid extends View {
                             Действия
                         </th>
                     </tr>
-                    <? if ($this->dataGrid->hasFiltered()): ?>
+                    <? if ($this->DataGrid->hasFiltered()): ?>
                         <tr>
-                            <? if ($this->dataGrid->hasGroupActions()): ?>
+                            <? if ($this->DataGrid->hasGroupActions()): ?>
                                 <th></th>
                             <? endif; ?>
-                            <? foreach ($this->dataGrid->getHeaders() as $header): ?>
+                            <? foreach ($this->DataGrid->getHeaders() as $header): ?>
                                 <th>
                                     <input type="text" name="filter-<?= $header->getKey() ?>" value="<?= $header->getFilterValue() ?>"/>
                                 </th>
@@ -49,19 +50,19 @@ class ViewDataGrid extends View {
                     <? endif; ?>
                 </thead>
                 <tbody>
-                    <? foreach ($this->dataGrid->getData() as $row): ?>
+                    <? foreach ($this->DataGrid->getData() as $row): ?>
                         <tr>
-                            <? if ($this->dataGrid->hasGroupActions()): ?>
+                            <? if ($this->DataGrid->hasGroupActions()): ?>
                                 <th>
-                                    <input name="selected-<?= $this->dataGrid->getKey() ?>" type="checkbox" />
+                                    <input name="selected-<?= $this->DataGrid->getKey() ?>" type="checkbox" />
                                 </th>
                             <? endif; ?>
-                            <? foreach ($this->dataGrid->getHeaders() as $header): ?>
+                            <? foreach ($this->DataGrid->getHeaders() as $header): ?>
                                 <td><?= $row[$header->getKey()] ?></td>
                             <? endforeach; ?>
                             <td>
-                                <? foreach ($this->dataGrid->getActions() as $action): ?>
-                                    <a name="action-<?= $action->getName() ?>-<?= $row[$this->dataGrid->getKey()] ?>" href="<?= CoreFunctions::addGETParamToURI($action->getURI(), $action->getParamName(), $row[$this->dataGrid->getKey()]) ?>">
+                                <? foreach ($this->DataGrid->getActions() as $action): ?>
+                                    <a name="action-<?= $action->getName() ?>-<?= $row[$this->DataGrid->getKey()] ?>" href="<?= CoreFunctions::addGETParamToURI($action->getURI(), $action->getParamName(), $row[$this->DataGrid->getKey()]) ?>">
                                         <span class="<?= $action->buildAttributes() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
                                     </a>
                                 <? endforeach; ?>
@@ -71,9 +72,9 @@ class ViewDataGrid extends View {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="<?= (count($this->dataGrid->getHeaders()) + ($this->dataGrid->hasGroupActions() ? 2 : 1)) ?>">
+                        <td colspan="<?= (count($this->DataGrid->getHeaders()) + ($this->DataGrid->hasGroupActions() ? 2 : 1)) ?>">
                             Групповые операции:&nbsp;
-                            <? foreach ($this->dataGrid->getGroupActions() as $action): ?>
+                            <? foreach ($this->DataGrid->getGroupActions() as $action): ?>
                                 <button name="action-<?= $action->getName() ?>-selected" formmethod="post" type="submit" formaction="<?= $action->buildGroupURI() ?>" >
                                     <span class="<?= $action->buildAttributes() ?>" title="<?= $action->getTitle() ?>"><?= $action->getDisplayName() ?></span>
                                 </button>

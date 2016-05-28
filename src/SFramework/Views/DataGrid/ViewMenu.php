@@ -9,14 +9,16 @@ use SFramework\Classes\View;
 use SFramework\Views\DataGrid\Menu\ViewItem;
 use SFramework\Views\DataGrid\Menu\ViewSeparator;
 
-class ViewMenu extends View {
+class ViewMenu extends View
+{
 
     /** @var Menu */
-    public $menu;
+    public $Menu;
 
-    public function currentRender() {
-        echo $this->menu->getName() . ': ';
-        foreach ($this->menu->getElements() as $element) {
+    public function currentRender()
+    {
+        echo $this->Menu->getName() . ': ';
+        foreach ($this->Menu->getElements() as $element) {
             if ($element instanceof Separator){
                 (new ViewSeparator())->render();
             } elseif ($element instanceof Item) {

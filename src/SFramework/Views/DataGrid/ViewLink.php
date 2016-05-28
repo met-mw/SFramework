@@ -2,7 +2,8 @@
 namespace SFramework\Views\DataGrid;
 
 
-class ViewLink extends ViewDecoration {
+class ViewLink extends ViewDecoration
+{
 
     /** @var string Формат: /path/to/{label}/ */
     public $urlTemplate;
@@ -11,7 +12,8 @@ class ViewLink extends ViewDecoration {
     /** @var bool */
     public $blank;
 
-    public function __construct($urlTemplate, $blank = false, $valueFieldName = null) {
+    public function __construct($urlTemplate, $blank = false, $valueFieldName = null)
+    {
         $this->optional[] = 'valueFieldName';
 
         $this->urlTemplate = $urlTemplate;
@@ -19,7 +21,8 @@ class ViewLink extends ViewDecoration {
         $this->valueFieldName = $valueFieldName;
     }
 
-    public function currentRender() {
+    public function currentRender()
+    {
         $additionalData = $this->getAdditionalData();
         $label = $this->getValue();
         if ($this->valueFieldName !== null && isset($additionalData[$this->valueFieldName])) {

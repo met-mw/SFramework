@@ -2,9 +2,11 @@
 namespace SFramework\Classes;
 
 
-class CustomizationValueNull extends CustomizationValueBase {
+class CustomizationValueNull extends CustomizationValueBase
+{
 
-    public function isExists() {
+    public function isExists()
+    {
         return false;
     }
 

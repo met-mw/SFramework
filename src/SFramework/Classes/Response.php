@@ -2,27 +2,32 @@
 namespace SFramework\Classes;
 
 
-class Response {
+class Response
+{
 
     /** @var NotificationLog */
-    private $notificationLog;
+    private $NotificationLog;
 
-    public function __construct(NotificationLog $notificationLog) {
-        $this->notificationLog = $notificationLog;
+    public function __construct(NotificationLog $NotificationLog)
+    {
+        $this->NotificationLog = $NotificationLog;
     }
 
-    public function arrayToJSON(array $data) {
+    public function arrayToJSON(array $data)
+    {
         return json_encode($data);
     }
 
-    public function sendAny(array $data, $success = true) {
+    public function sendAny(array $data, $success = true)
+    {
         echo $this->arrayToJSON(array_merge(['success' => $success], $data));
     }
 
-    public function send($redirect = '', array $additionalData = []) {
-        $success = !($this->notificationLog->hasErrors()
-            || $this->notificationLog->hasWarnings()
-            || $this->notificationLog->hasNotices());
+    public function send($redirect = '', array $additionalData = [])
+    {
+        $success = !($this->NotificationLog->hasErrors()
+            || $this->NotificationLog->hasWarnings()
+            || $this->NotificationLog->hasNotices());
 
         $errors = [];
         $warnings = [];
@@ -30,20 +35,20 @@ class Response {
         $messages = [];
 
         if (!$success) {
-            foreach ($this->notificationLog->getErrors() as $error) {
+            foreach ($this->NotificationLog->getErrors() as $error) {
                 $errors[] = $error;
             }
 
-            foreach ($this->notificationLog->getWarnings() as $warning) {
+            foreach ($this->NotificationLog->getWarnings() as $warning) {
                 $warnings[] = $warning;
             }
 
-            foreach ($this->notificationLog->getNotices() as $notice) {
+            foreach ($this->NotificationLog->getNotices() as $notice) {
                 $notices[] = $notice;
             }
         }
 
-        foreach ($this->notificationLog->getMessages() as $message) {
+        foreach ($this->NotificationLog->getMessages() as $message) {
             $messages[] = $message;
         }
 
