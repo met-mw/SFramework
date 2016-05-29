@@ -40,7 +40,7 @@ class NotificationLog
     static public function instance()
     {
         if (is_null(self::$Instance)) {
-            self::$Instance = new self();
+            self::$Instance = new static();
         }
 
         return self::$Instance;
