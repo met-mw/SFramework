@@ -15,6 +15,11 @@ class NotificationLog
     const MODE_DEVELOP = 0;
     const MODE_PRODUCTION = 1;
 
+    const TYPE_ERROR = 0;
+    const TYPE_WARNING = 1;
+    const TYPE_NOTICE = 2;
+    const TYPE_MESSAGE = 3;
+
     /** @var NotificationLog | null */
     static protected $Instance = null;
 
@@ -51,33 +56,50 @@ class NotificationLog
         $this->mode = self::MODE_DEVELOP;
     }
 
+    protected function pushAny($type, $text)
+    {
+        $triggerErrorType = null;
+        switch ($type) {
+            case self::TYPE_ERROR:
+                $this->errors[] = $text;
+                $triggerErrorType = E_USER_ERROR;
+                break;
+            case self::TYPE_WARNING:
+                $this->warnings[] = $text;
+                $triggerErrorType = E_USER_WARNING;
+                break;
+            case self::TYPE_NOTICE:
+                $this->notice[] = $text;
+                $triggerErrorType = E_USER_NOTICE;
+                break;
+            case self::TYPE_MESSAGE:
+                $this->messages[] = $text;
+                break;
+        }
+
+        if (!is_null($triggerErrorType) && $this->mode == self::MODE_DEVELOP) {
+            trigger_error($text, $triggerErrorType);
+        }
+    }
+
     public function pushError($errorText)
     {
-        $this->errors[] = $errorText;
-        if ($this->mode == self::MODE_DEVELOP) {
-            trigger_error($errorText, E_USER_ERROR);
-        }
+        $this->pushAny(self::TYPE_ERROR, $errorText);
     }
 
     public function pushWarning($warningText)
     {
-        $this->warnings[] = $warningText;
-        if ($this->mode == self::MODE_DEVELOP) {
-            trigger_error($warningText, E_USER_WARNING);
-        }
+        $this->pushAny(self::TYPE_WARNING, $warningText);
     }
 
     public function pushNotice($noticeText)
     {
-        $this->notice[] = $noticeText;
-        if ($this->mode == self::MODE_DEVELOP) {
-            trigger_error($noticeText, E_USER_NOTICE);
-        }
+        $this->pushAny(self::TYPE_NOTICE, $noticeText);
     }
 
     public function pushMessage($messageText)
     {
-        $this->messages[] = $messageText;
+        $this->pushAny(self::TYPE_MESSAGE, $messageText);
     }
 
     public function hasErrors()
