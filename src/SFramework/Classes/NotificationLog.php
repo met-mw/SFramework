@@ -56,7 +56,7 @@ class NotificationLog
         $this->mode = self::MODE_DEVELOP;
     }
 
-    protected function pushAny($type, $text)
+    public function pushAny($type, $text)
     {
         $triggerErrorType = null;
         switch ($type) {
