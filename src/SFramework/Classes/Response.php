@@ -69,16 +69,16 @@ class Response
                 echo '<h3>Системные сообщения:</h3>';
                 echo 'Отчёт о выполнении: ', $success ? 'Успешно' : 'Возникли проблемы', '<hr/>';
                 if (!empty($errors)) {
-                    echo 'Ошибки:<br/><ul>', '<li>', implode('</li>', $errors), '</li>', '</ul>';
+                    echo 'Ошибки:<br/><ul>', '<li>', implode('</li><li>', $errors), '</li>', '</ul>';
                 }
                 if (!empty($warnings)) {
-                    echo 'Предупреждения:<br/><ul>', '<li>', implode('</li>', $warnings), '</li>', '</ul>';
+                    echo 'Предупреждения:<br/><ul>', '<li>', implode('</li><li>', $warnings), '</li>', '</ul>';
                 }
                 if (!empty($notices)) {
-                    echo 'Уведомления:<br/><ul>', '<li>', implode('</li>', $notices), '</li>', '</ul>';
+                    echo 'Уведомления:<br/><ul>', '<li>', implode('</li><li>', $notices), '</li>', '</ul>';
                 }
                 if (!empty($messages)) {
-                    echo 'Сообщения:<br/><ul>', '<li>', implode('</li>', $messages), '</li>', '</ul>';
+                    echo 'Сообщения:<br/><ul>', '<li>', implode('</li><li>', $messages), '</li>', '</ul>';
                 }
                 if (!empty($additionalData)) {
                     echo '<hr/><h4>Дополнительные данные:</h4>', var_export($additionalData);
