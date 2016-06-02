@@ -15,6 +15,14 @@
             "url": "https://github.com/met-mw/SFileSystem.git"
         },
         {
+          "type": "git",
+          "url": "https://github.com/met-mw/SDataGrid.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/met-mw/SLog.git"
+        },
+        {
             "type": "git",
             "url": "https://github.com/met-mw/SORM.git"
         },
@@ -26,7 +34,9 @@
     "require": {
         "php": ">=5.6.0",
         "met_mw/sorm": "@dev",
-        "met_mw/sfilesystem": "@dev"
+        "met_mw/sfilesystem": "@dev",
+        "met_mw/slog": "@dev",
+        "met_mw/sdatagrid": "@dev"
     },
     "autoload": {
         "psr-4": {
