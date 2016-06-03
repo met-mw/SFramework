@@ -11,6 +11,10 @@
     "minimum-stability": "dev",
     "repositories": [
         {
+          "type": "git",
+          "url": "https://github.com/met-mw/SignInBase.git"
+        },
+        {
             "type": "git",
             "url": "https://github.com/met-mw/SFileSystem.git"
         },
@@ -34,6 +38,7 @@
     "require": {
         "php": ">=5.6.0",
         "met_mw/sorm": "@dev",
+        "met_mw/signinbase": "@dev",
         "met_mw/sfilesystem": "@dev",
         "met_mw/slog": "@dev",
         "met_mw/sdatagrid": "@dev"
