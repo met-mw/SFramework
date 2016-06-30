@@ -1,7 +1,7 @@
 {
     "name": "met_mw/sframework",
     "type": "framework",
-    "keywords": "Framework, MVC, PHP, Simple, Simple framework, SFramework, Application",
+    "keywords": ["Framework", "MVC", "PHP", "Simple", "Simple framework", "SFramework", "Application"],
     "description": "Simple PHP MVC-Framework.",
     "authors": [
         {
