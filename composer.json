@@ -3,6 +3,7 @@
     "type": "framework",
     "keywords": ["Framework", "MVC", "PHP", "Simple", "Simple framework", "SFramework", "Application"],
     "description": "Simple PHP MVC-Framework.",
+    "license": "MIT",
     "authors": [
         {
             "name": "met-mw",
