@@ -13,7 +13,9 @@ composer require met_mw/sframework
 ```
 
 ## Fast start
-1. Install package (composer require met_mw/sframework) into your project root. 
+1. Install package into your project root.
+    1. composer install
+    2. composer require met_mw/sframework
 2. Copy all from the "skeleton" folder into your project root folder.
 3. Have fun.
 
