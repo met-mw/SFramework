@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS `any` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  `description` TEXT NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE=InnoDB
+;

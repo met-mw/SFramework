@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+Options +FollowSymlinks
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^\/assets/(.*).(.*)
+RewriteRule ^.*$ index.php [NC,L]
+</IfModule>
