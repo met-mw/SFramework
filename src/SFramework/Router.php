@@ -94,7 +94,7 @@ class Router implements RouterInterface
      */
     public function findAction(ControllerInterface $controller, $pathPart = null)
     {
-        $action = is_null($pathPart) ? 'actionIndex' : ucfirst($pathPart);
+        $action = is_null($pathPart) ? 'actionIndex' : 'action' . ucfirst($pathPart);
         if (!method_exists($controller, $action)) {
             throw new Exception("Action \"{$action}\" of controller \"" . get_class($controller) . "\"");
         }
