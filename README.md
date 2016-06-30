@@ -5,7 +5,7 @@
 [![Total Downloads](https://poser.pugx.org/met_mw/sframework/downloads)](https://packagist.org/packages/met_mw/sframework)
 [![License](https://poser.pugx.org/met_mw/sframework/license)](https://packagist.org/packages/met_mw/sframework)
 # SFramework
-Simple PHP MVC framework.
+Simple PHP MVC-Framework.
 
 ## Install
 ```
