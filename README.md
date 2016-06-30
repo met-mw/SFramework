@@ -8,15 +8,24 @@
 Simple PHP MVC-Framework.
 
 ## Install
+
+### As library
 ```
 composer require met_mw/sframework
 ```
 
+### As project skeleton
+```
+composer create-project met_mw/sskeleton
+```
+
 ## Fast start
-1. Install package into your project root.
-    1. composer install
-    2. composer require met_mw/sframework
-2. Copy all from the "skeleton" folder into your project root folder.
+### As library
+1. composer require met_mw/sframework
+2. Have fun.
+
+### As project skeleton
+1. composer create-project met_mw/sskeleton
 3. Have fun.
 
 ## License
