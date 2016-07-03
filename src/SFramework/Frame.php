@@ -64,7 +64,7 @@ class Frame implements FrameInterface
             throw new InvalidArgumentException('CSS URI must be a string.');
         }
 
-        if (!@fopen($uri, "r")) {
+        if (!@fopen(ltrim($uri, '/'), "r")) {
             throw new InvalidArgumentException("CSS file not found.");
         }
 
@@ -84,7 +84,7 @@ class Frame implements FrameInterface
             throw new InvalidArgumentException('JavaScript URI must be a string.');
         }
 
-        if (!@fopen($uri, "r")) {
+        if (!@fopen(ltrim($uri, '/'), "r")) {
             throw new InvalidArgumentException("JavaScript file not found.");
         }
 
