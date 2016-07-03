@@ -4,7 +4,6 @@ namespace SFramework;
 
 use Exception;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Uri;
 use InvalidArgumentException;
 use SFileSystem\Directory;
@@ -40,7 +39,7 @@ class Router implements RouterInterface
         $root = $this->root;
 
         if (sizeof($pathParts) == 0) {
-            $controllerName = $root->getPath() . '\\ControllerIndex';
+            $controllerName = str_replace('/', '\\', $root->getPath()) . '\\ControllerIndex';
         } else {
             $controllerName = '';
 
@@ -54,7 +53,7 @@ class Router implements RouterInterface
                     if (empty($pathParts)) {
                         $file = $root->getFile('ControllerIndex.php');
                         if (!is_null($file)) {
-                            $controllerName = $root->getPath() . '\\ControllerIndex';
+                            $controllerName = str_replace('/', '\\', $root->getPath()) . '\\ControllerIndex';
                             break;
                         }
                     }
@@ -63,14 +62,14 @@ class Router implements RouterInterface
 
                 $file = $root->getFile('Controller' . ucfirst($part) . '.php');
                 if (!is_null($file)) {
-                    $controllerName = $root->getPath() . '\\Controller' . ucfirst($part);
+                    $controllerName = str_replace('/', '\\', $root->getPath()) . '\\Controller' . ucfirst($part);
                     break;
                 }
 
                 $file = $root->getFile('ControllerIndex.php');
                 if (!is_null($file)) {
                     $pathParts[] = $previousPart;
-                    $controllerName = $root->getPath() . '\\ControllerIndex';
+                    $controllerName = str_replace('/', '\\', $root->getPath()) . '\\ControllerIndex';
                     break;
                 }
             }
@@ -171,7 +170,7 @@ class Router implements RouterInterface
             $controller = $this->findController($pathParts);
             $action = $this->findAction($controller, array_shift($pathParts));
         } catch (Exception $e) {
-            $controllerName = $this->root->getPath() . '\\Controller404';
+            $controllerName = str_replace('/', '\\', $this->root->getPath()) . '\\Controller404';
             if (!class_exists($controllerName)) {
                 throw new Exception('Controller or action is not exists.');
             }

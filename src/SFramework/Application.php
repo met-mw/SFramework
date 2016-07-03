@@ -30,7 +30,7 @@ class Application implements ApplicationInterface
         $this->request = $request;
         $this->response = $response;
 
-        $this->router = new Router('App\\Controllers', $this->request->getUri());
+        $this->router = new Router('App' . DIRECTORY_SEPARATOR . 'Controllers', $this->request->getUri());
         FrameSet::i()
             ->addFrame('front', new Frame(), true)
             ->addFrame('back', new Frame());
