@@ -83,6 +83,7 @@ class Application implements ApplicationInterface
             )
             ->getCurrentDriver()
             ->connect();
+        DataSource::d()->query('SET NAMES utf8');
 
         return $this;
     }
