@@ -17,7 +17,8 @@
         "met_mw/sfilesystem": "^1.0",
         "met_mw/sbreadcrumbs": "^1.0",
         "met_mw/ssystemmessage": "^1.0",
-        "met_mw/spagination": "^1.0"
+        "met_mw/spagination": "^1.0",
+        "met_mw/signinbase": "^1.0"
     },
     "autoload": {
         "psr-4": {
