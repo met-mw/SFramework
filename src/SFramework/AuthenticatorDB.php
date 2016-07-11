@@ -2,8 +2,8 @@
 namespace SFramework;
 
 
-use App\Models\Siteuser;
 use InvalidArgumentException;
+use SFramework\Models\Siteuser;
 use SignInBase\Session\AuthenticatorAbstract;
 use SORM\DataSource;
 
@@ -15,6 +15,15 @@ class AuthenticatorDB extends AuthenticatorAbstract
 {
 
     public $salt = 'B1-az#a^xzc1';
+
+    public function __construct($salt = '')
+    {
+        parent::__construct();
+
+        if (!empty($salt)) {
+            $this->salt = $salt;
+        }
+    }
 
     /**
      * Sign in
