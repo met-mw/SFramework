@@ -43,9 +43,9 @@ class AuthenticatorDB extends AuthenticatorAbstract
         }
 
         $oSiteusers = DataSource::i()->factory(Siteuser::cls());
-        $oSiteusers->getQueryBuilder()->where('email', '=', $login);
+        $oSiteusers->getQueryBuilder()->where('login', '=', '?');
         /** @var Siteuser[] $aSiteusers */
-        $aSiteusers = $oSiteusers->loadAll();
+        $aSiteusers = $oSiteusers->loadAll([$login]);
         if (empty($aSiteusers)) {
             return false;
         }
