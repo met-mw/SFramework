@@ -49,12 +49,20 @@ class Router implements RouterInterface
                 $root->scan();
                 $dir = $root->getDirectory(ucfirst($part));
                 if (!is_null($dir)) {
+                    $oldRoot = clone $root;
                     $root = $dir;
                     if (empty($pathParts)) {
                         $file = $root->getFile('ControllerIndex.php');
                         if (!is_null($file)) {
                             $controllerName = str_replace('/', '\\', $root->getPath()) . '\\ControllerIndex';
                             break;
+                        } else {
+                            $root = $oldRoot;
+                            $file = $root->getFile('Controller' . ucfirst($part) . '.php');
+                            if (!is_null($file)) {
+                                $controllerName = str_replace('/', '\\', $root->getPath()) . '\\Controller' . ucfirst($part);
+                                break;
+                            }
                         }
                     }
                     continue;
