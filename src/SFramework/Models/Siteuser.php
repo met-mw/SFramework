@@ -11,6 +11,7 @@ use SORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $surname
+ * @property string $login
  * @property string $email
  * @property string $password
  * @property string $date
